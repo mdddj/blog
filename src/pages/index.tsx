@@ -1,26 +1,21 @@
 import { Button, Card, CardHeader } from "@nextui-org/react";
-import yayJpg from "../assets/yay.jpg";
 import { useEffect } from "react";
 import { blogStore } from "@/providers/blog";
 import { useShallow } from "zustand/react/shallow";
+import {CardBody, CardFooter} from "@nextui-org/card";
+import {Chip} from "@nextui-org/chip";
+import {Link} from "umi";
+import BlogCard from "@/components/blog";
 
 export default function HomePage() {
-  const [blogs, fetchBlogs] = blogStore(
+  const [blogs] = blogStore(
     useShallow((state) => [state.blogs, state.fetchAll])
   );
-  useEffect(() => {
-    fetchBlogs();
-  }, []);
-  console.log("build...");
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="flex flex-col gap-4">
       {blogs.map((v) => {
         return (
-          <Card key={v.id} className="py-4">
-            <CardHeader>
-              <h4 className="font-bold text-large">{v.title}</h4>
-            </CardHeader>
-          </Card>
+          <BlogCard blog={v} key={v.id}/>
         );
       })}
     </div>

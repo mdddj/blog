@@ -21,6 +21,7 @@ export const blogStore = create<Props>((set) => ({
         set((state) => ({ blogs: [...state.blogs, ...blogs] }));
       }
     }
-    console.log(response);
   },
 }));
+
+blogStore.getState().fetchAll()
