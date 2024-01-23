@@ -5,7 +5,8 @@ import {blogStore} from "@/providers/blog";
 
 type Props = {
     blogs: Blog[],
-    doFilter: (run: (blogs: Blog[]) => Blog[]) => void
+    doFilter: (run: (blogs: Blog[]) => Blog[]) => void,
+    selectLabel: string | undefined
 }
 
 ///过滤博客列表
@@ -16,7 +17,8 @@ const filterBlogsProvider = create<Props>((set)=>{
          const blogs =  blogStore.getState().blogs
           const newBlogs = run(blogs)
           set((state)=>({blogs: newBlogs}))
-      }
+      },
+      selectLabel: undefined
   })
 })
 

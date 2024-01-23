@@ -2,6 +2,7 @@ import React from 'react';
 import {Card, CardHeader, Divider} from "@nextui-org/react";
 import CardTitle from "@/components/title";
 import {CardBody} from "@nextui-org/card";
+import TextComponent from "@/components/text";
 
 export default function Page() {
   return (
@@ -11,9 +12,7 @@ export default function Page() {
           </CardHeader>
           <Divider/>
           <CardBody>
-              <div className={'flex flex-wrap gap-5'}>
-                  暂无内容
-              </div>
+              <TextComponent textKey={'about'} />
           </CardBody>
       </Card>
   );

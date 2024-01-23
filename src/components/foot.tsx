@@ -6,7 +6,6 @@ import {Divider, Link} from "@nextui-org/react";
 const Foot: React.FC = () => {
 
     return <div>
-        <Divider />
         <div className={'flex justify-between gap-2 text-sm items-center pt-2 px-2'}>
 
             <div className={'flex gap-2'}>
@@ -17,7 +16,7 @@ const Foot: React.FC = () => {
             </div>
 
             <div>
-          <span className={'text-sm text-content3-foreground'}>
+          <span className={'text-content3-foreground text-small'}>
               赣ICP备17011549号-1
           </span>
             </div>

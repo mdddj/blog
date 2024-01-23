@@ -8,11 +8,12 @@ import {CardBody} from "@nextui-org/card";
 import CardTitle from "@/components/title";
 import FilterBlogs from "@/components/filter_blogs";
 import filterBlogsProvider from "@/providers/filter_blog";
+import {useShallow} from "zustand/react/shallow";
 
 export default function Page() {
     const categorys = categoryStore((state) => state.data?.categoryList) ?? []
 
-    const filter = filterBlogsProvider((state)=>state.doFilter)
+    const [filter,label] = filterBlogsProvider(useShallow((state)=>[state.doFilter,state.selectLabel]))
     return (
         <Card>
             <CardHeader>
@@ -22,13 +23,15 @@ export default function Page() {
             <CardBody>
                 <div className={'flex flex-wrap gap-5'}>
                     {
-                        categorys.map(value => <Chip key={value.id} onClick={()=>{
-                          filter.call(undefined,(b)=> b.filter((blog)=>blog.category.name === value.name) )
+                        categorys.map(value => <Chip color={label===value.name ? 'primary' : undefined} className={'cursor-pointer'} key={value.id} onClick={() => {
+                            filter.call(undefined, (b) => b.filter((blog) => blog.category.name === value.name))
+                            filterBlogsProvider.setState({selectLabel: value.name})
                         }}
                                                      avatar={<Image src={value.logo}/>}>{value.name}</Chip>)
                     }
                 </div>
-                <FilterBlogs/>
+                <FilterBlogs
+                />
             </CardBody>
         </Card>
     );

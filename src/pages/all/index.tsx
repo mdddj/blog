@@ -14,7 +14,7 @@ export default function Page() {
     return (
         <div>
             {
-                archives.map(value => <Card key={value.months}>
+                archives.map(value => <Card key={value.months} className={'mb-2'}>
                     <CardHeader>
                         <CardTitle title={value.months}/>
                     </CardHeader>
