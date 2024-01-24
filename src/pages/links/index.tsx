@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./index.less";
 import axios from "axios";
 import { Api } from "@/tools/api";
 import { ApiResponse } from "@/models/base";
@@ -31,7 +30,7 @@ export default function Page() {
         {loading && <Loading />}
         {error && <div>{error.message}</div>}
         {data && (
-          <div className={"grid grid-cols-3 gap-2"}>
+          <div className={"grid gap-2 md:grid-cols-3 sm: grid-cols-1"}>
             {data.data.map((value) => {
               return (
                 <div key={value.id}>

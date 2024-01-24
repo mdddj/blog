@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './index.less';
 import {categoryStore} from "@/providers/category";
 import {Chip} from "@nextui-org/chip";
 import {Image} from "@nextui-org/image";

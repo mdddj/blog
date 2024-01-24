@@ -22,10 +22,7 @@ export default function Layout() {
         className={"flex flex-row container container-sm mx-auto gap-5  h-max"}
       >
         <div
-          className={
-            "flex-none w-72 py-5 flex flex-col h-screen  sticky top-0 "
-          }
-        >
+          className={"flex-none w-72 py-5 flex-col h-screen sticky top-0 hidden lg:flex"}>
           <LeftMenu />
           <Foot />
         </div>
@@ -39,7 +36,7 @@ export default function Layout() {
 
         <div
           className={
-            "flex-none w-72  py-5 flex flex-col h-screen  sticky top-0"
+            "flex-none w-72  py-5  h-screen  sticky top-0 hidden lg:flex lg:flex-col"
           }
         >
           <RightMenu />

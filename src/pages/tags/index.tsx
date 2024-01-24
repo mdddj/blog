@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './index.less';
 import {categoryStore} from "@/providers/category";
 import {Card, CardHeader, Divider} from "@nextui-org/react";
 import {CardBody} from "@nextui-org/card";
@@ -31,7 +30,7 @@ export default function Page() {
                 <FilterBlogs ending={blog => {
                     return <span className={'flex gap-2'}>
                         {
-                            blog.tags.map(value => <span className={'text-sm text-default-500'}>{value.name}</span>)
+                            blog.tags.map(value => <span key={value.id} className={'text-sm text-default-500'}>{value.name}</span>)
                         }
                     </span>
                 }} />
