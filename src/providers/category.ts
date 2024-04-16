@@ -1,8 +1,7 @@
-import axios from "axios";
-import {Api} from "@/tools/api";
-import {ApiResponse} from "@/models/base";
-import {CategoryResult} from "@/models/category";
-import {create} from "zustand";
+import axiosInstance, { categoryApi } from "@/tools/api";
+import { ApiResponse } from "@/models/base";
+import { CategoryResult } from "@/models/category";
+import { create } from "zustand";
 
 
 type Prop = {
@@ -10,12 +9,11 @@ type Prop = {
     fetchData: () => void
 }
 
-
 /**
  * 加载归档数据
  */
 async function fetchAllCategorys(): Promise<ApiResponse<CategoryResult>> {
-    const response = await axios.get<ApiResponse<CategoryResult>>(Api.categoryApi)
+    const response = await axiosInstance.get<ApiResponse<CategoryResult>>(categoryApi)
     return response.data
 }
 
@@ -28,7 +26,7 @@ export const categoryStore = create<Prop>((set) => {
         data: undefined,
         fetchData: async () => {
             const result = await fetchAllCategorys()
-            set((_) => ({data: result.data}))
+            set((state) => ({ ...state, data: result.data }))
         }
     })
 })

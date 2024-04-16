@@ -1,7 +1,9 @@
-import {Spinner} from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
 
-export  default function Loading() {
-    return <div className={'p-5 flex justify-center'}>
-        <Spinner />
+export default function Loading() {
+  return (
+    <div className={"p-5 flex justify-center"}>
+      <Spinner />
     </div>
+  );
 }

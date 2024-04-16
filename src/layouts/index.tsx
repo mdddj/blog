@@ -10,7 +10,7 @@ import { useLocation } from "@@/exports";
 export default function Layout() {
   const nav = useLocation();
   useEffect(() => {
-    if (document && nav.pathname != "/") {
+    if (document && nav.pathname !== "/") {
       if (document?.documentElement || document?.body) {
         document.documentElement.scrollTop = document.body.scrollTop = 0;
       }
@@ -19,10 +19,13 @@ export default function Layout() {
   return (
     <NextUIProvider>
       <div
-        className={"flex flex-row container container-sm mx-auto gap-5  h-max"}
+        className={" flex flex-row container container-sm mx-auto gap-5  h-max"}
       >
         <div
-          className={"flex-none w-72 py-5 flex-col h-screen sticky top-0 hidden lg:flex"}>
+          className={
+            "flex-none w-72 py-5 flex-col h-screen sticky top-0 hidden lg:flex"
+          }
+        >
           <LeftMenu />
           <Foot />
         </div>

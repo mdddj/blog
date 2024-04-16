@@ -1,11 +1,8 @@
-import {create} from "zustand";
+import { create } from "zustand";
 
-
-type AppBaseMenu = {
-    menus: BaseMenu[]
-}
-
-export const appMenuStore = create<AppBaseMenu>((set)=>{
+export const appMenuStore = create<{
+    menus: { title: string, href: string }[]
+}>(() => {
     return ({
         menus: [
             {
@@ -27,6 +24,10 @@ export const appMenuStore = create<AppBaseMenu>((set)=>{
             {
                 title: '友链',
                 href: '/links'
+            },
+            {
+                title: '项目',
+                href: '/projects'
             },
             {
                 title: '关于',
