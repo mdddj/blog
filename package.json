@@ -1,5 +1,5 @@
 {
-  "private": true,
+  "private": false,
   "author": "梁典典 <413153189@qq.com>",
   "scripts": {
     "build": "umi build",
