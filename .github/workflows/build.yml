@@ -12,10 +12,12 @@ jobs:
         uses: actions/setup-node@v4.0.2
         with:
           node-version: "20.3.1"
+      - name: 安装pnpm
+        run: npm install -g pnpm
       - name: 安装依赖
-        run: yarn install
+        run: pnpm install
       - name: 构建
-        run: yarn run build
+        run: pnpm run build
       - name: 发布到服务器
         uses: easingthemes/ssh-deploy@v5.0.3
         env:
