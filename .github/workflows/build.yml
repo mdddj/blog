@@ -17,12 +17,8 @@ jobs:
         with:
           node-version: 20
 
-      - uses: pnpm/action-setup@v3
-        name: 安装 pnpm
-        with:
-          version: 8
-
-
+      - name: 安装 pnpm
+        run: npm install -g pnpm
 
       - name: 安装依赖
         run: pnpm install
