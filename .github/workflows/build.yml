@@ -5,18 +5,17 @@ on:
       - main
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [ 15 ]
     steps:
       - uses: actions/checkout@v3
 
-      - name: 安装nodejs ${{ matrix.node-version }}
+      - name: 安装nodejs
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          node-version: 20
 
       - uses: pnpm/action-setup@v3
         name: 安装 pnpm
