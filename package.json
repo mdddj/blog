@@ -7,11 +7,9 @@
     "start": "umi dev"
   },
   "dependencies": {
-    "@ahooksjs/use-request": "^2.8.15",
     "@nextui-org/react": "^2.3.5",
     "axios": "^1.6.8",
     "dayjs": "^1.11.10",
-    "framer-motion": "^11.1.5",
     "github-markdown-css": "^5.5.1",
     "highlight.js": "^11.9.0",
     "markdown-it": "^14.1.0",
