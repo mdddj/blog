@@ -8,14 +8,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: 安装nodejs
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v4
         with:
-          node-version: "20.3.1"
-      - name: 安装pnpm
-        run: npm install -g pnpm
+          node-version: 20
+
+      - uses: pnpm/action-setup@v3
+        name: 安装 pnpm
+        with:
+            version: 8
+            run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+            
+
       - name: 安装依赖
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
       - name: 构建
         run: pnpm run build
       - name: 发布到服务器
