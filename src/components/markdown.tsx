@@ -14,6 +14,7 @@ import java from "highlight.js/lib/languages/java";
 import c from "highlight.js/lib/languages/c";
 import cmake from "highlight.js/lib/languages/cmake";
 import gradle from "highlight.js/lib/languages/gradle";
+import docker from "highlight.js/lib/languages/dockerfile";
 import "highlight.js/styles/github.css";
 hljs.registerLanguage("dart", dart);
 hljs.registerLanguage("rust", rust);
@@ -30,6 +31,7 @@ hljs.registerLanguage("c++", c);
 hljs.registerLanguage("cpp", c);
 hljs.registerLanguage("cmake", cmake);
 hljs.registerLanguage("gradle", gradle);
+hljs.registerLanguage("Dockerfile",docker)
 const mdParser = new MarkdownIt({
   highlight: (str, lang) => {
     let code: any = mdParser.utils.escapeHtml(str);
