@@ -5,7 +5,7 @@ import { Spinner } from "@nextui-org/react";
 
 
 export default function HomePage() {
-  document.title = "梁典典的博客";
+  document.title = "梁典典的博客,";
   const [blogs, isLoading] = blogStore(
     useShallow((state) => [state.blogs, state.isLoading])
   );
