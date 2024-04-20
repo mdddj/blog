@@ -10,17 +10,17 @@ jobs:
       matrix:
         node-version: [ 15 ]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: 安装nodejs
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - uses: pnpm/action-setup@v3
         name: 安装 pnpm
         with:
-            version: 8
+          version: 8
 
 
 
