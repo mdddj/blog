@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 15 ]
+        node-version: [ 20 ]
     steps:
       - uses: actions/checkout@v4
 
@@ -17,13 +17,16 @@ jobs:
         with:
           node-version: 20
 
-      - name: 安装 pnpm
-        run: npm install -g pnpm && pnpm setup && pnpm install -g umi
+      - name: 安装 yarn
+        run: npm install -g yarn
 
       - name: 安装依赖
-        run: pnpm install
+        run: yarn install
+
       - name: 构建
-        run: pnpm run build
+        run: yarn run build
+
+
       - name: 发布到服务器
         uses: easingthemes/ssh-deploy@v5.0.3
         env:
