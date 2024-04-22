@@ -11,3 +11,5 @@
 .vscode
 
 pnpm-lock.yaml
+.npmrc
+dist
