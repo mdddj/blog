@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 20 ]
+        node-version: [20]
     steps:
       - uses: actions/checkout@v4
 
@@ -16,9 +16,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
       - name: 安装pnpm
         run: npm install -g pnpm
+      - name: 安装ext
+        run: pnpm install -g es5-ext
       - name: 安装依赖
         run: pnpm install
 
