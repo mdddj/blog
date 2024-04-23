@@ -10,17 +10,17 @@ jobs:
       matrix:
         node-version: [20]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@main
 
-      - name: 安装nodejs
-        uses: actions/setup-node@v4
+      - name: install nodejs
+        uses: actions/setup-node@master
         with:
           node-version: 20
-      - name: 安装依赖
+      - name: install deps
         run: npm install
       - name: 构建
         run: npm run build
-      - name: 发布到服务器
+      - name: push to server
         uses: easingthemes/ssh-deploy@v5.0.3
         env:
           REMOTE_HOST: ${{ secrets.HOST }}
