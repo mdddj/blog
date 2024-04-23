@@ -16,15 +16,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: 安装pnpm
-        run: npm install -g pnpm
-      - name: 安装ext
-        run: pnpm install es5-ext
       - name: 安装依赖
-        run: pnpm install
+        run: npm install
 
       - name: 构建
-        run: pnpm run build
+        run: npm run build
 
       - name: 发布到服务器
         uses: easingthemes/ssh-deploy@v5.0.3
