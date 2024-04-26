@@ -10,16 +10,19 @@ jobs:
       matrix:
         node-version: [20]
     steps:
-      - uses: actions/checkout@v4
-
-      - name: install nodejs
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: "pnpm"
+
       - name: install deps
-        run: npm install
+        run: pnpm install --frozen-lockfile
       - name: build
-        run: npm run build
+        run: pnpm build
       - name: push to server
         uses: easingthemes/ssh-deploy@v5.0.3
         env:
