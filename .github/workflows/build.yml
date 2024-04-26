@@ -18,7 +18,7 @@ jobs:
           node-version: 20
       - name: install deps
         run: npm install
-      - name: 构建
+      - name: build
         run: npm run build
       - name: push to server
         uses: easingthemes/ssh-deploy@v5.0.3
