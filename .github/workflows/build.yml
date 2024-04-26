@@ -7,24 +7,28 @@ jobs:
   cache-and-install:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - name: Install node.js
+        # 使用action库  actions/setup-node安装node
+        uses: actions/setup-node@main
         with:
-          node-version: 20
+          node-version: lts/*
 
-      - uses: pnpm/action-setup@v3
-        name: Install pnpm
-        with:
-          version: 8
-          run_install: false
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install
-      - name: build
+        run: pnpm i
+
+      # 暂时没有编写test程序，可跳过
+      # - name: Test
+      #   run: pnpm test
+
+      - name: Build
         run: pnpm build
+
       - name: push to server
         uses: easingthemes/ssh-deploy@v5.0.3
         env:
