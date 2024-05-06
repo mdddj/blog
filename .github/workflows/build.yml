@@ -8,26 +8,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Install node.js
-        # 使用action库  actions/setup-node安装node
-        uses: actions/setup-node@main
-        with:
-          node-version: lts/*
+      # - name: Install node.js
+      #   # 使用action库  actions/setup-node安装node
+      #   uses: actions/setup-node@main
+      #   with:
+      #     node-version: lts/*
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+      # - name: Install pnpm
+      #   run: npm install -g pnpm
 
-      - name: Install dependencies
-        run: pnpm i
+      # - name: Install dependencies
+      #   run: pnpm i
 
-      # 暂时没有编写test程序，可跳过
-      # - name: Test
-      #   run: pnpm test
+      # # 暂时没有编写test程序，可跳过
+      # # - name: Test
+      # #   run: pnpm test
 
-      - name: Build
-        run: pnpm build
+      # - name: Build
+      #   run: pnpm build
 
       - name: push to server
         uses: easingthemes/ssh-deploy@v5.0.3

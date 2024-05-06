@@ -1,4 +1,3 @@
-import React from "react";
 import { categoryStore } from "@/providers/category";
 import { Chip } from "@nextui-org/chip";
 import { Image } from "@nextui-org/image";
