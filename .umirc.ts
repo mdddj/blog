@@ -40,4 +40,5 @@ export default defineConfig({
   },
   plugins: ["@umijs/plugins/dist/tailwindcss"],
   esbuildMinifyIIFE: true,
+  publicPath: '/'
 });
