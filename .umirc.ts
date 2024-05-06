@@ -36,6 +36,7 @@ export default defineConfig({
   title: '梁典典的博客',
   npmClient: "pnpm",
   tailwindcss: {
+    tailwindCssFilePath: 'tailwind.css',
     tailwindConfigFilePath: "tailwind.config.js",
   },
   plugins: ["@umijs/plugins/dist/tailwindcss"],
