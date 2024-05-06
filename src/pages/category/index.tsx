@@ -1,8 +1,4 @@
 import { categoryStore } from "@/providers/category";
-import { Chip } from "@nextui-org/chip";
-import { Image } from "@nextui-org/image";
-import { Card, CardHeader, Divider } from "@nextui-org/react";
-import { CardBody } from "@nextui-org/card";
 import CardTitle from "@/components/title";
 import FilterBlogs from "@/components/filter_blogs";
 import filterBlogsProvider from "@/providers/filter_blog";
@@ -15,15 +11,15 @@ export default function Page() {
     useShallow((state) => [state.doFilter, state.selectLabel])
   );
   return (
-    <Card>
-      <CardHeader>
+    <div>
+      <div>
         <CardTitle title={"分类"} />
-      </CardHeader>
-      <Divider />
-      <CardBody>
+      </div>
+      <div />
+      <div>
         <div className={"flex flex-wrap gap-5"}>
           {categorys.map((value) => (
-            <Chip
+            <div
               color={label === value.name ? "primary" : undefined}
               className={"cursor-pointer"}
               key={value.id}
@@ -33,14 +29,13 @@ export default function Page() {
                 );
                 filterBlogsProvider.setState({ selectLabel: value.name });
               }}
-              avatar={<Image src={value.logo} />}
             >
               {value.name}
-            </Chip>
+            </div>
           ))}
         </div>
         <FilterBlogs />
-      </CardBody>
-    </Card>
+      </div>
+    </div>
   );
 }

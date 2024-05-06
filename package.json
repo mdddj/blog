@@ -4,13 +4,12 @@
   "scripts": {
     "build": "umi build",
     "postinstall": "umi setup",
-    "start": "umi dev"
+    "start": "umi dev",
+    "abuild": "ANALYZE=1 umi build"
   },
   "dependencies": {
-    "@nextui-org/react": "^2.3.6",
     "axios": "^1.6.8",
     "dayjs": "^1.11.11",
-    "framer-motion": "^11.1.7",
     "github-markdown-css": "^5.5.1",
     "highlight.js": "^11.9.0",
     "markdown-it": "^14.1.0",
@@ -24,6 +23,7 @@
     "@types/react-dom": "^18.3.0",
     "@umijs/lint": "^4.1.10",
     "@umijs/plugins": "^4.1.10",
+    "daisyui": "^4.10.5",
     "eslint": "^9.2.0",
     "stylelint": "^16",
     "tailwindcss": "^3",

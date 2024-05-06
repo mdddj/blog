@@ -3,8 +3,6 @@
 
 import {createRoot} from "react-dom/client";
 import React from "react";
-import {ModalProps, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter} from "@nextui-org/modal";
-import {Button} from "@nextui-org/react";
 
 function ShowCustomModal(
     customModalElement: React.ReactElement,
@@ -12,11 +10,11 @@ function ShowCustomModal(
     const div = document.createElement("div")
     div.id = "custom-modal"
     const modal = createRoot(div)
-    const clone = React.cloneElement<ModalProps>(customModalElement, {
+    const clone = React.cloneElement<{}>(customModalElement, {
         isOpen: true,
         onOpenChange: isOpen => {
             if (!isOpen) {
-                const closeClone = React.cloneElement<ModalProps>(clone, {
+                const closeClone = React.cloneElement<{}>(clone, {
                     isOpen: false
                 })
                 modal.render(closeClone)

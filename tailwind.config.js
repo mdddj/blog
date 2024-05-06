@@ -1,10 +1,11 @@
-import { nextui } from "@nextui-org/react";
-export const content = [
-  './src/pages/**/*.tsx',
-  './src/components/**/*.tsx',
-  './src/layouts/**/*.tsx',
-  "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
-];
-export const plugins = [
-  nextui()
-];
+import daisyui from "daisyui"
+module.exports = {
+  plugins: [
+    daisyui,
+  ],
+  content: [
+    './src/pages/**/*.tsx',
+    './src/components/**/*.tsx',
+    './src/layouts/**/*.tsx'
+  ]
+}

@@ -3,6 +3,6 @@ import React from "react";
 const CardTitle: React.FC<{
   title: string;
 }> = ({ title }) => {
-  return <div className={"text-large font-bold text-foreground"}>{title}</div>;
+  return <h1 className={"font-bold  text-foreground"}>{title}</h1>
 };
 export default CardTitle;

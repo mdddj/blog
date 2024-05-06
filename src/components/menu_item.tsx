@@ -1,18 +1,15 @@
-import { Card, CardHeader, CardBody } from "@nextui-org/react";
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 
 type Prop = {
   title: string;
 };
 
-const MyMenuItem: React.FC<PropsWithChildren<Prop>> = (props) => {
-  return (
-    <Card shadow={"none"}>
-      <CardHeader>
-        <div>{props.title}</div>
-      </CardHeader>
-      <CardBody>{props.children}</CardBody>
-    </Card>
-  );
+const MyMenuItem: React.FC<PropsWithChildren<Prop>> = ({title,children}) => {
+    return <div className="card bg-base-100 shadow-xl m-2">
+        <div className="card-body">
+            <h2 className="card-title">{title}</h2>
+            {children}
+        </div>
+    </div>
 };
 export default MyMenuItem;

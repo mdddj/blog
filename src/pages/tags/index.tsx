@@ -1,8 +1,5 @@
 import React from "react";
 import { categoryStore } from "@/providers/category";
-import { Card, CardHeader, Divider } from "@nextui-org/react";
-import { CardBody } from "@nextui-org/card";
-import { Chip } from "@nextui-org/chip";
 import CardTitle from "@/components/title";
 import FilterBlogs from "@/components/filter_blogs";
 import filterBlogsProvider from "@/providers/filter_blog";
@@ -16,15 +13,15 @@ export default function Page() {
   );
 
   return (
-    <Card>
-      <CardHeader>
+    <div>
+      <div>
         <CardTitle title={"标签"} />
-      </CardHeader>
-      <Divider />
-      <CardBody>
+      </div>
+      <div />
+      <div>
         <div className={"flex flex-wrap gap-5"}>
           {tags.map((value) => (
-            <Chip
+            <div
               color={label === value.name ? "primary" : undefined}
               className={"cursor-pointer"}
               key={value.id}
@@ -38,7 +35,7 @@ export default function Page() {
               }}
             >
               {value.name}
-            </Chip>
+            </div>
           ))}
         </div>
         <FilterBlogs
@@ -54,7 +51,7 @@ export default function Page() {
             );
           }}
         />
-      </CardBody>
-    </Card>
+      </div>
+    </div>
   );
 }

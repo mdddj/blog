@@ -1,16 +1,13 @@
 import {Project} from "@/models/project";
 import React from "react";
-import {Card, CardHeader, Divider, Image, Link, Listbox, ListboxItem} from "@nextui-org/react";
-import {CardBody, CardFooter} from "@nextui-org/card";
 
 
 const ProjectCard: React.FC<{project: Project}> = ({ project }) => {
 
-    return <Card>
-        <CardHeader className="flex gap-3">
-            <Image
+    return <div>
+        <div className="flex gap-3">
+            <img
                 alt={project.logo}
-                radius="sm"
                 src={project.logo}
                 className={'object-cover h-10 w-10'}
             />
@@ -18,21 +15,21 @@ const ProjectCard: React.FC<{project: Project}> = ({ project }) => {
                 <p className="text-md font-bold">{project.name}</p>
                 <p className="text-small text-default-500">Number:{project.id}</p>
             </div>
-        </CardHeader>
-        <Divider/>
-        <CardBody>
+        </div>
+        <div/>
+        <div>
             {project.description}
-        </CardBody>
-        <CardFooter>
+        </div>
+        <div>
             <div className={'border-sm rounded-sm w-full border-default-200 dark:border-gray-100'}>
-                <Listbox variant={'shadow'} color={'default'}>
-                    <ListboxItem key="download"><Link href={project.github}>Github</Link></ListboxItem>
-                    <ListboxItem key="download"><Link href={project.downloadUrl}>下载</Link></ListboxItem>
-                    <ListboxItem key="download"><Link href={project.previewUrl}>预览</Link></ListboxItem>
-                </Listbox>
+                <ul  color={'default'}>
+                    <li key="download"><a href={project.github}>Github</a></li>
+                    <li key="download"><a href={project.downloadUrl}>下载</a></li>
+                    <li key="download"><a href={project.previewUrl}>预览</a></li>
+                </ul>
             </div>
-        </CardFooter>
-    </Card>
+        </div>
+    </div>
 }
 
 export default ProjectCard;

@@ -1,11 +1,11 @@
 import { blogStore } from "@/providers/blog";
 import { useShallow } from "zustand/react/shallow";
 import BlogCard from "@/components/blog";
-import { Spinner } from "@nextui-org/react";
+import LoadingWidget from "@/loading";
 
 
 export default function HomePage() {
-  document.title = "梁典典的博客1. 0";
+  document.title = "梁典典的博客";
   const [blogs, isLoading] = blogStore(
     useShallow((state) => [state.blogs, state.isLoading])
   );
@@ -13,7 +13,7 @@ export default function HomePage() {
     <>
       {isLoading && (
         <div className="text-center">
-          <Spinner />
+          <LoadingWidget/>
         </div>
       )}
       {blogs.length > 0 && (
