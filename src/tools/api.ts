@@ -1,6 +1,6 @@
 import axios from 'axios';
-const host = "https://api.itbug.shop";
-// const host = "http://localhost:8082";
+// const host = "https://api.itbug.shop";
+const host = "http://localhost:8082";
 
 export const blogsApi = `/api/blog/all`;
 export const categoryApi = `/api/blog/statistics`

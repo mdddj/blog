@@ -1,6 +1,5 @@
 import { Blog } from "@/models/blog";
-import { Card } from "@nextui-org/react";
-import { CardBody } from "@nextui-org/card";
+import { Card, CardBody } from "@nextui-org/react";
 import { Chip } from "@nextui-org/chip";
 import React from "react";
 import { Avatar } from "@nextui-org/avatar";

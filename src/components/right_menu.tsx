@@ -37,7 +37,7 @@ const RightMenu: React.FC = () => {
   return (
     <div>
       <Item title={"分类"}>
-        <div>
+        <>
           {cates.map((value) => {
             return (
               <div key={value.id} className={"cursor-pointer"}>
@@ -60,11 +60,11 @@ const RightMenu: React.FC = () => {
               </div>
             );
           })}
-        </div>
+        </>
       </Item>
 
       <Item title={"标签"}>
-        <div>
+        <>
           {tags.map((value) => {
             return (
               <div key={value.id} className={"cursor-pointer"}>
@@ -89,11 +89,11 @@ const RightMenu: React.FC = () => {
               </div>
             );
           })}
-        </div>
+        </>
       </Item>
 
       <Item title={"归档"}>
-        <div>
+        <>
           {arts.map((value) => {
             return (
               <div key={value.months} className={"cursor-pointer"}>
@@ -108,7 +108,7 @@ const RightMenu: React.FC = () => {
               </div>
             );
           })}
-        </div>
+        </>
       </Item>
     </div>
   );
