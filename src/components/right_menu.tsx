@@ -1,25 +1,10 @@
 import { categoryStore } from "@/providers/category";
-import React, { PropsWithChildren } from "react";
-import { Card, CardHeader, Link } from "@nextui-org/react";
-import { CardBody } from "@nextui-org/card";
+import React from "react";
+import { Link } from "@nextui-org/react";
 import filterBlogsProvider from "@/providers/filter_blog";
 import { useShallow } from "zustand/react/shallow";
 import { useNavigate } from "@@/exports";
-
-type Prop = {
-  title: string;
-};
-
-const Item: React.FC<PropsWithChildren<Prop>> = (props) => {
-  return (
-    <Card shadow={"none"}>
-      <CardHeader>
-        <div>{props.title}</div>
-      </CardHeader>
-      <CardBody>{props.children}</CardBody>
-    </Card>
-  );
-};
+import MyMenuItem from "./menu_item";
 
 /**
  * 右侧导航
@@ -36,7 +21,7 @@ const RightMenu: React.FC = () => {
 
   return (
     <div>
-      <Item title={"分类"}>
+      <MyMenuItem title={"分类"}>
         <>
           {cates.map((value) => {
             return (
@@ -61,9 +46,9 @@ const RightMenu: React.FC = () => {
             );
           })}
         </>
-      </Item>
+      </MyMenuItem>
 
-      <Item title={"标签"}>
+      <MyMenuItem title={"标签"}>
         <>
           {tags.map((value) => {
             return (
@@ -90,9 +75,9 @@ const RightMenu: React.FC = () => {
             );
           })}
         </>
-      </Item>
+      </MyMenuItem>
 
-      <Item title={"归档"}>
+      <MyMenuItem title={"归档"}>
         <>
           {arts.map((value) => {
             return (
@@ -109,7 +94,7 @@ const RightMenu: React.FC = () => {
             );
           })}
         </>
-      </Item>
+      </MyMenuItem>
     </div>
   );
 };
