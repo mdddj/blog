@@ -43,14 +43,14 @@ const mdParser = new MarkdownIt({
         ignoreIllegals: true,
       }).value;
     }
-    return `<pre class="hljs font-bold"><code>${code}</code></pre>`;
+    return `<pre>${code}</pre>`;
   },
   html: true,
 });
 const MarkdownComponent: React.FC<{ text: string }> = ({ text }) => {
   return (
     <div
-      className={"markdown-body"}
+      className={"markdown-body shadow-2xl p-5 bg-white rounded-lg"}
       dangerouslySetInnerHTML={{ __html: mdParser.render(text) }}
     ></div>
   );

@@ -20,8 +20,7 @@ export default function Page() {
         <div className={"flex flex-wrap gap-5"}>
           {categorys.map((value) => (
             <div
-              color={label === value.name ? "primary" : undefined}
-              className={"cursor-pointer"}
+              className={"cursor-pointer" + `${label === value.name ? "text-secondary link" : ""}`}
               key={value.id}
               onClick={() => {
                 filter.call(undefined, (b) =>

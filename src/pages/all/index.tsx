@@ -18,14 +18,13 @@ export default function Page() {
                         {value.blogs.map((blog) => (
                             <Link
                                 key={blog.id}
-                                className={"text-foreground"}
                                 to={`/detail/${blog.id}`}
                             >
                                 <div key={blog.id}>
                     <span className={"mr-2 text-neutral"}>
                       {dayjs(blog.createTime).format("YYYY-MM-DD")}
                     </span>
-                                    <span className={"text-primary"}>{blog.title}</span>
+                                    <span className={"text-base link link-hover"}>{blog.title}</span>
                                 </div>
                             </Link>
                         ))}

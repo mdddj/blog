@@ -1,47 +1,23 @@
-///弹窗.
-
 
 import {createRoot} from "react-dom/client";
 import React from "react";
 
-function ShowCustomModal(
-    customModalElement: React.ReactElement,
-) {
-    const div = document.createElement("div")
-    div.id = "custom-modal"
-    const modal = createRoot(div)
-    const clone = React.cloneElement<{}>(customModalElement, {
-        isOpen: true,
-        onOpenChange: isOpen => {
-            if (!isOpen) {
-                const closeClone = React.cloneElement<{}>(clone, {
-                    isOpen: false
-                })
-                modal.render(closeClone)
-                setTimeout(() => {
-                    modal.unmount()
-                    div.remove()
-                }, 300)
-            }
-        }
-    })
-    modal.render(clone)
-    document.body.appendChild(div)
-}
+import dsImage from '../assets/ds.jpg'
 
 
-export function showDefaultMessage(message: string){
-    ShowCustomModal(<Modal isOpen={true}>
-        <ModalContent>
-            {(onClose)=>(<>
-                <ModalHeader>提示</ModalHeader>
-                <ModalBody>
-                    {message}
-                </ModalBody>
-                <ModalFooter>
-                    <Button color={'primary'} onClick={onClose}>关闭</Button>
-                </ModalFooter>
-            </>)}
-        </ModalContent>
-    </Modal>)
+export const MyRewardDialog: React.FC = () => {
+    return <dialog id="ds" className="modal">
+        <div className="modal-box">
+            <h3 className="font-bold text-lg">打赏</h3>
+            <p className="py-4">
+                <img src={dsImage} alt={'打赏'} className={'shadow shadow-blue-100'}/>
+            </p>
+            <div className={'modal-action'}>
+                <form method="dialog">
+                    <button className="btn">取消</button>
+                </form>
+            </div>
+        </div>
+
+    </dialog>
 }

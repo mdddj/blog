@@ -2,7 +2,6 @@ import React from "react";
 import { FriendLink } from "@/models/friend";
 import CardTitle from "@/components/title";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { showDefaultMessage } from "@/components/alert_modal";
 import { linkStore } from "@/providers/links";
 import { useShallow } from "zustand/react/shallow";
 
@@ -23,9 +22,7 @@ export default function Page() {
     setIsLoading(true);
     try {
       await add(values);
-      setTimeout(() => showDefaultMessage("提交成功."), 300);
     } catch (e) {
-      showDefaultMessage(`${e}`);
     }
     setIsLoading(false);
   };
