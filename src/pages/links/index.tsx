@@ -6,7 +6,6 @@ import { linkStore } from "@/providers/links";
 import { useShallow } from "zustand/react/shallow";
 
 export default function Page() {
-  document.title = "友链";
   const [useEmail, setUseEmail] = React.useState<boolean>(false);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const {
@@ -22,8 +21,7 @@ export default function Page() {
     setIsLoading(true);
     try {
       await add(values);
-    } catch (e) {
-    }
+    } catch (e) {}
     setIsLoading(false);
   };
   return (
@@ -48,16 +46,14 @@ export default function Page() {
               return (
                 <div key={value.id}>
                   <div>
-                    <a href={value.url}>
-                        {value.intro}
-                      </a>
+                    <a href={value.url}>{value.intro}</a>
                   </div>
                 </div>
               );
             })}
 
             {list.length === 0 && (
-                <span className={"text-default-500 text-sm"}>暂无友链</span>
+              <span className={"text-default-500 text-sm"}>暂无友链</span>
             )}
           </div>
         </div>

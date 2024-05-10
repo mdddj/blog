@@ -10,18 +10,22 @@ export default defineConfig({
     {
       path: "/category",
       component: "category/index",
+      title: "分类"
     },
     {
       path: "/tags",
       component: "tags/index",
+      title: "标签"
     },
     {
       path: "/all",
       component: "all/index",
+      title: "归档"
     },
     {
       path: "/links",
       component: "links/index",
+      title: "友链"
     },
     {
       path: "/about",
@@ -30,7 +34,8 @@ export default defineConfig({
     },
     {
       path: "/projects",
-      component: "project/index"
+      component: "project/index",
+      title: "项目"
     }
   ],
   title: '梁典典的博客',
@@ -41,5 +46,5 @@ export default defineConfig({
   },
   plugins: ["@umijs/plugins/dist/tailwindcss"],
   esbuildMinifyIIFE: true,
-  publicPath: '/'
+  publicPath: '/',
 });

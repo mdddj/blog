@@ -1,6 +1,5 @@
 import React from "react";
 import MarkdownIt from "markdown-it";
-import "github-markdown-css/github-markdown-light.css";
 import hljs from "highlight.js/lib/core";
 import dart from "highlight.js/lib/languages/dart";
 import rust from "highlight.js/lib/languages/rust";
@@ -32,8 +31,8 @@ hljs.registerLanguage("c++", c);
 hljs.registerLanguage("cpp", c);
 hljs.registerLanguage("cmake", cmake);
 hljs.registerLanguage("gradle", gradle);
-hljs.registerLanguage("Dockerfile",docker)
-hljs.registerLanguage("md",md)
+hljs.registerLanguage("Dockerfile", docker);
+hljs.registerLanguage("md", md);
 const mdParser = new MarkdownIt({
   highlight: (str, lang) => {
     let code: any = mdParser.utils.escapeHtml(str);
@@ -49,10 +48,12 @@ const mdParser = new MarkdownIt({
 });
 const MarkdownComponent: React.FC<{ text: string }> = ({ text }) => {
   return (
-    <div
-      className={"markdown-body shadow-2xl p-5 bg-white rounded-lg"}
+    <article
+      className={
+        "prose lg:prose-xl prose-pre:bg-base-200 prose-pre:text-base-content max-w-none p-5 shadow-2xl rounded-lg"
+      }
       dangerouslySetInnerHTML={{ __html: mdParser.render(text) }}
-    ></div>
+    ></article>
   );
 };
 
