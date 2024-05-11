@@ -1,14 +1,12 @@
 import { Blog } from "@/models/blog";
 import React from "react";
 import { Link } from "umi";
-import { useNavigate } from "@@/exports";
 import { fromNow } from "@/tools/date";
 
 const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
-  let nav = useNavigate();
 
   return (
-    <div className="card shadow-xl cursor-pointer relative transition-transform duration-300  hover:transform hover:-translate-y-1 focus-within:border-green-500 focus-within:transform focus-within:-translate-y-1 focus-within:outline-none">
+    <div className="card shadow-xl bg-base-100 cursor-pointer relative transition-transform duration-300  hover:transform hover:-translate-y-1 focus-within:border-green-500 focus-within:transform focus-within:-translate-y-1 focus-within:outline-none">
       <div className={"card-body"}>
         <Link
           className={"link link-hover card-title"}

@@ -8,10 +8,10 @@ const Foot: React.FC = () => {
             <div>
                 <p>Copyright © 2024 - All right reserved by 梁典典 Ltd</p>
                 <p className={'flex gap-2'}>
-                    <a href={"https://github.com/mdddj"} target={"_blank"} className={'link link-hover'}>
+                    <a href={"https://github.com/mdddj"} rel={'noreferrer'} target={"_blank"} className={'link link-hover'}>
                         <Github className={"size-4 cursor-pointer"}/>
                     </a>
-                    <a href={"https://admin.itbug.shop"} target={"_blank"} className={'link link-hover'}>
+                    <a href={"https://admin.itbug.shop"} rel={'noreferrer'} target={"_blank"} className={'link link-hover'}>
                         <Admin className={"size-4 cursor-pointer"}/>
                     </a>
                     <span className={"text-content3-foreground text-small"}>

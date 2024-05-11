@@ -1,5 +1,4 @@
 
-import {createRoot} from "react-dom/client";
 import React from "react";
 
 import dsImage from '../assets/ds.jpg'
@@ -14,7 +13,7 @@ export const MyRewardDialog: React.FC = () => {
             </p>
             <div className={'modal-action'}>
                 <form method="dialog">
-                    <button className="btn">取消</button>
+                    <button type={'button'} className="btn">取消</button>
                 </form>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 const host = "https://api.itbug.shop";
-// const host = "http://192.168.199.79:8082";
+// const host = "http://192.168.199.92:8082";
 
 export const blogsApi = `/api/blog/all`;
 export const categoryApi = `/api/blog/statistics`
@@ -28,7 +28,7 @@ const axiosInstance = axios.create({
     timeout: 5000, // 请求超时时间
 });
 
-// 响应拦截器
+// 响应拦截器  
 axiosInstance.interceptors.response.use(
     (response) => {
         const { state, message } = response.data;

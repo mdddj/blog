@@ -37,7 +37,7 @@ export default function Page() {
             <div className={'h-10'}/>
             <div className="relative">
                     <div className="fixed -ml-28 mt-5">
-                        <button className="btn btn-circle" onClick={()=>nav(-1)}>
+                        <button type={'button'} className="btn btn-circle" onClick={()=>nav(-1)}>
                             <BackSvg/>
                         </button>
                     </div>

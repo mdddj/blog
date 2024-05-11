@@ -1,13 +1,5 @@
 import React from "react";
 
-
-const WriteButton: React.FC = () => {
-    return <>
-        <button className="btn btn-circle  fixed bottom-4 right-4" onClick={()=>window.location.href="https://admin.itbug.shop/blog/add"}>
-           <SvgComponent/>
-        </button>
-    </>
-}
 const SvgComponent = () => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -22,5 +14,14 @@ const SvgComponent = () => (
         />
     </svg>
 )
+
+
+const WriteButton: React.FC = () => {
+    return <>
+        <button type={'button'} className="btn btn-circle hidden md:flex md:fixed md:bottom-4 md:right-4" onClick={()=>window.location.href="https://admin.itbug.shop/blog/add"}>
+           <SvgComponent/>
+        </button>
+    </>
+}
 
 export default WriteButton

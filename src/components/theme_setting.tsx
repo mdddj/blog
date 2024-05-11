@@ -7,11 +7,11 @@ const ThemeSetting: React.FC = () => {
   }, []);
 
   return (
-    <div className={"flex items-center"}>
+    <div className={" items-center hidden md:flex"}>
       <span className="text-base-content mr-5">切换主题</span>
       <select
         className="select select-sm text-pretty select-bordered"
-        data-choose-theme
+        data-choose-theme=""
       >
         <option value="light">Default</option>
         <option value="dark">Dark</option>

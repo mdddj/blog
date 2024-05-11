@@ -5,7 +5,6 @@ import { useLocation } from "@@/exports";
 import { MyRewardDialog } from "@/components/alert_modal";
 import Foot from "@/components/foot";
 import WriteButton from "@/components/write_button";
-import { themeChange } from "theme-change";
 
 export default function Layout() {
   const nav = useLocation();
