@@ -13,7 +13,7 @@ export const MyRewardDialog: React.FC = () => {
             </p>
             <div className={'modal-action'}>
                 <form method="dialog">
-                    <button type={'button'} className="btn">取消</button>
+                    <button className="btn">取消</button>
                 </form>
             </div>
         </div>

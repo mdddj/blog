@@ -7,6 +7,7 @@ import {useShallow} from "zustand/react/shallow";
 import {showDialogModal} from "@/tools/fun";
 import InputErrorLabel, {InputErrorClass} from "@/components/input_error_label";
 import LinkItemLayout from "@/components/link_item_layout";
+import TextComponent from "@/components/text";
 
 export default function Page() {
     const [useEmail, setUseEmail] = React.useState<boolean>(false);
@@ -33,17 +34,21 @@ export default function Page() {
         <div>
             <div className={'flex justify-between mb-4'}>
                 <CardTitle title={"友链"}/>
-                <button className={'btn'} color={"primary"} type={'button'}
-                        onClick={() => showDialogModal("request-link")}>
-                    申请友链
-                </button>
+
+                <div className={'flex gap-2'}>
+                    <button type={'button'} className={'btn'} onClick={()=>showDialogModal('my-info-dialog')}>我的信息</button>
+                    <button className={'btn btn-primary'} color={"primary"} type={'button'}
+                            onClick={() => showDialogModal("request-link")}>
+                        申请友链
+                    </button>
+                </div>
             </div>
             <div
                 className={
-                    "grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5"
+                    "grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4"
                 }
             >
-                {list.map((value) => {
+            {list.map((value) => {
                     return (
                         <LinkItemLayout link={value} key={value.id}/>
                     );
@@ -55,8 +60,19 @@ export default function Page() {
             </div>
 
 
+            <dialog id={'my-info-dialog'} className={'modal'}>
+                <div className={'modal-box'}>
+                    <h3 className={'font-bold text-lg mb-5'}>我的信息</h3>
+                    <TextComponent  textKey={'my-info'}/>
+                </div>
+                <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+
+            {/*申请弹窗*/}
             <dialog className={'modal'} id={'request-link'}>
-                <div className={"modal-box"}>
+            <div className={"modal-box"}>
                     <h3 className="font-bold text-lg mb-5">申请友链</h3>
                     <form onSubmit={handleSubmit(onSubmit)} className={'flex flex-col justify-center gap-4'}>
                         <Controller control={control} render={({field, fieldState: {error}}) => {

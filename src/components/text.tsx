@@ -11,6 +11,9 @@ const TextComponent: React.FC<Prop> = ({ textKey }) => {
   const list = textStore((state) => state.data);
   const find = list.find((item) => item.name === textKey);
 
+  if(!find){
+    return <p>暂无数据</p>
+  }
   return <>{find && <MarkdownComponent text={find.context} />}</>;
 };
 
