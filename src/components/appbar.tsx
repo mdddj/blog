@@ -1,8 +1,8 @@
 import React, {useRef} from "react";
 import {appMenuStore} from "@/providers/menu";
-import {Link} from "@@/exports";
 import ThemeSetting from "./theme_setting";
 import {showDialogModal} from "@/tools/fun";
+import {NavLink} from "@@/exports";
 
 export default function AppBar() {
     const menus = appMenuStore((state) => state.menus);
@@ -29,26 +29,25 @@ export default function AppBar() {
                                 if (ref.current) {
                                     ref.current.removeAttribute("open")
                                 }
-
                             }} key={`${item.href}-${index}`}>
-                                <Link to={item.href}>{item.title}</Link>
+                                <NavLink to={item.href}>{item.title}</NavLink>
                             </li>
                         ))}
                     </ul>
                 </details>
-                <Link to={"/"} className="btn btn-ghost text-xl">
+                <NavLink to={"/"} className="btn btn-ghost text-xl">
                     梁典典的博客
-                </Link>
+                </NavLink>
             </div>
-            <div className="navbar-center hidden lg:flex">
+            <nav className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {menus.map((item, index) => (
                         <li key={`${item.href}-${index}`}>
-                            <Link to={item.href}>{item.title}</Link>
+                            <NavLink to={item.href}>{item.title}</NavLink>
                         </li>
                     ))}
                 </ul>
-            </div>
+            </nav>
             <div className="navbar-end gap-4">
                 <ThemeSetting/>
                 <button

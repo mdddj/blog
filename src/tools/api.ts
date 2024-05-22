@@ -1,6 +1,6 @@
 import axios from 'axios';
 const host = "https://api.itbug.shop";
-// const host = "http://192.168.199.92:8082";
+// const host = "http://192.168.199.84:8082";
 
 export const blogsApi = `/api/blog/all`;
 export const categoryApi = `/api/blog/statistics`
@@ -8,6 +8,8 @@ export const friendApi = `/api/public/friend/all`
 export const friendAddApi = `/api/friend/save`
 export const textAllApi = '/api/blog/getTextAll'
 export const projectListApi = "/api/blog/projects"
+export const groupListApi = "/api/rc/cates"
+export const groupResourceList = "/api/app/resource/findByCateId"
 
 //自定义错误信息
 class BizException extends Error {

@@ -10,6 +10,10 @@ export const appMenuStore = create<{
                 href: '/'
             },
             {
+                title: '群组',
+                href: '/g'
+            },
+            {
                 title: '分类',
                 href: '/category'
             },

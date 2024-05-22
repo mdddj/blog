@@ -36,6 +36,17 @@ export default defineConfig({
       path: "/projects",
       component: "project/index",
       title: "项目"
+    },
+    {
+      path: '/g',
+      component: 'group/index',
+      title: '群组',
+      routes: [
+        {
+          path: '/g/:id',
+          component: 'group/list',
+        }
+      ]
     }
   ],
   title: '梁典典的博客',

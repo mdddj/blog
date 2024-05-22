@@ -5,7 +5,9 @@ import { useLocation } from "@@/exports";
 import { MyRewardDialog } from "@/components/alert_modal";
 import Foot from "@/components/foot";
 import WriteButton from "@/components/write_button";
-
+import {configure} from "axios-hooks";
+import axiosInstance from "@/tools/api";
+configure({ axios: axiosInstance })
 export default function Layout() {
   const nav = useLocation();
   useEffect(() => {
