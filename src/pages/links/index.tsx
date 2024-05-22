@@ -63,7 +63,7 @@ export default function Page() {
             <dialog id={'my-info-dialog'} className={'modal'}>
                 <div className={'modal-box'}>
                     <h3 className={'font-bold text-lg mb-5'}>我的信息</h3>
-                    <TextComponent  textKey={'my-info'}/>
+                    <TextComponent isShadow={false} textKey={'my-info'}/>
                 </div>
                 <form method="dialog" className="modal-backdrop">
                     <button>close</button>

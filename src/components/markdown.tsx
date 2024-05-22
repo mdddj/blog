@@ -46,11 +46,11 @@ const mdParser = new MarkdownIt({
   },
   html: true,
 });
-const MarkdownComponent: React.FC<{ text: string }> = ({ text }) => {
+const MarkdownComponent: React.FC<{ text: string,isShadow?: boolean }> = ({ text,isShadow = true }) => {
   return (
     <article
       className={
-        "prose lg:prose-xl prose-pre:bg-base-200 prose-pre:text-base-content max-w-none p-5 shadow-2xl rounded-lg"
+        `prose lg:prose-xl prose-pre:bg-base-200 prose-pre:text-base-content max-w-none p-5 ${isShadow ? 'shadow-2xl' : ''} rounded-lg`
       }
       dangerouslySetInnerHTML={{ __html: mdParser.render(text) }}
     ></article>
