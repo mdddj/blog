@@ -6,8 +6,6 @@ import Loading from "@/components/loading";
 import {ApiResponse, Resource} from "@/models/base";
 import ResourceCard from "@/components/resource_card";
 
-
-///
 const ResourceListWidget: React.FC = () => {
     const params = useParams()
     const id = params.id

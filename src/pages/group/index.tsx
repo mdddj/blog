@@ -24,7 +24,7 @@ export default function Page() {
 
     return (
         <div className={'flex flex-row gap-10 relative'}>
-            <ul className={'menu flex-none bg-base-200 w-56 rounded-box '}>
+            <ul className={'menu flex-none bg-base-200 w-56 rounded-box'}>
                 {
                     list.map(value => {
                         return <li key={value.id}><Link className={`${selectId === `${value.id}` ? 'active' : ''}`} to={`/g/${value.id}`}>{value.name}</Link></li>
