@@ -21,12 +21,10 @@ jobs:
         name: 安装 pnpm
         with:
           version: 8
-          run_install: false
-
-      - name: 获取 pnpm 存储目录
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies]
+            - args: [--global, gulp, prettier, typescript]
 
       - name: 安装npm依赖
         run: pnpm install
