@@ -4,8 +4,12 @@ on:
     branches:
       - main
 jobs:
-  cache-and-install:
+  push_to_registry:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      attestations: write
     steps:
       - name: 拉代码
         uses: actions/checkout@v4
