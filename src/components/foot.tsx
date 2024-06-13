@@ -16,8 +16,7 @@ const Foot: React.FC = () => {
                     </a>
                     <a className={'link'}
                        href={'https://apifox.com/apidoc/shared-6f74775d-40ca-4a07-ad1e-dd9c8480f927'} rel={'noreferrer'} target={"_blank"}>Api</a>
-                    <span className={"text-content3-foreground text-small"}>赣ICP备17011549号-1</span>
-                    <span>赣ICP备17011549号-2X<span className={'text-base-content/60'}>(小程序)</span></span>
+                    <a href={'https://beian.miit.gov.cn/#/Integrated/recordQuery'} target={'_blank'} className={"text-content3-foreground text-small link"}>赣ICP备17011549号-1</a>
                 </p>
             </div>
 

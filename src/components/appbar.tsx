@@ -36,7 +36,7 @@ export default function AppBar() {
                     </ul>
                 </details>
                 <NavLink to={"/"} className="btn btn-ghost text-xl">
-                    梁典典的博客
+                    itbug笔记
                 </NavLink>
             </div>
             <nav className="navbar-center hidden lg:flex">
