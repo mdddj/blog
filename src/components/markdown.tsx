@@ -50,7 +50,7 @@ const MarkdownComponent: React.FC<{ text: string,isShadow?: boolean }> = ({ text
   return (
     <article
       className={
-        `prose lg:prose-xl prose-pre:bg-base-200 prose-pre:text-base-content max-w-none p-5 ${isShadow ? 'shadow-2xl' : ''} rounded-lg`
+        `prose prose-pre:bg-base-200 prose-pre:text-base-content max-w-none p-5 ${isShadow ? 'shadow-2xl' : ''} rounded-lg border-t-2`
       }
       dangerouslySetInnerHTML={{ __html: mdParser.render(text) }}
     ></article>

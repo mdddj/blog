@@ -49,7 +49,7 @@ export default defineConfig({
       ]
     }
   ],
-  title: '梁典典的博客',
+  title: '典典的博客',
   npmClient: "pnpm",
   tailwindcss: {
     tailwindCssFilePath: 'tailwind.css',
@@ -58,4 +58,7 @@ export default defineConfig({
   plugins: ["@umijs/plugins/dist/tailwindcss"],
   esbuildMinifyIIFE: true,
   publicPath: '/',
+  favicons: [
+      "/favicon.ico",
+  ]
 });

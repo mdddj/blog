@@ -15,3 +15,9 @@
     /*bottom: 0;*/
     /*z-index: -1;*/
 }
+
+@layer components {
+    .my-foot-link:hover {
+        @apply scale-105 transition duration-200 ease-in-out;
+    }
+}

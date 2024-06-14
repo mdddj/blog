@@ -5,7 +5,7 @@ import LoadingWidget from "@/loading";
 
 
 export default function HomePage() {
-  document.title = "梁典典的博客";
+  document.title = "典典博客";
   const [blogs, isLoading] = blogStore(
     useShallow((state) => [state.blogs, state.isLoading])
   );
