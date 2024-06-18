@@ -54,7 +54,7 @@ export default function Page() {
                         <BackSvg/>
                     </button>
                     <div className={'tooltip tooltip-left'} data-tip={'API接口'}>
-                        <a target={'_blank'} href={`/api/blog/get/${params?.id}`}>
+                        <a target={'_blank'} href={`https://api.itbug.shop/api/blog/get/${params?.id}`}>
                             <button type={'button'} className={'btn btn-circle btn-ghost'}>
                                 <ApiSvg/>
                             </button>

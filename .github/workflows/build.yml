@@ -10,18 +10,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        name: 安装 pnpm
-        with:
-          version: 8
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "pnpm"
-        run: pnpm install --no-frozen-lockfile && pnpm run build
+#
+#      - uses: pnpm/action-setup@v4
+#        name: 安装 pnpm
+#        with:
+#          version: 8
+#
+#      - name: Install Node.js
+#        uses: actions/setup-node@v4
+#        with:
+#          node-version: 20
+#          cache: "pnpm"
+#        run: pnpm install --no-frozen-lockfile && pnpm run build
 
       - name: push to server
         uses: easingthemes/ssh-deploy@v5.0.3
