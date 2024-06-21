@@ -50,9 +50,11 @@ export default function Page() {
             <div className={'h-10'}/>
             <div className="relative">
                 <div className="fixed -ml-28 mt-5 flex flex-col gap-5">
-                    <button type={'button'} className="btn btn-circle" onClick={() => nav(-1)}>
-                        <BackSvg/>
-                    </button>
+                    <div className={'tooltip tooltip-left'} data-tip={'返回'}>
+                        <button type={'button'} className="btn btn-circle" onClick={() => nav(-1)}>
+                            <BackSvg/>
+                        </button>
+                    </div>
                     <div className={'tooltip tooltip-left'} data-tip={'API接口'}>
                         <a target={'_blank'} href={`https://api.itbug.shop/api/blog/get/${params?.id}`}>
                             <button type={'button'} className={'btn btn-circle btn-ghost'}>

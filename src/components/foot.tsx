@@ -3,10 +3,10 @@ import BeiAnSvg from "@/components/beian_svg";
 
 const Foot: React.FC = () => {
     return <>
-        <footer className="footer footer-center p-4 text-base text-base-content flex-none">
+        <footer className="footer footer-center p-4 text-base text-base-content flex-none text-sm">
             <div>
                 <p>Copyright © 2024 - All right reserved by 典典博客 Ltd</p>
-                <p className={'flex flex-wrap items-center justify-center gap-6 mb-5'}>
+                <p className={'flex flex-wrap items-center justify-center gap-4 mb-5'}>
                     <a href={"https://github.com/mdddj"} rel={'noreferrer'} target={"_blank"}
                        className={'link my-foot-link'}>
                         Github

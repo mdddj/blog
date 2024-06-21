@@ -21,3 +21,9 @@
         @apply scale-105 transition duration-200 ease-in-out;
     }
 }
+
+@layer base {
+    code {
+        @apply break-all
+    }
+}

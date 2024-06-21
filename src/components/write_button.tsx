@@ -17,11 +17,14 @@ const SvgComponent = () => (
 
 
 const WriteButton: React.FC = () => {
-    return <>
-        <button type={'button'} className="btn btn-circle hidden md:flex md:fixed md:bottom-4 md:right-4" onClick={()=>window.location.href="https://admin.itbug.shop/blog/add"}>
-           <SvgComponent/>
+    return <div>
+        <button type={'button'} className="btn btn-circle hidden md:flex md:fixed md:bottom-4 md:right-4"
+                onClick={() => window.location.href = "https://admin.itbug.shop/blog/add"}>
+            <div className={'tooltip tooltip-top'} data-tip={'发布新博客'}>
+                <SvgComponent/>
+            </div>
         </button>
-    </>
+    </div>
 }
 
 export default WriteButton

@@ -3,6 +3,7 @@ import {appMenuStore} from "@/providers/menu";
 import ThemeSetting from "./theme_setting";
 import {showDialogModal} from "@/tools/fun";
 import {NavLink} from "@@/exports";
+import MiniAppWidget from "@/components/mini_app_widget";
 
 export default function AppBar() {
     const menus = appMenuStore((state) => state.menus);
@@ -35,9 +36,16 @@ export default function AppBar() {
                         ))}
                     </ul>
                 </details>
-                <NavLink to={"/"} className="btn btn-ghost text-xl">
-                    典典博客
-                </NavLink>
+                <div className={'flex flex-row gap-2 text-center items-center'}>
+                    <NavLink to={"/"} className="btn btn-ghost text-xl">
+                        典典博客
+                    </NavLink>
+                    <div className={'dropdown dropdown-bottom'}>
+                        <span tabIndex={0} role="button"
+                            className={'badge badge-accent badge-outline hover:bg-accent hover:text-secondary-content cursor-pointer'}>在小程序打开</span>
+                        <MiniAppWidget />
+                    </div>
+                </div>
             </div>
             <nav className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
