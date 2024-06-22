@@ -33,9 +33,13 @@ export default function Page() {
                 }
                 {
                     blog &&
-                    <div className={'flex gap-2 items-center mt-2 badge badge-ghost p-3'}><img src={blog.category.logo}
-                                                                                               alt={blog.category.name}
-                                                                                               className={'w-5 h-5 rounded-full'}/><span>{blog.category.name}</span>
+                    <div className={'flex justify-between'}>
+                        <div className={'flex gap-2 items-center mt-2 badge badge-ghost p-3'}><img
+                            src={blog.category.logo}
+                            alt={blog.category.name}
+                            className={'w-5 h-5 rounded-full'}/><span>{blog.category.name}</span>
+                        </div>
+                        <a className={'text-base-content'} target={'_blank'} href={`https://admin.itbug.shop/blog/add?update=${blog.id}`}>编辑</a>
                     </div>
                 }
                 {

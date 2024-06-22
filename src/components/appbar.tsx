@@ -40,7 +40,7 @@ export default function AppBar() {
                     <NavLink to={"/"} className="btn btn-ghost text-xl">
                         典典博客
                     </NavLink>
-                    <div className={'dropdown dropdown-bottom'}>
+                    <div className={'dropdown dropdown-bottom hidden lg:inline'}>
                         <span tabIndex={0} role="button"
                             className={'badge badge-accent badge-outline hover:bg-accent hover:text-secondary-content cursor-pointer'}>在小程序打开</span>
                         <MiniAppWidget />
