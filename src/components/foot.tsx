@@ -1,9 +1,9 @@
 import React from "react";
-import BeiAnSvg from "@/components/beian_svg";
+import gaw from '../assets/gaw.png'
 
 const Foot: React.FC = () => {
     return <>
-        <footer className="footer footer-center p-4 text-base text-base-content flex-none text-sm">
+        <footer className="footer footer-center p-4 text-base text-base-content flex-none">
             <div>
                 <p>Copyright © 2024 - All right reserved by 典典博客 Ltd</p>
                 <p className={'flex flex-wrap items-center justify-center gap-4 mb-5'}>
@@ -24,8 +24,13 @@ const Foot: React.FC = () => {
                         href={'https://github.com/mdddj/dd_server'} className={'link'}>后端</a>)
                     </span>
 
+
+                    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=44011302004470" rel="noreferrer"
+                       className={'flex gap-1 items-center'} target="_blank"><img src={gaw}
+                                                                                  className={'w-4 h-4 object-cover'}
+                                                                                  alt={'备案'}/>粤公网安备44011302004470</a>
                     <a href={'https://beian.miit.gov.cn/#/Integrated/recordQuery'} target={'_blank'}
-                       className={"my-foot-link link flex gap-0.5 items-center"}><BeiAnSvg/>赣ICP备17011549号-1</a>
+                       className={"my-foot-link link flex gap-0.5 items-center"}>赣ICP备17011549号-1</a>
                 </p>
             </div>
 
