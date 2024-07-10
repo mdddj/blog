@@ -3,23 +3,25 @@ import gaw from '../assets/gaw.png'
 
 const Foot: React.FC = () => {
     return <>
-        <footer className="footer footer-center p-4 text-base text-base-content flex-none">
+        <footer className="footer footer-center p-4 xl:text-base text-base-content flex-none text-sm">
             <div>
                 <p>Copyright © 2024 - All right reserved by 典典博客 Ltd</p>
-                <p className={'flex flex-wrap items-center justify-center gap-4 mb-5'}>
+                <p className={'flex flex-wrap items-center justify-center xl:gap-3 gap-1 mb-5'}>
                     <a href={"https://github.com/mdddj"} rel={'noreferrer'} target={"_blank"}
+                       className={'hidden xl:inline'}
                     >
                         Github
                     </a>
-                    <a href={"https://admin.itbug.shop"} rel={'noreferrer'} target={"_blank"}>
+                    <a href={"https://admin.itbug.shop"} rel={'noreferrer'} target={"_blank"}
+                       className={'hidden xl:inline'}>
                         管理后台
                     </a>
                     <a
                         href={'https://apifox.com/apidoc/shared-6f74775d-40ca-4a07-ad1e-dd9c8480f927'}
                         rel={'noreferrer'}
-                        target={"_blank"}>开放API接口</a>
+                        target={"_blank"} className={'hidden xl:inline'}>开放API接口</a>
 
-                    <span>
+                    <span className={'hidden xl:inline'}>
                         博客源码 (<a href={'https://github.com/mdddj/blog'}>前端</a>)(<a
                         href={'https://github.com/mdddj/dd_server'}>后端</a>)
                     </span>
