@@ -39,7 +39,7 @@ export default function Page() {
                             alt={blog.category.name}
                             className={'w-5 h-5 rounded-full'}/><span>{blog.category.name}</span>
                         </div>
-                        <a className={'text-base-content'} target={'_blank'} href={`https://admin.itbug.shop/blog/add?update=${blog.id}`}>编辑</a>
+                        <a rel={'noreferrer'} className={'text-base-content'} target={'_blank'} href={`https://admin.itbug.shop/blog/add?update=${blog.id}`}>编辑</a>
                     </div>
                 }
                 {
@@ -60,7 +60,7 @@ export default function Page() {
                         </button>
                     </div>
                     <div className={'tooltip tooltip-left'} data-tip={'API接口'}>
-                        <a target={'_blank'} href={`https://api.itbug.shop/api/blog/get/${params?.id}`}>
+                        <a rel={'noreferrer'} target={'_blank'} href={`https://api.itbug.shop/api/blog/get/${params?.id}`}>
                             <button type={'button'} className={'btn btn-circle btn-ghost'}>
                                 <ApiSvg/>
                             </button>

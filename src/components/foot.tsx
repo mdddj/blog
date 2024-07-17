@@ -31,7 +31,7 @@ const Foot: React.FC = () => {
                        className={'flex gap-1 items-center'} target="_blank"><img src={gaw}
                                                                                   className={'w-4 h-4 object-cover'}
                                                                                   alt={'备案'}/>粤公网安备44011302004470</a>
-                    <a href={'https://beian.miit.gov.cn/#/Integrated/recordQuery'} target={'_blank'}
+                    <a href={'https://beian.miit.gov.cn/#/Integrated/recordQuery'} target={'_blank'} rel={'noreferrer'}
                        className={""}>赣ICP备17011549号-1</a>
                 </p>
             </div>

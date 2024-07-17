@@ -66,7 +66,7 @@ export default function Page() {
                     <TextComponent isShadow={false} textKey={'my-info'}/>
                 </div>
                 <form method="dialog" className="modal-backdrop">
-                    <button>close</button>
+                    <button type={'submit'}>close</button>
                 </form>
             </dialog>
 
@@ -170,7 +170,7 @@ export default function Page() {
                                 : <>提交申请</>}
                             </button>
                             <form method="dialog">
-                                <button  className="btn" onClick={() => reset()}>取消</button>
+                                <button type={'submit'} className="btn" onClick={() => reset()}>取消</button>
                             </form>
                         </div>
                     </form>

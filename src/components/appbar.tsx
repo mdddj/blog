@@ -10,7 +10,7 @@ export default function AppBar() {
     const ref = useRef<HTMLDetailsElement>(null);
 
     return (
-        <header className="navbar fixed bg-base-100 shadow-2xl z-10">
+        <header className="navbar fixed bg-base-100 z-10">
             <div className="navbar-start ">
                 <details className="dropdown" ref={ref}>
                     <summary tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -59,6 +59,7 @@ export default function AppBar() {
             <div className="navbar-end gap-4">
                 <ThemeSetting/>
                 <button
+                    type="button"
                     onClick={() => showDialogModal('ds')}
                     className="btn btn-sm"
                 >
