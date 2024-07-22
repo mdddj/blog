@@ -22,8 +22,8 @@ const Foot: React.FC = () => {
                         target={"_blank"} className={'hidden xl:inline'}>开放API接口</a>
 
                     <span className={'hidden xl:inline'}>
-                        博客源码 (<a href={'https://github.com/mdddj/blog'}>前端</a>)(<a
-                        href={'https://github.com/mdddj/dd_server'}>后端</a>)
+                        博客源码 <a href={'https://github.com/mdddj/blog'}>前端</a> <a
+                        href={'https://github.com/mdddj/dd_server'}>后端</a>
                     </span>
 
 
