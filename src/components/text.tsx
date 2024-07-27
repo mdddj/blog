@@ -13,7 +13,7 @@ const TextComponent: React.FC<Prop> = ({textKey, isShadow}) => {
     const find = list.find((item) => item.name === textKey);
 
     if (!find) {
-        return <p>暂无数据</p>
+        return <p>抱歉, 404 Notfound</p>
     }
     return <>{find && <div>
       <MarkdownComponent text={find.context} isShadow={isShadow}/>

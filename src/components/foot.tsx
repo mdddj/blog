@@ -7,12 +7,15 @@ const Foot: React.FC = () => {
             <div>
                 <p>Copyright © 2024 - All right reserved by 典典博客 Ltd</p>
                 <p className={'flex flex-wrap items-center justify-center xl:gap-3 gap-1 mb-5'}>
+                    <a href={"/single/privacy"} rel={'noreferrer'} target={"_blank"} className={'hidden xl:inline'}>
+                        隐私政策
+                    </a>
                     <a href={"https://github.com/mdddj"} rel={'noreferrer'} target={"_blank"}
                        className={'hidden xl:inline'}
                     >
                         Github
                     </a>
-                    <a href={"https://admin.itbug.shop"} rel={'noreferrer'} target={"_blank"}
+                    <a href={"https://manager.itbug.shop"} rel={'noreferrer'} target={"_blank"}
                        className={'hidden xl:inline'}>
                         管理后台
                     </a>
