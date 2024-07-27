@@ -24,7 +24,7 @@ jobs:
 #        run: pnpm install --no-frozen-lockfile && pnpm run build
 
       - name: push to server
-        uses: easingthemes/ssh-deploy@v5.0.3
+        uses: easingthemes/ssh-deploy@v5.1.0
         env:
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USER }}

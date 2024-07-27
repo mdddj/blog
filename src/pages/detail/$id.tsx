@@ -39,7 +39,7 @@ export default function Page() {
                             alt={blog.category.name}
                             className={'w-5 h-5 rounded-full'}/><span>{blog.category.name}</span>
                         </div>
-                        <a rel={'noreferrer'} className={'text-base-content'} target={'_blank'} href={`https://admin.itbug.shop/blog/add?update=${blog.id}`}>编辑</a>
+                        <a rel={'noreferrer'} className={'text-base-content'} target={'_blank'} href={`https://manager.itbug.shop/blog/add?update=${blog.id}`}>编辑</a>
                     </div>
                 }
                 {
