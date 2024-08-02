@@ -8,7 +8,7 @@
     "abuild": "ANALYZE=1 umi build"
   },
   "dependencies": {
-    "axios": "^1.7.2",
+    "axios": "^1.7.3",
     "axios-hooks": "^5.0.2",
     "dayjs": "^1.11.12",
     "g": "^2.0.1",
