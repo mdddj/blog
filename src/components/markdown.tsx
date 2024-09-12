@@ -16,6 +16,7 @@ import gradle from "highlight.js/lib/languages/gradle";
 import docker from "highlight.js/lib/languages/dockerfile";
 import md from "highlight.js/lib/languages/markdown";
 import "highlight.js/styles/github.css";
+
 hljs.registerLanguage("dart", dart);
 hljs.registerLanguage("rust", rust);
 hljs.registerLanguage("sql", sql);
@@ -34,27 +35,28 @@ hljs.registerLanguage("gradle", gradle);
 hljs.registerLanguage("Dockerfile", docker);
 hljs.registerLanguage("md", md);
 const mdParser = new MarkdownIt({
-  highlight: (str, lang) => {
-    let code: any = mdParser.utils.escapeHtml(str);
-    if (lang && hljs.getLanguage(lang)) {
-      code = hljs.highlight(str, {
-        language: lang,
-        ignoreIllegals: true,
-      }).value;
-    }
-    return `<pre>${code}</pre>`;
-  },
-  html: true,
+    highlight: (str, lang) => {
+        let code: any = mdParser.utils.escapeHtml(str);
+        if (lang && hljs.getLanguage(lang)) {
+            code = hljs.highlight(str, {
+                language: lang,
+                ignoreIllegals: true,
+            }).value;
+        }
+        return `<pre>${code}</pre>`;
+    },
+    html: true,
 });
-const MarkdownComponent: React.FC<{ text: string,isShadow?: boolean }> = ({ text,isShadow = true }) => {
-  return (
-    <article
-      className={
-        `prose prose-pre:bg-base-200 prose-pre:text-base-content max-w-none p-5 ${isShadow ? 'shadow-2xl' : ''} rounded-lg ${isShadow?'border-t-2':''}`
-      }
-      dangerouslySetInnerHTML={{ __html: mdParser.render(text) }}
-    ></article>
-  );
+const MarkdownComponent: React.FC<{ text: string, isShadow?: boolean,id?: string }> = ({text, isShadow = true,id}) => {
+    return (
+        <article
+            id={id}
+            className={
+                `prose prose-pre:bg-base-200 prose-pre:text-base-content max-w-none p-5 ${isShadow ? 'shadow-2xl' : ''} rounded-lg ${isShadow ? 'border-t-2' : ''}`
+            }
+            dangerouslySetInnerHTML={{__html: mdParser.render(text)}}
+        />
+    );
 };
 
 export default MarkdownComponent;

@@ -6,6 +6,8 @@ import MarkdownComponent from "@/components/markdown";
 import {fromNow} from "@/tools/date";
 import BackSvg from "@/components/back_svg";
 import ApiSvg from "@/components/api_svg";
+import Documents from "@/components/md_header";
+
 
 export default function Page() {
     const params = useParams<{ id: string }>();
@@ -60,16 +62,27 @@ export default function Page() {
                         </button>
                     </div>
                     <div className={'tooltip tooltip-left'} data-tip={'API接口'}>
-                        <a rel={'noreferrer'} target={'_blank'} href={`https://api.itbug.shop/api/blog/get/${params?.id}`}>
+                        <a rel={'noreferrer'} target={'_blank'}
+                           href={`https://api.itbug.shop/api/blog/get/${params?.id}`}>
                             <button type={'button'} className={'btn btn-circle btn-ghost'}>
                                 <ApiSvg/>
                             </button>
                         </a>
                     </div>
+                </div>
+                <div className={'relative'}>
+                    <div className={'fixed left-0 bottom-0 mt-5 w-80 card shadow-lg'}>
+                        <div className={'card-body'}>
+                            <h2 className="card-title">目录</h2>
+                            <Documents md={blog?.content ?? ""}/>
+                        </div>
+
+                    </div>
+                    <MarkdownComponent text={blog?.content ?? ""} id={'md-body'}/>
 
                 </div>
-                <MarkdownComponent text={blog?.content ?? ""}/>
             </div>
+
         </div>
     );
 }

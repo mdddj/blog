@@ -8,29 +8,29 @@
     "abuild": "ANALYZE=1 umi build"
   },
   "dependencies": {
-    "axios": "^1.7.4",
+    "axios": "^1.7.7",
     "axios-hooks": "^5.0.2",
     "dayjs": "^1.11.13",
     "g": "^2.0.1",
     "highlight.js": "^11.10.0",
     "markdown-it": "^14.1.0",
-    "pnpm": "^9.7.1",
-    "react-hook-form": "^7.52.2",
+    "pnpm": "^9.10.0",
+    "react-hook-form": "^7.53.0",
     "theme-change": "^2.5.0",
-    "umi": "^4.3.14",
+    "umi": "^4.3.20",
     "zustand": "^4.5.5"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.14",
+    "@tailwindcss/typography": "^0.5.15",
     "@types/markdown-it": "^14.1.2",
-    "@types/react": "^18.3.4",
+    "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
-    "@umijs/lint": "^4.3.14",
-    "@umijs/plugins": "^4.3.14",
+    "@umijs/lint": "^4.3.20",
+    "@umijs/plugins": "^4.3.20",
     "daisyui": "^4.12.10",
-    "eslint": "^9.9.0",
+    "eslint": "^9.10.0",
     "stylelint": "^16",
     "tailwindcss": "^3",
-    "typescript": "^5.5.4"
+    "typescript": "^5.6.2"
   }
 }
