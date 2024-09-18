@@ -20,10 +20,10 @@ type Props = {
 }
 
 const Documents: React.FC<Props> = ({md}) => {
-    const [show, setShow] = useState(false);
+    const [, setShow] = useState(false);
     const [sourceMd, setSourceMd] = useState("");
     const [titles, setTitles] = useState<Title[]>([]);
-    const [isFix, setIsFix] = useState(false);
+    const [, setIsFix] = useState(false);
 
     useEffect(() => {
         // 请求文件
@@ -60,7 +60,13 @@ const Documents: React.FC<Props> = ({md}) => {
      */
     const formatNavItem = (headerDom: NodeListOf<HTMLElement>) => {
         // 将NodeList转换为数组，并提取出需要的属性
-        let headerArr = Array.prototype.slice
+        /**
+         * (双重循环，从后往前，逐渐将子节点存入父节点children属性)
+         * 1. 从后往前，将子标题直接存入前一个父级标题的children[]中
+         * 2. 如果前一个标题与当前标题(或标题数组)无直系关系，则直接将当前标题(或标题数组解构后)放入list数组
+         * 3. 循环多次，直到result数组长度无变化，结束循环
+         */
+        let result = Array.prototype.slice
             .call(headerDom)
             .map((item, index) => {
                 return {
@@ -71,14 +77,6 @@ const Documents: React.FC<Props> = ({md}) => {
                     nodeName: item.nodeName,
                 };
             }) as Title[];
-
-        /**
-         * (双重循环，从后往前，逐渐将子节点存入父节点children属性)
-         * 1. 从后往前，将子标题直接存入前一个父级标题的children[]中
-         * 2. 如果前一个标题与当前标题(或标题数组)无直系关系，则直接将当前标题(或标题数组解构后)放入list数组
-         * 3. 循环多次，直到result数组长度无变化，结束循环
-         */
-        let result = headerArr;
         let preLength = 0;
         let newLength = result.length;
         let num = 0;
@@ -140,8 +138,7 @@ const Documents: React.FC<Props> = ({md}) => {
             navItem.setAttribute("id", index.toString());
         });
         // 格式化标题数组，用于antd锚点组件自动生成锚点
-        let titles = formatNavItem(header);
-        return titles;
+        return formatNavItem(header);
     };
 
     /**
@@ -162,17 +159,22 @@ const Documents: React.FC<Props> = ({md}) => {
     };
 
     return (
-        <div>
-            <aside>
-                {titles.length > 0 && (
-                    <Anchor
-                        affix={false}
-                        offsetTop={100} // 设置距离页面顶部的偏移
-                        onClick={handleClickNavItem}
-                        items={titles}
-                    ></Anchor>
-                )}
-            </aside>
+        <div className={'card shadow-2xl m-2'}>
+            <div className={'card-body'}>
+                {
+                    titles.length > 0 && <h2 className={'font-bold text-2xl card-title'}>目录</h2>
+                }
+                <aside>
+                    {titles.length > 0 && (
+                        <Anchor
+                            affix={false}
+                            offsetTop={100} // 设置距离页面顶部的偏移
+                            onClick={handleClickNavItem}
+                            items={titles}
+                        ></Anchor>
+                    )}
+                </aside>
+            </div>
         </div>
     );
 };

@@ -71,12 +71,8 @@ export default function Page() {
                     </div>
                 </div>
                 <div className={'relative'}>
-                    <div className={'fixed left-0 bottom-0 mt-5 w-80 card shadow-lg'}>
-                        <div className={'card-body'}>
-                            <h2 className="card-title">目录</h2>
-                            <Documents md={blog?.content ?? ""}/>
-                        </div>
-
+                    <div className={'fixed left-0 bottom-0 mt-5 w-80'}>
+                        <Documents md={blog?.content ?? ""}/>
                     </div>
                     <MarkdownComponent text={blog?.content ?? ""} id={'md-body'}/>
 
