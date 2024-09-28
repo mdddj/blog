@@ -4,6 +4,7 @@ import ThemeSetting from "./theme_setting";
 import {showDialogModal} from "@/tools/fun";
 import {NavLink} from "@@/exports";
 import MiniAppWidget from "@/components/mini_app_widget";
+import MyDocMenuElement from "@/components/doc_menu";
 
 export default function AppBar() {
     const menus = appMenuStore((state) => state.menus);
@@ -31,7 +32,7 @@ export default function AppBar() {
                                     ref.current.removeAttribute("open")
                                 }
                             }} key={`${item.href}-${index}`}>
-                                <NavLink to={item.href}>{item.title}</NavLink>
+                                {item.href && <NavLink to={item.href}>{item.title}</NavLink>}
                             </li>
                         ))}
                     </ul>
@@ -42,17 +43,20 @@ export default function AppBar() {
                     </NavLink>
                     <div className={'dropdown dropdown-bottom hidden lg:inline'}>
                         <span tabIndex={0} role="button"
-                            className={'badge badge-accent badge-outline hover:bg-accent hover:text-secondary-content cursor-pointer'}>在小程序打开</span>
-                        <MiniAppWidget />
+                              className={'badge badge-accent badge-outline hover:bg-accent hover:text-secondary-content cursor-pointer'}>在小程序打开</span>
+                        <MiniAppWidget/>
                     </div>
                 </div>
             </div>
             <nav className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {menus.map((item, index) => (
-                        <li key={`${item.href}-${index}`}>
-                            <NavLink to={item.href}>{item.title}</NavLink>
-                        </li>
+                        <>
+                            {item.href && <li key={`${item.href}-${index}`}>
+                                <NavLink to={item.href}>{item.title}</NavLink>
+                            </li>}
+                            {item.isDoc && <MyDocMenuElement/>}
+                        </>
                     ))}
                 </ul>
             </nav>

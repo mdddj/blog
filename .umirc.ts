@@ -23,6 +23,11 @@ export default defineConfig({
       title: "标签"
     },
     {
+      path: "/idea/:title",
+      component: "doc/doc_page",
+      title: "学习笔记"
+    },
+    {
       path: "/all",
       component: "all/index",
       title: "归档"

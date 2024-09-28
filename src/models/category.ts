@@ -15,6 +15,7 @@ export interface CategoryResult {
     monthsCounts:  MonthsCount[];
     tagCount:      number;
     tags:          Tag[];
+    ideaDocs: string[]
 }
 
 export interface ArchiveModel {

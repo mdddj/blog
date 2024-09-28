@@ -1,13 +1,17 @@
-import { create } from "zustand";
+import {create} from "zustand";
 
 export const appMenuStore = create<{
-    menus: { title: string, href: string }[]
+    menus: { title: string, href?: string, isDoc?: boolean }[]
 }>(() => {
     return ({
         menus: [
             {
                 title: '首页',
                 href: '/'
+            },
+            {
+                title: '学习文档',
+                isDoc: true
             },
             {
                 title: '群组',
