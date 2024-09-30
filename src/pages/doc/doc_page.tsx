@@ -9,14 +9,15 @@ import MarkdownComponent from "@/components/markdown";
 import FolderSvg from "@/components/folder_svg";
 import MdSvg from "@/components/md_svg";
 import {fromNow} from "@/tools/date";
+import Documents from "@/components/md_header";
 
 
 type Type = {
     doc: DocDirectory,
-    onClick:(file: MarkdownFile) => void,
+    onClick: (file: MarkdownFile) => void,
     selectedFile: MarkdownFile | undefined,
 }
-const Menu: React.FC<Type> = ({doc,onClick,selectedFile}) => {
+const Menu: React.FC<Type> = ({doc, onClick, selectedFile}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -52,11 +53,12 @@ const Menu: React.FC<Type> = ({doc,onClick,selectedFile}) => {
                                 {child.files && Array.isArray(child.files) && (
                                     <ul>
                                         {child.files.map((file) => (
-                                            <li key={file.id}  onClick={() => {
+                                            <li key={file.id} onClick={() => {
                                                 toggleMenu()
                                                 onClick(file)
                                             }}>
-                                                <a className={selectedFile?.id == file.id ? 'active' : ''}> <MdSvg/>{file.name}</a>
+                                                <a className={selectedFile?.id == file.id ? 'active' : ''}>
+                                                    <MdSvg/>{file.name}</a>
                                             </li>
                                         ))}
                                     </ul>
@@ -77,7 +79,7 @@ const Menu: React.FC<Type> = ({doc,onClick,selectedFile}) => {
             {/* 使用tailwind中的图标类，或者你可以使用你喜欢的图标 */}
             {isMenuOpen ? '关闭菜单' : '显示菜单'}
         </button>
-        <ul  className={`menu menu-xs rounded-lg bg-base-200 w-full max-w-xs fixed left-1 transition-transform duration-300 ease-in-out shadow-2xl ${
+        <ul className={`menu menu-xs rounded-lg bg-base-200 w-full max-w-xs fixed left-1 transition-transform duration-300 ease-in-out shadow-2xl ${
             isMenuOpen ? 'block' : 'hidden'
         } sm:block`}>
             <li><a className={'text-lg font-bold'}>{doc.name}</a></li>
@@ -99,33 +101,37 @@ const DocPage: React.FC = () => {
         setSelectedFile(file);
     };
 
-    useEffect(()=>{
-        if(doc && doc.children.length >0 && !selectedFile){
+    useEffect(() => {
+        if (doc && doc.children.length > 0 && !selectedFile) {
             let first = doc.children[0]
-            if(first.files.length > 0){
+            if (first.files.length > 0) {
                 setSelectedFile(first.files[0])
             }
         }
-    },[
+    }, [
         doc
     ])
-
 
 
     return <div className={''}>
         {loading && <Loading/>}
         {!loading && !doc && <span>学习笔记不存在</span>}
         {doc && <div>
-            <div className="">
-                <Menu doc={doc}  onClick={handleFileClick} selectedFile={selectedFile}/>
+            <div className="relative">
+                <Menu doc={doc} onClick={handleFileClick} selectedFile={selectedFile}/>
+                {selectedFile && <div className={'fixed right-0 bottom-0 mt-5 w-80'}>
+                    <Documents md={selectedFile.content}/>
+                </div>}
                 <div>
+
                     {selectedFile ? (
                         <div>
                             <h2 className="text-2xl font-bold mb-4">{selectedFile.name}</h2>
                             <div className={'text-neutral-500'}>
                                 发布时间:{fromNow(selectedFile.createDate)}
                             </div>
-                            <MarkdownComponent text={selectedFile.content}/>
+
+                            <MarkdownComponent id={'md-body'} text={selectedFile.content}/>
                         </div>
                     ) : (
                         <div className="text-center text-gray-500">请选择一个文档</div>

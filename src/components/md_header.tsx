@@ -159,7 +159,7 @@ const Documents: React.FC<Props> = ({md}) => {
     };
 
     return (
-        <div className={'card shadow-2xl m-2'}>
+        <div className={'card shadow-2xl m-2 hidden md:block'}>
             <div className={'card-body'}>
                 {
                     titles.length > 0 && <h2 className={'font-bold text-2xl card-title'}>目录</h2>
