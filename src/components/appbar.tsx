@@ -26,14 +26,25 @@ export default function AppBar() {
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-base-100 rounded-box w-52"
                     >
                         {menus.map((item, index) => (
-                            <li onClick={() => {
-                                //关闭弹窗
-                                if (ref.current) {
-                                    ref.current.removeAttribute("open")
+                            <>
+                                {
+                                    item.href && <li onClick={() => {
+                                        //关闭弹窗
+                                        if (ref.current) {
+                                            ref.current.removeAttribute("open")
+                                        }
+                                    }} key={`${item.href}-${index}`}>
+                                        <NavLink to={item.href}>{item.title}</NavLink>
+                                    </li>
                                 }
-                            }} key={`${item.href}-${index}`}>
-                                {item.href && <NavLink to={item.href}>{item.title}</NavLink>}
-                            </li>
+                                {item.isDoc && <MyDocMenuElement onClick={()=>{
+                                    if (ref.current) {
+                                        ref.current.removeAttribute("open")
+                                    }
+                                }}/>}
+                            </>
+
+
                         ))}
                     </ul>
                 </details>
@@ -55,7 +66,7 @@ export default function AppBar() {
                             {item.href && <li key={`${item.href}-${index}`}>
                                 <NavLink to={item.href}>{item.title}</NavLink>
                             </li>}
-                            {item.isDoc && <MyDocMenuElement/>}
+                            {item.isDoc && <MyDocMenuElement />}
                         </>
                     ))}
                 </ul>
