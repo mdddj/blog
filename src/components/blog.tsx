@@ -2,7 +2,6 @@ import {Blog, Category} from "@/models/blog";
 import React from "react";
 import {fromNow} from "@/tools/date";
 import {useNavigate} from "@@/exports";
-import HoverPanel from "@/components/hover_panel";
 
 
 const CategoryWidget: React.FC<{ category: Category }> = ({category}) => {

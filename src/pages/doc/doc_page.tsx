@@ -108,9 +108,8 @@ const DocPage: React.FC = () => {
                 setSelectedFile(first.files[0])
             }
         }
-    }, [
-        doc
-    ])
+    }, [doc])
+
 
 
     return <div className={''}>
@@ -119,11 +118,10 @@ const DocPage: React.FC = () => {
         {doc && <div>
             <div className="relative">
                 <Menu doc={doc} onClick={handleFileClick} selectedFile={selectedFile}/>
-                {selectedFile && <div className={'fixed right-0 bottom-0 mt-5 w-80'}>
-                    <Documents md={selectedFile.content}/>
-                </div>}
+                <div className={'fixed right-0 bottom-0 mt-5 w-80'}>
+                    <Documents md={selectedFile?.content??''}/>
+                </div>
                 <div>
-
                     {selectedFile ? (
                         <div>
                             <h2 className="text-2xl font-bold mb-4">{selectedFile.name}</h2>

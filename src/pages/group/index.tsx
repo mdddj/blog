@@ -11,7 +11,6 @@ export default function Page() {
     const match = useMatch('/g/:id')
     const [{loading, data}] = useAxios<ApiResponse<ResourcesCategory[]>>({url: groupListApi})
 
-    console.log(match)
     if (loading) {
         return <Loading/>
     }

@@ -35,13 +35,16 @@ const Documents: React.FC<Props> = ({md}) => {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    }, []);
+    }, [md]);
 
     useEffect(() => {
         // 获取到md数据后显示md内容和nav
         setTitles(addAnchor());
         setShow(true);
+        console.log(sourceMd)
     }, [sourceMd, setSourceMd]);
+
+
 
     /**
      * 滚动事件
@@ -128,7 +131,6 @@ const Documents: React.FC<Props> = ({md}) => {
     const addAnchor = () => {
         // 获取markdown标题的dom节点
         let md_ele = document.getElementById("md-body")
-        console.log(md_ele)
         if(md_ele==null) return []
         const header: NodeListOf<HTMLElement> = md_ele.querySelectorAll(
             "h1, h2, h3, h4, h5, h6"
