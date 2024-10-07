@@ -41,7 +41,6 @@ const Documents: React.FC<Props> = ({md}) => {
         // 获取到md数据后显示md内容和nav
         setTitles(addAnchor());
         setShow(true);
-        console.log(sourceMd)
     }, [sourceMd, setSourceMd]);
 
 

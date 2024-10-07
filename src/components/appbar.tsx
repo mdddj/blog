@@ -2,15 +2,45 @@ import React, {useEffect, useRef} from "react";
 import {appMenuStore} from "@/providers/menu";
 import ThemeSetting from "./theme_setting";
 import {showDialogModal} from "@/tools/fun";
-import {NavLink} from "@@/exports";
+import {NavLink, useMatch} from "@@/exports";
 import MiniAppWidget from "@/components/mini_app_widget";
 import MyDocMenuElement from "@/components/doc_menu";
 import { history } from 'umi';
+import { motion } from "framer-motion";
 
+
+
+const AppbarTitle : React.FC = () => {
+    const match = useMatch('/idea/:title')
+    const docTitle = match ? match.params.title : undefined;
+
+    const GetShowTitle = () => {
+        if(docTitle){
+            return "典典博客-"+docTitle
+        }
+        return "典典博客"
+    }
+
+    const title = GetShowTitle()
+    return <>
+        <NavLink to={"/"} className="btn btn-ghost text-xl">
+            <motion.p
+                key={title} // 使用 key 来触发动画
+                initial={{ opacity: 0, y: 10 }}  // 初始状态：透明且稍微向下
+                animate={{ opacity: 1, y: 0 }}   // 动画到：完全显示且位置恢复
+                exit={{ opacity: 0, y: -10 }}    // 离开时的动画：透明且向上
+                transition={{ duration: 0.5 }}   // 过渡时间
+            >
+                {title}
+            </motion.p>
+        </NavLink>
+    </>
+}
 
 export default function AppBar() {
     const menus = appMenuStore((state) => state.menus);
     const ref = useRef<HTMLDetailsElement>(null);
+
 
     //关闭弹出菜单
     const closeMenu = () => {
@@ -59,9 +89,7 @@ export default function AppBar() {
                     </ul>
                 </details>
                 <div className={'flex flex-row gap-2 text-center items-center'}>
-                    <NavLink to={"/"} className="btn btn-ghost text-xl">
-                        典典博客
-                    </NavLink>
+                    <AppbarTitle />
                     <div className={'dropdown dropdown-bottom hidden lg:inline'}>
                         <span tabIndex={0} role="button"
                               className={'badge badge-accent badge-outline hover:bg-accent hover:text-secondary-content cursor-pointer'}>在小程序打开</span>

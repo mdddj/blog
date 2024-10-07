@@ -15,6 +15,9 @@ const ResourceListWidget: React.FC = () => {
         return <div>not found</div>
     }
 
+    if(data){
+        console.log(data)
+    }
     if (loading) return <Loading/>
     return <div className={'flex flex-col gap-5'}>
         {

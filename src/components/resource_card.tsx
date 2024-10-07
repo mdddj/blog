@@ -7,7 +7,7 @@ type Prop = {
 }
 
 const ResourceCard: React.FC<Prop> = ({item}) => {
-    const {content,category: {name},user: {picture,nickName,enterprise},createDate,images} = item
+    const {content,category,user: {picture,nickName,enterprise},createDate,images} = item
 
     let enterpriseName = enterprise?.name
 
@@ -34,7 +34,7 @@ const ResourceCard: React.FC<Prop> = ({item}) => {
                         </div>
                     }
 
-                    <div className="badge badge-outline badge-lg">#{name}</div>
+                    <div className="badge badge-outline badge-lg">#{category?.name ?? "-"}</div>
                 </div>
             </div>
         </div>
