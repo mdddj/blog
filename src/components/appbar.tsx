@@ -1,14 +1,33 @@
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import {appMenuStore} from "@/providers/menu";
 import ThemeSetting from "./theme_setting";
 import {showDialogModal} from "@/tools/fun";
 import {NavLink} from "@@/exports";
 import MiniAppWidget from "@/components/mini_app_widget";
 import MyDocMenuElement from "@/components/doc_menu";
+import { history } from 'umi';
+
 
 export default function AppBar() {
     const menus = appMenuStore((state) => state.menus);
     const ref = useRef<HTMLDetailsElement>(null);
+
+    //关闭弹出菜单
+    const closeMenu = () => {
+        if (ref.current) {
+            ref.current.removeAttribute("open")
+        }
+    }
+
+    useEffect(() => {
+        const unListen = history.listen(() => {
+            closeMenu()
+        });
+
+        return () => {
+            unListen();
+        };
+    }, [history]);
 
     return (
         <header className="navbar fixed bg-base-100 z-10 shadow">
@@ -28,20 +47,11 @@ export default function AppBar() {
                         {menus.map((item, index) => (
                             <>
                                 {
-                                    item.href && <li onClick={() => {
-                                        //关闭弹窗
-                                        if (ref.current) {
-                                            ref.current.removeAttribute("open")
-                                        }
-                                    }} key={`${item.href}-${index}`}>
+                                    item.href && <li onClick={closeMenu} key={`${item.href}-${index}`}>
                                         <NavLink to={item.href}>{item.title}</NavLink>
                                     </li>
                                 }
-                                {item.isDoc && <MyDocMenuElement onClick={()=>{
-                                    if (ref.current) {
-                                        ref.current.removeAttribute("open")
-                                    }
-                                }}/>}
+                                {item.isDoc && <MyDocMenuElement onClick={closeMenu}/>}
                             </>
 
 
@@ -66,7 +76,7 @@ export default function AppBar() {
                             {item.href && <li key={`${item.href}-${index}`}>
                                 <NavLink to={item.href}>{item.title}</NavLink>
                             </li>}
-                            {item.isDoc && <MyDocMenuElement />}
+                            {item.isDoc && <MyDocMenuElement onClick={closeMenu} />}
                         </>
                     ))}
                 </ul>
