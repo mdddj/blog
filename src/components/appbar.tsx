@@ -9,15 +9,8 @@ import { history } from 'umi';
 import { motion } from "framer-motion";
 
 
-
 const AppbarTitle : React.FC = () => {
-    const match = useMatch('/idea/:title')
-    const docTitle = match ? match.params.title : undefined;
-
     const GetShowTitle = () => {
-        if(docTitle){
-            return "典典博客-"+docTitle
-        }
         return "典典博客"
     }
 

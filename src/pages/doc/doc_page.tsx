@@ -10,8 +10,54 @@ import FolderSvg from "@/components/folder_svg";
 import MdSvg from "@/components/md_svg";
 import {fromNow} from "@/tools/date";
 import Documents from "@/components/md_header";
-import {useMatch} from "@@/exports";
 
+
+type FilesProp = {
+    files: MarkdownFile[],
+    onSelectFile: (file: MarkdownFile) => void,
+    currentFile: MarkdownFile | undefined
+}
+const FilesWidget: React.FC<FilesProp> = ({files, onSelectFile, currentFile}) => {
+    return <>
+        <ul>
+            {files.map((file) => (
+                <li key={file.id} onClick={() => {
+                    onSelectFile(file)
+                }}>
+                    <a className={currentFile?.id == file.id ? 'active' : ''}>
+                        <MdSvg/>{file.name}</a>
+                </li>
+            ))}
+        </ul>
+    </>
+}
+
+type Props = {
+    children: DocDirectory[],
+    onSelectFile: (file: MarkdownFile) => void,
+    currentFile: MarkdownFile | undefined
+}
+
+const RenderMenu: React.FC<Props> = ({children, onSelectFile, currentFile}) => {
+    return <>
+        <li>
+            {children.map((child) => (
+                <ul key={child.name}>
+                    <li>
+                        <details open>
+                            <summary><FolderSvg/>{child.name}</summary>
+                            {child.files && Array.isArray(child.files) &&
+                                <FilesWidget currentFile={currentFile} files={child.files}
+                                             onSelectFile={onSelectFile}/>}
+                            {child.children && <RenderMenu children={child.children} onSelectFile={onSelectFile}
+                                                           currentFile={currentFile}/>}
+                        </details>
+                    </li>
+                </ul>
+            ))}
+        </li>
+    </>
+}
 
 type Type = {
     doc: DocDirectory,
@@ -23,61 +69,29 @@ const Menu: React.FC<Type> = ({doc, onClick, selectedFile}) => {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
-
-    // 滚动时关闭菜单的函数
     const closeMenuOnScroll = () => {
         setIsMenuOpen(false);
     };
-
-
-    // useEffect 用于监听滚动事件
     useEffect(() => {
-        // 当菜单打开时，添加滚动事件监听
         if (isMenuOpen) {
             window.addEventListener('scroll', closeMenuOnScroll);
         }
-
-        // 清除监听器
         return () => {
             window.removeEventListener('scroll', closeMenuOnScroll);
         };
     }, [isMenuOpen]);
 
-    const renderMenu = (children: DocDirectory[]) => {
-        return (
-            <li>
-                {children.map((child) => (
-                    <ul key={child.name}>
-                        <li>
-                            <details open>
-                                <summary><FolderSvg/>{child.name}</summary>
-                                {child.files && Array.isArray(child.files) && (
-                                    <ul>
-                                        {child.files.map((file) => (
-                                            <li key={file.id} onClick={() => {
-                                                toggleMenu()
-                                                onClick(file)
-                                            }}>
-                                                <a className={selectedFile?.id == file.id ? 'active' : ''}>
-                                                    <MdSvg/>{file.name}</a>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                                {child.children && renderMenu(child.children)}
-                            </details>
-                        </li>
-                    </ul>
-                ))}
-            </li>
-        );
-    };
+
+    const onSelectFile = (file: MarkdownFile) => {
+        onClick(file)
+        toggleMenu()
+    }
+
     return <>
         <button
             className="sm:hidden fixed top-2 left-2 p-2 mt-12 bg-base-200 rounded-md"
             onClick={toggleMenu}
         >
-            {/* 使用tailwind中的图标类，或者你可以使用你喜欢的图标 */}
             {isMenuOpen ? '关闭菜单' : '显示菜单'}
         </button>
         <ul className={`menu menu-xs rounded-lg bg-base-200 w-full max-w-xs fixed left-1 transition-transform duration-300 ease-in-out shadow-2xl ${
@@ -86,7 +100,8 @@ const Menu: React.FC<Type> = ({doc, onClick, selectedFile}) => {
             <li><a className={'text-lg font-bold'}>{doc.name}</a></li>
             <li><span>创建于{fromNow(doc.createDate)}</span></li>
             <div className={'divider'}></div>
-            {renderMenu(doc.children)}
+            <FilesWidget files={doc.files} onSelectFile={onSelectFile} currentFile={selectedFile}/>
+            <RenderMenu children={doc.children} onSelectFile={onSelectFile} currentFile={selectedFile}/>
         </ul>
     </>
 }
@@ -103,24 +118,31 @@ const DocPage: React.FC = () => {
     };
 
     useEffect(() => {
+        if(doc?.files && doc.files.length > 0){
+            setSelectedFile(doc.files[0])
+            return
+        }
         if (doc && doc.children.length > 0 && !selectedFile) {
             let first = doc.children[0]
             if (first.files.length > 0) {
                 setSelectedFile(first.files[0])
+            } else {
+                setSelectedFile(undefined)
             }
+        } else {
+            setSelectedFile(undefined)
         }
     }, [doc])
 
 
-
     return <div className={''}>
         {loading && <Loading/>}
-        {!loading && !doc && <span>学习笔记不存在</span>}
+        {!loading && !doc && <span>笔记不存在</span>}
         {doc && <div>
             <div className="relative">
                 <Menu doc={doc} onClick={handleFileClick} selectedFile={selectedFile}/>
                 <div className={'fixed right-0 bottom-0 mt-5 w-80'}>
-                    <Documents md={selectedFile?.content??''}/>
+                    <Documents md={selectedFile?.content ?? ''}/>
                 </div>
                 <div>
                     {selectedFile ? (
