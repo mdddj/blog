@@ -17,7 +17,7 @@ export default function HomePage() {
         </div>
       )}
       {blogs.length > 0 && (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5">
           {blogs.map((v) => {
             return <BlogCard blog={v} key={v.id} />;
           })}

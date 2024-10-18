@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 [data-theme='valentine'] body:before {
-    /*content: "";*/
-    /*background-image: url("https://t.mwm.moe/moez");*/
-    /*background-repeat: no-repeat;*/
-    /*background-position: center center;*/
-    /*background-size: cover;*/
-    /*position: fixed;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*top: 0;*/
-    /*bottom: 0;*/
-    /*z-index: -1;*/
+    content: "";
+    background-image: url("https://t.mwm.moe/moez");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
 }
 
 @layer components {

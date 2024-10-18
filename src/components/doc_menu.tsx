@@ -23,9 +23,10 @@ const MyDocMenuElement: React.FC<Type> = ({onClick}) => {
         const unListen = history.listen(() => {
             closeMenu()
         });
-
+        window.addEventListener("scroll",closeMenu)
         return () => {
             unListen();
+            window.removeEventListener("scroll",closeMenu)
         };
     }, [history]);
 
