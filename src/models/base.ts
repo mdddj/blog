@@ -29,7 +29,7 @@ export interface Resource {
   title:          string;
   type:           string;
   updateDate:     Date;
-  user:           User;
+  publisher:           User;
 }
 
 export interface Category {

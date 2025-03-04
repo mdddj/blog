@@ -7,6 +7,8 @@ import MiniAppWidget from "@/components/mini_app_widget";
 import MyDocMenuElement from "@/components/doc_menu";
 import { history } from 'umi';
 import { motion } from "framer-motion";
+import {SearchBox} from "react-instantsearch";
+import {SearchButton} from "@/components/search";
 
 
 const AppbarTitle : React.FC = () => {
@@ -53,7 +55,7 @@ export default function AppBar() {
     }, [history]);
 
     return (
-        <header className="navbar fixed bg-base-100 z-10 shadow">
+        <header className="navbar fixed bg-base-100 z-10 shadow-sm">
             <div className="navbar-start ">
                 <details className="dropdown" ref={ref}>
                     <summary tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -68,14 +70,14 @@ export default function AppBar() {
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-base-100 rounded-box w-52"
                     >
                         {menus.map((item, index) => (
-                            <>
+                            <span key={`item:${item.title}-${index}`}>
                                 {
-                                    item.href && <li onClick={closeMenu} key={`${item.href}-${index}`}>
+                                    item.href && <li onClick={closeMenu}>
                                         <NavLink to={item.href}>{item.title}</NavLink>
                                     </li>
                                 }
                                 {item.isDoc && <MyDocMenuElement onClick={closeMenu}/>}
-                            </>
+                            </span>
 
 
                         ))}
@@ -93,16 +95,17 @@ export default function AppBar() {
             <nav className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {menus.map((item, index) => (
-                        <>
-                            {item.href && <li key={`${item.href}-${index}`}>
+                        <span key={`${item.href}-${index}`}>
+                            {item.href && <li>
                                 <NavLink to={item.href}>{item.title}</NavLink>
                             </li>}
                             {item.isDoc && <MyDocMenuElement onClick={closeMenu} />}
-                        </>
+                        </span>
                     ))}
                 </ul>
             </nav>
             <div className="navbar-end gap-4">
+                <SearchButton />
                 <ThemeSetting/>
                 <button
                     type="button"

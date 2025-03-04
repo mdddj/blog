@@ -23,4 +23,14 @@
     code {
         @apply break-all
     }
+
 }
+
+.ais-Hits-item {
+    @apply shadow-xl rounded-xl
+}
+
+.ais-SearchBox {
+    @apply  rounded-xl my-5
+}
+

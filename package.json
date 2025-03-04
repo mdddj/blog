@@ -8,30 +8,34 @@
     "abuild": "ANALYZE=1 umi build"
   },
   "dependencies": {
-    "axios": "^1.7.7",
-    "axios-hooks": "^5.0.2",
+    "@meilisearch/instant-meilisearch": "^0.25.0",
+    "antd": "^5.24.2",
+    "axios": "^1.8.1",
+    "axios-hooks": "^5.1.0",
     "dayjs": "^1.11.13",
-    "framer-motion": "^11.11.9",
+    "framer-motion": "^12.4.7",
     "g": "^2.0.1",
-    "highlight.js": "^11.10.0",
+    "highlight.js": "^11.11.1",
+    "instantsearch.css": "^8.5.1",
     "markdown-it": "^14.1.0",
-    "pnpm": "^9.12.2",
-    "react-hook-form": "^7.53.0",
+    "pnpm": "^10.5.2",
+    "react-hook-form": "^7.54.2",
+    "react-instantsearch": "^7.15.3",
     "theme-change": "^2.5.0",
-    "umi": "^4.3.27",
-    "zustand": "^5.0.0"
+    "umi": "^4.4.5",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/markdown-it": "^14.1.2",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.1",
-    "@umijs/lint": "^4.3.27",
-    "@umijs/plugins": "^4.3.27",
-    "daisyui": "^4.12.13",
-    "eslint": "^9.12.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@umijs/lint": "^4.4.5",
+    "@umijs/plugins": "^4.4.5",
+    "daisyui": "^4.12.24",
+    "eslint": "^9.21.0",
     "stylelint": "^16",
     "tailwindcss": "^3",
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.3"
   }
 }

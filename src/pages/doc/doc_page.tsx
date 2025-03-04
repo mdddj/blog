@@ -10,7 +10,7 @@ import FolderSvg from "@/components/folder_svg";
 import MdSvg from "@/components/md_svg";
 import {fromNow} from "@/tools/date";
 import Documents from "@/components/md_header";
-
+import { motion } from "framer-motion";
 
 type FilesProp = {
     files: MarkdownFile[],
@@ -66,6 +66,7 @@ type Type = {
 }
 const Menu: React.FC<Type> = ({doc, onClick, selectedFile}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
@@ -94,15 +95,18 @@ const Menu: React.FC<Type> = ({doc, onClick, selectedFile}) => {
         >
             {isMenuOpen ? '关闭菜单' : '显示菜单'}
         </button>
-        <ul className={`menu menu-xs rounded-lg bg-base-200 w-full max-w-xs fixed left-1 transition-transform duration-300 ease-in-out shadow-2xl ${
-            isMenuOpen ? 'block' : 'hidden'
-        } sm:block`}>
+        <motion.ul
+            key={doc.name}
+            transition={{ type: "spring", stiffness: 200, damping: 25 }} // 动画过渡
+            className={`menu menu-xs rounded-lg bg-base-200 w-full max-w-xs fixed left-1 transition-transform duration-300 ease-in-out shadow-2xl ${
+                isMenuOpen ? 'block' : 'hidden'
+            }  sm:block`}>
             <li><a className={'text-lg font-bold'}>{doc.name}</a></li>
             <li><span>创建于{fromNow(doc.createDate)}</span></li>
             <div className={'divider'}></div>
             <FilesWidget files={doc.files} onSelectFile={onSelectFile} currentFile={selectedFile}/>
             <RenderMenu children={doc.children} onSelectFile={onSelectFile} currentFile={selectedFile}/>
-        </ul>
+        </motion.ul>
     </>
 }
 
@@ -148,11 +152,12 @@ const DocPage: React.FC = () => {
                     {selectedFile ? (
                         <div>
                             <h2 className="text-2xl font-bold mb-4">{selectedFile.name}</h2>
-                            <div className={'text-neutral-500'}>
+                            <div className={'text-neutral-500 mb-2'}>
                                 发布时间:{fromNow(selectedFile.createDate)}
                             </div>
+                            <div className={'divider'}></div>
 
-                            <MarkdownComponent id={'md-body'} text={selectedFile.content}/>
+                            <MarkdownComponent id={'md-body'} key={`${selectedFile.id}`} text={selectedFile.content} />
                         </div>
                     ) : (
                         <div className="text-center text-gray-500">请选择一个文档</div>
