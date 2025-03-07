@@ -2,7 +2,7 @@ import { blogStore } from "@/providers/blog";
 import { useShallow } from "zustand/react/shallow";
 import BlogCard from "@/components/blog";
 import LoadingWidget from "@/loading";
-
+import "../main.css"
 
 export default function HomePage() {
   document.title = "典典博客";

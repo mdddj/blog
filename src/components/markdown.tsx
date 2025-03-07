@@ -19,7 +19,7 @@ import md from "highlight.js/lib/languages/markdown";
 import csharp from 'highlight.js/lib/languages/csharp';
 import nginx from "highlight.js/lib/languages/nginx";
 import toml from "highlight.js/lib/languages/ini";
-import "highlight.js/styles/xcode.min.css";
+import "highlight.js/styles/github.min.css";
 import {motion} from "framer-motion";
 
 hljs.registerLanguage("dart", dart);
@@ -84,7 +84,7 @@ const MarkdownComponent: React.FC<{ text: string, id?: string, key?: string }> =
             <article
                 id={id ?? '-1'}
                 className={
-                    `prose prose-pre:bg-base-200 prose-pre:text-base-content max-w-none rounded-lg`
+                    `prose  lg:prose-xl max-w-none rounded-2xl shadow-2xl p-5`
                 }
                 dangerouslySetInnerHTML={{__html: mdParser.render(text)}}
             />

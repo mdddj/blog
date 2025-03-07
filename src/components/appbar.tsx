@@ -1,6 +1,5 @@
 import React, {useEffect, useRef} from "react";
 import {appMenuStore} from "@/providers/menu";
-import ThemeSetting from "./theme_setting";
 import {showDialogModal} from "@/tools/fun";
 import {NavLink, useMatch} from "@@/exports";
 import MiniAppWidget from "@/components/mini_app_widget";
@@ -106,7 +105,6 @@ export default function AppBar() {
             </nav>
             <div className="navbar-end gap-4">
                 <SearchButton />
-                <ThemeSetting/>
                 <button
                     type="button"
                     onClick={() => showDialogModal('ds')}
