@@ -7,7 +7,7 @@ import Foot from "@/components/foot";
 import WriteButton from "@/components/write_button";
 import {configure} from "axios-hooks";
 import axiosInstance from "@/tools/api";
-
+import "../main.css"
 configure({ axios: axiosInstance })
 export default function Layout() {
   const nav = useLocation();
@@ -31,6 +31,7 @@ export default function Layout() {
       </main>
       <Foot />
       <WriteButton />
+
     </div>
   );
 }

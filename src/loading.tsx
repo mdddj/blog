@@ -1,8 +1,8 @@
 
 export default function LoadingWidget() {
   return (
-    <div className="h-screen w-screen flex items-center justify-center">
-        <span className="loading loading-bars loading-md">加载中</span>
+    <div className=" flex items-center justify-center text-center">
+        <span className="loading loading-bars loading-md" />
     </div>
   );
 }

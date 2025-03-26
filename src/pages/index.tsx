@@ -2,7 +2,8 @@ import { blogStore } from "@/providers/blog";
 import { useShallow } from "zustand/react/shallow";
 import BlogCard from "@/components/blog";
 import LoadingWidget from "@/loading";
-import "../main.css"
+
+import BeianInfo from "@/components/BeianInfo";
 
 export default function HomePage() {
   document.title = "典典博客";
@@ -17,12 +18,13 @@ export default function HomePage() {
         </div>
       )}
       {blogs.length > 0 && (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-10">
           {blogs.map((v) => {
             return <BlogCard blog={v} key={v.id} />;
           })}
         </div>
       )}
+            <BeianInfo />
     </>
   );
 }

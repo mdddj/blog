@@ -35,8 +35,8 @@ const SearchComponent = () => {
 
 const SearchButton: React.FC = () => {
 
-    return <span className={'items-center'}>
-        <button className={'btn btn-sm btn-circle'} onClick={() => showDialogModal("my_search_box")}>🔍</button>
+    return <span className={'items-center hidden lg:flex'}>
+        <button className={'btn btn-sm '} onClick={() => showDialogModal("my_search_box")}>🔍</button>
         <dialog id="my_search_box" className="modal">
             <div className="modal-box w-11/12 max-w-5xl">
                 <form method="dialog">

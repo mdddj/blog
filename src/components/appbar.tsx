@@ -6,8 +6,9 @@ import MiniAppWidget from "@/components/mini_app_widget";
 import MyDocMenuElement from "@/components/doc_menu";
 import { history } from 'umi';
 import { motion } from "framer-motion";
-import {SearchBox} from "react-instantsearch";
 import {SearchButton} from "@/components/search";
+import MobileAppNavbar from "./mobile";
+import MenuSvgIcon from "./menu_svg_icon";
 
 
 const AppbarTitle : React.FC = () => {
@@ -17,7 +18,7 @@ const AppbarTitle : React.FC = () => {
 
     const title = GetShowTitle()
     return <>
-        <NavLink to={"/"} className="btn btn-ghost text-xl">
+        <NavLink to={"/"} className="text-xl font-bold">
             <motion.p
                 key={title} // 使用 key 来触发动画
                 initial={{ opacity: 0, y: 10 }}  // 初始状态：透明且稍微向下
@@ -33,7 +34,7 @@ const AppbarTitle : React.FC = () => {
 
 export default function AppBar() {
     const menus = appMenuStore((state) => state.menus);
-    const ref = useRef<HTMLDetailsElement>(null);
+    const ref = useRef<HTMLDivElement>(null);
 
 
     //关闭弹出菜单
@@ -54,34 +55,27 @@ export default function AppBar() {
     }, [history]);
 
     return (
-        <header className="navbar fixed bg-base-100 z-10 shadow-sm">
-            <div className="navbar-start ">
-                <details className="dropdown" ref={ref}>
-                    <summary tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                             stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                  d="M4 6h16M4 12h8m-8 6h16"/>
-                        </svg>
-                    </summary>
-                    <ul
-                        tabIndex={0}
-                        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 bg-base-100 rounded-box w-52"
+        <header className="navbar fixed bg-base-100 z-10 shadow-2xl">
+            <div className="navbar-start">
+                <div className="dropdown" ref={ref}>
+                    <div tabIndex={0}  role="button"  className="btn btn-ghost lg:hidden">   <MenuSvgIcon />   </div>
+                    <ul tabIndex={0}
+                    className="menu dropdown-content  bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
                     >
                         {menus.map((item, index) => (
-                            <span key={`item:${item.title}-${index}`}>
+                            <li key={`item:${item.title}-${index}`}>
                                 {
                                     item.href && <li onClick={closeMenu}>
                                         <NavLink to={item.href}>{item.title}</NavLink>
                                     </li>
                                 }
                                 {item.isDoc && <MyDocMenuElement onClick={closeMenu}/>}
-                            </span>
+                            </li>
 
 
                         ))}
                     </ul>
-                </details>
+                </div>
                 <div className={'flex flex-row gap-2 text-center items-center'}>
                     <AppbarTitle />
                     <div className={'dropdown dropdown-bottom hidden lg:inline'}>
@@ -91,18 +85,7 @@ export default function AppBar() {
                     </div>
                 </div>
             </div>
-            <nav className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
-                    {menus.map((item, index) => (
-                        <span key={`${item.href}-${index}`}>
-                            {item.href && <li>
-                                <NavLink to={item.href}>{item.title}</NavLink>
-                            </li>}
-                            {item.isDoc && <MyDocMenuElement onClick={closeMenu} />}
-                        </span>
-                    ))}
-                </ul>
-            </nav>
+            <MobileAppNavbar  closeMenu={closeMenu}/>
             <div className="navbar-end gap-4">
                 <SearchButton />
                 <button

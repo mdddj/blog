@@ -36,7 +36,7 @@ export default function Page() {
                 {
                     blog &&
                     <div className={'flex justify-between'}>
-                        <div className={'flex gap-2 items-center mt-2 badge badge-ghost p-3'}><img
+                        <div className={'flex gap-1 items-center mt-2 badge bg-base-200 p-1 shadow-2xl hover:shadow-3xl'}><img
                             src={blog.category.logo}
                             alt={blog.category.name}
                             className={'w-5 h-5 rounded-full'}/><span>{blog.category.name}</span>

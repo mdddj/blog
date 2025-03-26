@@ -100,7 +100,14 @@ const Menu: React.FC<Type> = ({doc, onClick, selectedFile}) => {
             transition={{ type: "spring", stiffness: 200, damping: 25 }} // 动画过渡
             className={`menu menu-xs rounded-lg bg-base-200 w-full max-w-xs fixed left-1 transition-transform duration-300 ease-in-out shadow-2xl ${
                 isMenuOpen ? 'block' : 'hidden'
-            }  sm:block`}>
+            } sm:block 
+    h-[calc(100vh-10rem)]
+    overflow-y-auto
+    scrollbar-thin
+    scrollbar-thumb-rounded-md
+    scrollbar-track-base-100
+    scrollbar-thumb-base-300
+    touch-pan-y`}>
             <li><a className={'text-lg font-bold'}>{doc.name}</a></li>
             <li><span>创建于{fromNow(doc.createDate)}</span></li>
             <div className={'divider'}></div>

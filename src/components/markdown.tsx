@@ -84,7 +84,7 @@ const MarkdownComponent: React.FC<{ text: string, id?: string, key?: string }> =
             <article
                 id={id ?? '-1'}
                 className={
-                    `prose  lg:prose-xl max-w-none rounded-2xl shadow-2xl p-5`
+                    `prose lg:prose-xl max-w-none rounded-2xl shadow-2xl p-5`
                 }
                 dangerouslySetInnerHTML={{__html: mdParser.render(text)}}
             />
