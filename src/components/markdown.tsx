@@ -19,6 +19,7 @@ import md from "highlight.js/lib/languages/markdown";
 import csharp from 'highlight.js/lib/languages/csharp';
 import nginx from "highlight.js/lib/languages/nginx";
 import toml from "highlight.js/lib/languages/ini";
+import swift from "highlight.js/lib/languages/swift";
 import "highlight.js/styles/github.min.css";
 import {motion} from "framer-motion";
 
@@ -46,6 +47,7 @@ hljs.registerLanguage("csharp", csharp);
 hljs.registerLanguage("c#", csharp);
 hljs.registerLanguage("cs", csharp);
 hljs.registerLanguage("toml", toml);
+hljs.registerLanguage("swift", swift);
 const mdParser = new MarkdownIt({
     highlight: (str, lang) => {
         let code: any = mdParser.utils.escapeHtml(str);
@@ -61,7 +63,7 @@ const mdParser = new MarkdownIt({
 });
 
 function customImagePlugin(md: MarkdownIt) {
-    md.renderer.rules.image = function (tokens, idx, options, env, self) {
+    md.renderer.rules.image = function (tokens, idx) {
         const token = tokens[idx];
         const src = token.attrGet("src");
         const alt = token.content;
