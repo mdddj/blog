@@ -55,7 +55,7 @@ export default function AppBar() {
     }, [history]);
 
     return (
-        <header className="navbar fixed bg-base-100 z-10 shadow-2xl">
+        <header className="navbar fixed bg-base-100 z-10">
             <div className="navbar-start">
                 <div className="dropdown" ref={ref}>
                     <div tabIndex={0}  role="button"  className="btn btn-ghost lg:hidden">   <MenuSvgIcon />   </div>

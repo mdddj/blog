@@ -7,7 +7,7 @@ import {Link} from "@@/exports";
 
 const {searchClient} = instantMeiliSearch(
     'https://search.itbug.shop',
-    '21e6bdff291cd3beec0e8b852d6b164b3cf07a4b13d796a538f89dc3d91b4767'
+    '7b8f1a8a2dd26a813b3ef7d3efad6aa89b348f295831b3c49087d5256d2fc5ca'
 );
 
 // @ts-ignore
@@ -16,7 +16,7 @@ const Hit = ({hit}) => <p>
 closeDialogModal("my_search_box")
     }} className="link link-hover break-all break-words">
         <Highlight hit={hit} attribute={"title"}>
-            {hit.title}
+        
         </Highlight>
     </Link>
 
@@ -28,14 +28,15 @@ const SearchComponent = () => {
         searchClient={searchClient}
     >
         <SearchBox/>
-        <Hits hitComponent={Hit}/>
+        <div className='h-5'></div>
+        <Hits hitComponent={Hit} classNames={{item:"rounded"}}/>
     </InstantSearch>
 }
 
 
 const SearchButton: React.FC = () => {
 
-    return <span className={'items-center hidden lg:flex'}>
+    return <span className={'items-center hidden lg:flex '}>
         <button className={'btn btn-sm '} onClick={() => showDialogModal("my_search_box")}>🔍</button>
         <dialog id="my_search_box" className="modal">
             <div className="modal-box w-11/12 max-w-5xl">

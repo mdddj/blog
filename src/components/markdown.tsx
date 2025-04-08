@@ -67,7 +67,7 @@ function customImagePlugin(md: MarkdownIt) {
         const token = tokens[idx];
         const src = token.attrGet("src");
         const alt = token.content;
-        return `<img src="${src}" alt="${alt}" class="shadow-sm rounded-lg w-full object-cover"  />`;
+        return `<img src="${src}" alt="${alt}" class="rounded-lg w-full object-cover"  />`;
     };
 }
 
@@ -86,7 +86,7 @@ const MarkdownComponent: React.FC<{ text: string, id?: string, key?: string }> =
             <article
                 id={id ?? '-1'}
                 className={
-                    `prose lg:prose-xl max-w-none rounded-2xl shadow-2xl p-5`
+                    `prose lg:prose-xl max-w-none rounded-2xl  p-5`
                 }
                 dangerouslySetInnerHTML={{__html: mdParser.render(text)}}
             />

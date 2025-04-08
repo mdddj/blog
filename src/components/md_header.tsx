@@ -161,7 +161,7 @@ const Documents: React.FC<Props> = ({md}) => {
     };
 
     return (
-        <motion.div className={'card shadow-2xl m-2 hidden md:block'}
+        <motion.div className={'card rounded m-2 hidden md:block'}
                     initial={{opacity: 0, y: 10}}  // 初始状态：透明且稍微向下
                     animate={{opacity: 1, y: 0}}   // 动画到：完全显示且位置恢复
                     exit={{opacity: 0, y: -5}}    // 离开时的动画：透明且向上

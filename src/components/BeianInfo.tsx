@@ -4,7 +4,7 @@ import {motion} from "framer-motion";
 
 const BeianInfo: React.FC = () => {
     return (
-        <motion.div className="shadow gap-2 hidden md:block fixed flex-col left-1 bottom-1 p-2 rounded text-sm text-accent-content"
+        <motion.div className="gap-2 hidden md:block fixed flex-col left-1 bottom-1 p-2 rounded text-sm text-accent-content"
                     initial={{opacity: 0, y: 10}}  // 初始状态：透明且稍微向下
                     animate={{opacity: 1, y: 0}}   // 动画到：完全显示且位置恢复
                     exit={{opacity: 0, y: -5}}    // 离开时的动画：透明且向上
