@@ -23,6 +23,7 @@ import swift from "highlight.js/lib/languages/swift";
 import "highlight.js/styles/github.min.css";
 import {motion} from "framer-motion";
 
+
 hljs.registerLanguage("dart", dart);
 hljs.registerLanguage("rust", rust);
 hljs.registerLanguage("sql", sql);
@@ -73,6 +74,7 @@ function customImagePlugin(md: MarkdownIt) {
 
 
 mdParser.use(customImagePlugin);
+
 
 const MarkdownComponent: React.FC<{ text: string, id?: string, key?: string }> = ({text, id,key}) => {
 
