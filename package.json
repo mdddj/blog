@@ -4,34 +4,38 @@
   "scripts": {
     "build": "umi build",
     "postinstall": "umi setup",
-    "start": "umi dev",
+    "start": "umi dev & npx react-scan@latest localhost:3000",
     "abuild": "ANALYZE=1 umi build"
   },
   "dependencies": {
-    "axios": "^1.7.7",
-    "axios-hooks": "^5.0.2",
+    "@meilisearch/instant-meilisearch": "^0.26.0",
+    "@tailwindcss/postcss": "^4.1.4",
+    "antd": "^5.24.8",
+    "axios": "^1.8.4",
+    "axios-hooks": "^5.1.1",
     "dayjs": "^1.11.13",
-    "framer-motion": "^11.11.9",
-    "g": "^2.0.1",
-    "highlight.js": "^11.10.0",
+    "framer-motion": "^12.7.4",
+    "highlight.js": "^11.11.1",
+    "instantsearch.css": "^8.5.1",
     "markdown-it": "^14.1.0",
-    "pnpm": "^9.12.2",
-    "react-hook-form": "^7.53.0",
-    "theme-change": "^2.5.0",
-    "umi": "^4.3.27",
-    "zustand": "^5.0.0"
+    "pnpm": "^10.9.0",
+    "react-hook-form": "^7.56.1",
+    "react-instantsearch": "^7.15.5",
+    "react-scan": "^0.3.3",
+    "umi": "^4.4.9",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/markdown-it": "^14.1.2",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.1",
-    "@umijs/lint": "^4.3.27",
-    "@umijs/plugins": "^4.3.27",
-    "daisyui": "^4.12.13",
-    "eslint": "^9.12.0",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@umijs/lint": "^4.4.9",
+    "@umijs/plugins": "^4.4.9",
+    "daisyui": "^5.0.27",
+    "eslint": "^9.25.1",
     "stylelint": "^16",
-    "tailwindcss": "^3",
-    "typescript": "^5.6.3"
+    "tailwindcss": "^4.1.4",
+    "typescript": "^5.8.3"
   }
 }

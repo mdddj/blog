@@ -61,19 +61,17 @@ export default defineConfig({
   ],
   title: '典典的博客',
   npmClient: "pnpm",
-  tailwindcss: {
-    tailwindCssFilePath: 'tailwind.css',
-    tailwindConfigFilePath: "tailwind.config.js",
-  },
-  plugins: ["@umijs/plugins/dist/tailwindcss"],
   esbuildMinifyIIFE: true,
   publicPath: '/',
+  extraPostCSSPlugins: [
+    require("@tailwindcss/postcss")
+  ],
   favicons: [
     "/favicon.ico",
   ],
   metas: [
     { name: 'keywords', content: '典典博客,梁典典,梁典典的博客,flutter博客,flutter' },
-    { name: 'description', content: '欢迎来到典典博客，这里是梁典典的个人博客，专注于Flutter开发教程和心得分享。如果你对Flutter开发感兴趣，请关注梁典典的博客，获取最新的Flutter资讯和技术分享。' },
-  ]
-  //  mako: {}
+    { name: 'description', content: '欢迎来到典典博客,这里是梁典典的个人博客,专注于Flutter开发教程和心得分享。如果你对Flutter开发感兴趣,请关注梁典典的博客,获取最新的Flutter资讯和技术分享。' },
+  ],
+  // mako: {}
 });

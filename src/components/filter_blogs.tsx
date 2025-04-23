@@ -15,7 +15,7 @@ const FilterBlogs: React.FC<Props> = ({ending}) => {
                 return (
                     <div
                         key={value.id}
-                        className={"card shadow"}
+                        className={"card shadow-2xl rounded-2xl "}
                     >
                         <div className={'card-body'}>
                             <Link className={'card-title link link-hover'} to={`/detail/${value.id}`}>{value.title}</Link>

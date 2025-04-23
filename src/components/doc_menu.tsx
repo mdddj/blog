@@ -45,7 +45,7 @@ const MyDocMenuElement: React.FC<Type> = ({onClick}) => {
     const title = GetShowTitle()
 
     return (<li className={match ? 'active' : ''}>
-        <details ref={ref}>
+        <details ref={ref} className={'dropdown dropdown-end'}>
             <summary>
                 <motion.p
                     key={title} // 使用 key 来触发动画
@@ -55,12 +55,12 @@ const MyDocMenuElement: React.FC<Type> = ({onClick}) => {
                     transition={{duration: 0.5}}   // 过渡时间
                 >{title}</motion.p>
             </summary>
-            <ul className={'w-52'}>
+            <ul  className={'menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow'}>
                 {
-                    docs.map((doc) => (<li onClick={() => {
+                    docs.map((doc) => (<li key={doc} onClick={() => {
                         closeMenu()
                         onClick?.()
-                    }} className={''}><NavLink to={`/idea/${doc}`}>{doc}</NavLink></li>))
+                    }}><NavLink to={`/idea/${doc}`}>{doc}</NavLink></li>))
                 }
             </ul>
         </details>

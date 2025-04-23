@@ -9,7 +9,7 @@
 
 .idea
 .vscode
-
+dist
 pnpm-lock.yaml
 .npmrc
 package-lock.json

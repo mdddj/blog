@@ -7,7 +7,7 @@ type Prop = {
 }
 
 const ResourceCard: React.FC<Prop> = ({item}) => {
-    const {content,category,user: {picture,nickName,enterprise},createDate,images} = item
+    const {content,category,publisher: {picture,nickName,enterprise},createDate,images} = item
 
     let enterpriseName = enterprise?.name
 
