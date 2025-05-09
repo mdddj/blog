@@ -1,6 +1,6 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect} from "react";
 import {categoryStore} from "@/providers/category";
-import {history, NavLink, useMatch} from "@@/exports";
+import {history, useMatch, useNavigate} from "@@/exports";
 import {motion} from "framer-motion";
 
 type Type = {
@@ -8,13 +8,15 @@ type Type = {
 }
 const MyDocMenuElement: React.FC<Type> = ({onClick}) => {
     const docs = categoryStore((state) => state.data?.ideaDocs) ?? [];
-    const ref = useRef<HTMLDetailsElement>(null);
     const match = useMatch('/idea/:title')
+    const nav = useNavigate()
     const docTitle = match ? match.params.title : undefined;
 
     const closeMenu = () => {
-        if (ref.current) {
-            ref.current.removeAttribute("open")
+        console.log(`document active element is ${document.activeElement}`)
+        let activeElement = document.activeElement;
+        if (activeElement instanceof HTMLBodyElement || activeElement instanceof HTMLUListElement) {
+            activeElement.blur()
         }
     }
 
@@ -23,10 +25,10 @@ const MyDocMenuElement: React.FC<Type> = ({onClick}) => {
         const unListen = history.listen(() => {
             closeMenu()
         });
-        window.addEventListener("scroll",closeMenu)
+        window.addEventListener("scroll", closeMenu)
         return () => {
             unListen();
-            window.removeEventListener("scroll",closeMenu)
+            window.removeEventListener("scroll", closeMenu)
         };
     }, [history]);
 
@@ -45,7 +47,7 @@ const MyDocMenuElement: React.FC<Type> = ({onClick}) => {
     const title = GetShowTitle()
 
     return (<li className={match ? 'active' : ''}>
-        <details ref={ref} className={'dropdown dropdown-end'}>
+        <details className={'dropdown'}>
             <summary>
                 <motion.p
                     key={title} // 使用 key 来触发动画
@@ -55,12 +57,15 @@ const MyDocMenuElement: React.FC<Type> = ({onClick}) => {
                     transition={{duration: 0.5}}   // 过渡时间
                 >{title}</motion.p>
             </summary>
-            <ul  className={'menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow'}>
+            <ul className={'menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow'}>
                 {
                     docs.map((doc) => (<li key={doc} onClick={() => {
                         closeMenu()
                         onClick?.()
-                    }}><NavLink to={`/idea/${doc}`}>{doc}</NavLink></li>))
+                    }}><a onClick={() => {
+                        closeMenu()
+                        nav(`/idea/${doc}`)
+                    }}>{doc}</a></li>))
                 }
             </ul>
         </details>

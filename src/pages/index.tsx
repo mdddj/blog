@@ -3,7 +3,6 @@ import { useShallow } from "zustand/react/shallow";
 import BlogCard from "@/components/blog";
 import LoadingWidget from "@/loading";
 
-import BeianInfo from "@/components/BeianInfo";
 
 export default function HomePage() {
   document.title = "典典博客";
@@ -24,7 +23,7 @@ export default function HomePage() {
           })}
         </div>
       )}
-            <BeianInfo />
+            {/*<BeianInfo />*/}
     </>
   );
 }

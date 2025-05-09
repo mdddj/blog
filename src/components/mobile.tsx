@@ -8,7 +8,7 @@ const MobileAppNavbar : React.FC<Props> = ({closeMenu}) => {
      const menus = appMenuStore((state) => state.menus);
     return (
         <nav className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal menu-sm px-1">
                     {menus.map((item, index) => (
                         <span key={`${item.href}-${index}`}>
                             {item.href && <li>

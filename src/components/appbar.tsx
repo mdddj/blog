@@ -34,19 +34,11 @@ const AppbarTitle : React.FC = () => {
 
 export default function AppBar() {
     const menus = appMenuStore((state) => state.menus);
-    const ref = useRef<HTMLDivElement>(null);
 
 
-    //关闭弹出菜单
-    const closeMenu = () => {
-        if (ref.current) {
-            ref.current.removeAttribute("open")
-        }
-    }
 
     useEffect(() => {
         const unListen = history.listen(() => {
-            closeMenu()
         });
 
         return () => {
@@ -57,19 +49,20 @@ export default function AppBar() {
     return (
         <header className="navbar fixed bg-base-100 z-10">
             <div className="navbar-start">
-                <div className="dropdown" ref={ref}>
-                    <div tabIndex={0}  role="button"  className="btn btn-ghost lg:hidden">   <MenuSvgIcon />   </div>
+                <div className="dropdown">
+                    <div tabIndex={0}  role="button"  className="btn btn-ghost btn-circle lg:hidden">   <MenuSvgIcon />   </div>
                     <ul tabIndex={0}
-                    className="menu dropdown-content  bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
                     >
                         {menus.map((item, index) => (
                             <li key={`item:${item.title}-${index}`}>
                                 {
-                                    item.href && <li onClick={closeMenu}>
-                                        <NavLink to={item.href}>{item.title}</NavLink>
-                                    </li>
+                                    item.href && !item.isDoc  &&  <NavLink onClick={(_)=>{
+                                        // @ts-ignore
+                                        document.activeElement?.blur()
+                                    }} to={item.href}>{item.title}</NavLink>
                                 }
-                                {item.isDoc && <MyDocMenuElement onClick={closeMenu}/>}
+                                {item.isDoc && <MyDocMenuElement />}
                             </li>
 
 
@@ -85,7 +78,8 @@ export default function AppBar() {
                     </div>
                 </div>
             </div>
-            <MobileAppNavbar  closeMenu={closeMenu}/>
+            <MobileAppNavbar closeMenu={function (): void {
+            } } />
             <div className="navbar-end gap-4">
                 <SearchButton />
                 <button
