@@ -1,6 +1,6 @@
 import React from "react";
 import MarkdownComponent from "@/components/markdown";
-import {textStore} from "@/providers/text";
+import { textStore } from "@/providers/text";
 
 type Prop = {
     textKey: string,
@@ -8,7 +8,7 @@ type Prop = {
 };
 
 ///字典组件
-const TextComponent: React.FC<Prop> = ({textKey, isShadow}) => {
+const TextComponent: React.FC<Prop> = ({ textKey, isShadow }) => {
     const list = textStore((state) => state.data);
     const find = list.find((item) => item.name === textKey);
 
@@ -16,7 +16,7 @@ const TextComponent: React.FC<Prop> = ({textKey, isShadow}) => {
         return <p>抱歉, 404 Notfound</p>
     }
     return <>{find && <div>
-      <MarkdownComponent text={find.context} isShadow={isShadow}/>
+        <MarkdownComponent text={find.context} />
     </div>}</>;
 };
 
