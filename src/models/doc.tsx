@@ -23,3 +23,24 @@ export interface DocDirectory {
     [property: string]: any;
     createDate: Date;
 }
+
+
+// 工具函数：递归查找文件
+export const findMarkdownFileById = (directories: DocDirectory[], fileId: number): MarkdownFile | null => {
+    for (const directory of directories) {
+        // 在当前目录的文件中查找
+        const foundFile = directory.files.find(file => file.id === fileId);
+        if (foundFile) {
+            return foundFile;
+        }
+
+        // 递归查找子目录
+        if (directory.children.length > 0) {
+            const foundInChildren = findMarkdownFileById(directory.children, fileId);
+            if (foundInChildren) {
+                return foundInChildren;
+            }
+        }
+    }
+    return null;
+};

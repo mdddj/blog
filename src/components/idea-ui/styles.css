@@ -1,0 +1,178 @@
+/* IntelliJ IDEA Theme Variables and Base Styles */
+
+:root {
+  /* Dark Theme Colors (Default IDEA Dark) */
+  --idea-bg-primary: #2B2B2B;
+  --idea-bg-secondary: #3C3F41;
+  --idea-bg-tertiary: #4C5052;
+  --idea-bg-hover: #4B6EAF;
+  --idea-bg-selected: #4A88C7;
+  --idea-bg-pressed: #365880;
+  
+  /* Light Theme Colors */
+  --idea-light-bg-primary: #F7F8FA;
+  --idea-light-bg-secondary: #FFFFFF;
+  --idea-light-bg-tertiary: #F2F2F2;
+  --idea-light-bg-hover: #E6F3FF;
+  --idea-light-bg-selected: #CCE7FF;
+  --idea-light-bg-pressed: #B3DAFF;
+  
+  /* Text Colors */
+  --idea-text-primary: #BBBBBB;
+  --idea-text-secondary: #919191;
+  --idea-text-disabled: #606060;
+  --idea-text-accent: #6897BB;
+  --idea-text-error: #BC3F3C;
+  --idea-text-success: #629755;
+  --idea-text-warning: #BBB529;
+  
+  /* Light Text Colors */
+  --idea-light-text-primary: #000000;
+  --idea-light-text-secondary: #6C6C6C;
+  --idea-light-text-disabled: #999999;
+  --idea-light-text-accent: #1976D2;
+  --idea-light-text-error: #D32F2F;
+  --idea-light-text-success: #388E3C;
+  --idea-light-text-warning: #F57C00;
+  
+  /* Border Colors */
+  --idea-border-default: #323232;
+  --idea-border-focus: #4A88C7;
+  --idea-border-separator: #555555;
+  
+  /* Light Border Colors */
+  --idea-light-border-default: #C9CCD6;
+  --idea-light-border-focus: #1976D2;
+  --idea-light-border-separator: #E1E1E1;
+  
+  /* Spacing */
+  --idea-spacing-xs: 2px;
+  --idea-spacing-sm: 4px;
+  --idea-spacing-md: 8px;
+  --idea-spacing-lg: 12px;
+  --idea-spacing-xl: 16px;
+  --idea-spacing-xxl: 24px;
+  
+  /* Border Radius */
+  --idea-radius-sm: 3px;
+  --idea-radius-md: 4px;
+  --idea-radius-lg: 6px;
+  
+  /* Shadows */
+  --idea-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --idea-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --idea-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.5);
+  
+  /* Light Shadows */
+  --idea-light-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --idea-light-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --idea-light-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.2);
+  
+  /* Typography */
+  --idea-font-family: 'JetBrains Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
+  --idea-font-size-xs: 11px;
+  --idea-font-size-sm: 12px;
+  --idea-font-size-md: 13px;
+  --idea-font-size-lg: 14px;
+  --idea-font-size-xl: 16px;
+  
+  /* Animation */
+  --idea-transition-fast: 0.1s ease;
+  --idea-transition-normal: 0.2s ease;
+  --idea-transition-slow: 0.3s ease;
+}
+
+/* Light Theme Override */
+.idea-theme-light {
+  --idea-bg-primary: var(--idea-light-bg-primary);
+  --idea-bg-secondary: var(--idea-light-bg-secondary);
+  --idea-bg-tertiary: var(--idea-light-bg-tertiary);
+  --idea-bg-hover: var(--idea-light-bg-hover);
+  --idea-bg-selected: var(--idea-light-bg-selected);
+  --idea-bg-pressed: var(--idea-light-bg-pressed);
+  
+  --idea-text-primary: var(--idea-light-text-primary);
+  --idea-text-secondary: var(--idea-light-text-secondary);
+  --idea-text-disabled: var(--idea-light-text-disabled);
+  --idea-text-accent: var(--idea-light-text-accent);
+  --idea-text-error: var(--idea-light-text-error);
+  --idea-text-success: var(--idea-light-text-success);
+  --idea-text-warning: var(--idea-light-text-warning);
+  
+  --idea-border-default: var(--idea-light-border-default);
+  --idea-border-focus: var(--idea-light-border-focus);
+  --idea-border-separator: var(--idea-light-border-separator);
+  
+  --idea-shadow-sm: var(--idea-light-shadow-sm);
+  --idea-shadow-md: var(--idea-light-shadow-md);
+  --idea-shadow-lg: var(--idea-light-shadow-lg);
+}
+
+/* Base Reset and Common Styles */
+.idea-component {
+  box-sizing: border-box;
+  font-family: var(--idea-font-family);
+  font-size: var(--idea-font-size-md);
+  color: var(--idea-text-primary);
+  transition: var(--idea-transition-normal);
+}
+
+.idea-component *,
+.idea-component *::before,
+.idea-component *::after {
+  box-sizing: border-box;
+}
+
+/* Common Focus Styles */
+.idea-focusable:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--idea-border-focus);
+}
+
+.idea-focusable:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--idea-border-focus);
+}
+
+/* Scrollbar Styles */
+.idea-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.idea-scrollbar::-webkit-scrollbar-track {
+  background: var(--idea-bg-primary);
+}
+
+.idea-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--idea-text-secondary);
+  border-radius: var(--idea-radius-sm);
+}
+
+.idea-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--idea-text-primary);
+}
+
+/* Utility Classes */
+.idea-text-primary { color: var(--idea-text-primary); }
+.idea-text-secondary { color: var(--idea-text-secondary); }
+.idea-text-disabled { color: var(--idea-text-disabled); }
+.idea-text-accent { color: var(--idea-text-accent); }
+.idea-text-error { color: var(--idea-text-error); }
+.idea-text-success { color: var(--idea-text-success); }
+.idea-text-warning { color: var(--idea-text-warning); }
+
+.idea-bg-primary { background-color: var(--idea-bg-primary); }
+.idea-bg-secondary { background-color: var(--idea-bg-secondary); }
+.idea-bg-tertiary { background-color: var(--idea-bg-tertiary); }
+
+.idea-border { border: 1px solid var(--idea-border-default); }
+.idea-border-separator { border-color: var(--idea-border-separator); }
+
+.idea-shadow-sm { box-shadow: var(--idea-shadow-sm); }
+.idea-shadow-md { box-shadow: var(--idea-shadow-md); }
+.idea-shadow-lg { box-shadow: var(--idea-shadow-lg); }
+
+.idea-rounded-sm { border-radius: var(--idea-radius-sm); }
+.idea-rounded-md { border-radius: var(--idea-radius-md); }
+.idea-rounded-lg { border-radius: var(--idea-radius-lg); }
