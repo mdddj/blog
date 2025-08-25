@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { appMenuStore } from "@/providers/menu";
 import { showDialogModal } from "@/tools/fun";
 import { NavLink } from "@@/exports";
@@ -8,6 +8,7 @@ import { history } from "umi";
 import { motion } from "framer-motion";
 import { SearchButton } from "@/components/search";
 import MenuSvgIcon from "./menu_svg_icon";
+import { categoryStore } from "@/providers/category";
 
 const AppbarTitle: React.FC = () => {
   const GetShowTitle = () => {
@@ -32,26 +33,27 @@ const AppbarTitle: React.FC = () => {
   );
 };
 const useScrollShadow = (threshold = 10) => {
-    const [showShadow, setShowShadow] = useState(false);
+  const [showShadow, setShowShadow] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setShowShadow(window.scrollY > threshold);
-        };
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowShadow(window.scrollY > threshold);
+    };
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll(); // 初始检查
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // 初始检查
 
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [threshold]);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [threshold]);
 
-    return showShadow;
+  return showShadow;
 };
 export default function AppBar() {
   const menus = appMenuStore((state) => state.menus);
-    const showShadow = useScrollShadow(10);
+  const docs = categoryStore((state) => state.data?.ideaDocs) ?? [];
+  const showShadow = useScrollShadow(10);
   useEffect(() => {
-    const unListen = history.listen(() => {});
+    const unListen = history.listen(() => { });
 
     return () => {
       unListen();
@@ -91,8 +93,11 @@ export default function AppBar() {
       </div>
       <div className="navbar-center">
         <ul tabIndex={0} className="menu menu-horizontal px-1">
-          {menus.map((item, index) => (
-            <li key={`item:${item.title}-${index}`}>
+          {menus.map((item, index) => {
+            if (item.isDoc && docs.length === 0) {
+              return null;
+            }
+            return <li key={`item:${item.title}-${index}`}>
               {item.href && !item.isDoc && (
                 <NavLink
                   onClick={(_) => {
@@ -104,9 +109,9 @@ export default function AppBar() {
                   {item.title}
                 </NavLink>
               )}
-              {item.isDoc && <MyDocMenuElement />}
+              {item.isDoc && docs.length > 0 && <MyDocMenuElement />}
             </li>
-          ))}
+          })}
         </ul>
       </div>
 

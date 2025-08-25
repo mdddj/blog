@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@meilisearch/instant-meilisearch": "^0.27.0",
-    "@tailwindcss/postcss": "^4.1.11",
-    "antd": "^5.26.7",
+    "@tailwindcss/postcss": "^4.1.12",
+    "antd": "^5.27.1",
     "axios": "^1.11.0",
     "axios-hooks": "^5.1.1",
     "dayjs": "^1.11.13",
@@ -18,23 +18,23 @@
     "highlight.js": "^11.11.1",
     "instantsearch.css": "^8.5.1",
     "markdown-it": "^14.1.0",
-    "pnpm": "^10.14.0",
+    "pnpm": "^10.15.0",
     "react-hook-form": "^7.62.0",
     "react-instantsearch": "^7.16.2",
     "umi": "^4.4.12",
-    "zustand": "^5.0.7"
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
     "@types/markdown-it": "^14.1.2",
-    "@types/react": "^19.1.9",
+    "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.7",
     "@umijs/lint": "^4.4.12",
     "@umijs/plugins": "^4.4.12",
     "daisyui": "^5.0.50",
-    "oxlint": "^1.11.0",
+    "oxlint": "^1.12.0",
     "stylelint": "^16",
-    "tailwindcss": "^4.1.11",
+    "tailwindcss": "^4.1.12",
     "typescript": "^5.9.2"
   }
 }

@@ -1,25 +1,27 @@
 import { appMenuStore } from "@/providers/menu";
 import { NavLink } from "umi";
 import MyDocMenuElement from "./doc_menu";
+import { categoryStore } from "@/providers/category";
 type Props = {
     closeMenu: () => void;
 }
-const MobileAppNavbar : React.FC<Props> = ({closeMenu}) => {
-     const menus = appMenuStore((state) => state.menus);
+const MobileAppNavbar: React.FC<Props> = ({ closeMenu }) => {
+    const menus = appMenuStore((state) => state.menus);
+    const docs = categoryStore((state) => state.data?.ideaDocs) ?? []
     return (
         <nav className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal menu-sm px-1">
-                    {menus.map((item, index) => (
-                        <span key={`${item.href}-${index}`}>
-                            {item.href && <li>
-                                <NavLink to={item.href}>{item.title}</NavLink>
-                            </li>}
-                            {item.isDoc && <MyDocMenuElement onClick={closeMenu} />}
-                        </span>
-                    ))}
-                </ul>
-            </nav>
+            <ul className="menu menu-horizontal menu-sm px-1">
+                {menus.map((item, index) => (
+                    <span key={`${item.href}-${index}`}>
+                        {item.href && <li>
+                            <NavLink to={item.href}>{item.title}</NavLink>
+                        </li>}
+                        {item.isDoc && docs.length > 0 && <MyDocMenuElement onClick={closeMenu} />}
+                    </span>
+                ))}
+            </ul>
+        </nav>
     );
-    }
+}
 
-    export default MobileAppNavbar;
+export default MobileAppNavbar;
