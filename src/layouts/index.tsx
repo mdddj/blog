@@ -37,7 +37,7 @@ export default function Layout() {
       className={"flex flex-col gap-5 h-screen relative"}
     >
       <AppBar />
-      <main className={"flex-grow mt-24 container mx-auto lg:max-w-5xl p-3"}>
+      <main className={"flex-grow mt-24 container mx-auto lg:max-w-5xl p-3 relative"}>
         <Outlet />
         <MyRewardDialog />
       </main>

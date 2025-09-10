@@ -7,7 +7,6 @@ import { fromNow } from "@/tools/date";
 import BackSvg from "@/components/back_svg";
 import ApiSvg from "@/components/api_svg";
 import Documents from "@/components/md_header";
-import LiquidGlass from "liquid-glass-react";
 
 export default function Page() {
   const params = useParams<{ id: string }>();

@@ -1,30 +1,30 @@
-import React, {useEffect, useMemo, useState} from "react";
-import {useParams} from "umi";
+import React, { useEffect, useMemo, useState } from "react";
+import { useParams } from "umi";
 import useAxios from "axios-hooks";
-import {ApiResponse} from "@/models/base";
-import {DocDirectory, findMarkdownFileById, MarkdownFile} from "@/models/doc";
-import {docGet} from "@/tools/api";
+import { ApiResponse } from "@/models/base";
+import { DocDirectory, findMarkdownFileById, MarkdownFile } from "@/models/doc";
+import { docGet } from "@/tools/api";
 import Loading from "@/components/loading";
 import MarkdownComponent from "@/components/markdown";
 import FolderSvg from "@/components/folder_svg";
 import MdSvg from "@/components/md_svg";
-import {fromNow} from "@/tools/date";
+import { fromNow } from "@/tools/date";
 import Documents from "@/components/md_header";
-import {motion} from "framer-motion";
-import {useSearchParams} from "@@/exports";
-import {Typography} from 'antd';
+import { motion } from "framer-motion";
+import { useSearchParams } from "@@/exports";
+import { Typography } from 'antd';
 
-const {Paragraph} = Typography;
+const { Paragraph } = Typography;
 type FilesProp = {
     files: MarkdownFile[];
     onSelectFile: (file: MarkdownFile) => void;
     currentFile: MarkdownFile | undefined;
 };
 const FilesWidget: React.FC<FilesProp> = ({
-                                              files,
-                                              onSelectFile,
-                                              currentFile,
-                                          }) => {
+    files,
+    onSelectFile,
+    currentFile,
+}) => {
     return (
         <>
             <ul>
@@ -36,7 +36,7 @@ const FilesWidget: React.FC<FilesProp> = ({
                         }}
                     >
                         <a className={currentFile?.id == file.id ? "menu-active" : ""}>
-                            <MdSvg/>
+                            <MdSvg />
                             {file.name}
                         </a>
                     </li>
@@ -53,10 +53,10 @@ type Props = {
 };
 
 const RenderMenu: React.FC<Props> = ({
-                                         children,
-                                         onSelectFile,
-                                         currentFile,
-                                     }) => {
+    children,
+    onSelectFile,
+    currentFile,
+}) => {
     return (
         <>
             <li>
@@ -65,7 +65,7 @@ const RenderMenu: React.FC<Props> = ({
                         <li>
                             <details open>
                                 <summary>
-                                    <FolderSvg/>
+                                    <FolderSvg />
                                     {child.name}
                                 </summary>
                                 {child.files && Array.isArray(child.files) && (
@@ -96,7 +96,7 @@ type Type = {
     onClick: (file: MarkdownFile) => void;
     selectedFile: MarkdownFile | undefined;
 };
-const Menu: React.FC<Type> = ({doc, onClick, selectedFile}) => {
+const Menu: React.FC<Type> = ({ doc, onClick, selectedFile }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -130,10 +130,9 @@ const Menu: React.FC<Type> = ({doc, onClick, selectedFile}) => {
             </button>
             <motion.ul
                 key={doc.name}
-                transition={{type: "spring", stiffness: 200, damping: 25}} // 动画过渡
-                className={`menu menu-xs rounded-lg bg-base-200 w-full max-w-xs fixed left-1 transition-transform duration-300 ease-in-out shadow-2xl ${
-                    isMenuOpen ? "block" : "hidden"
-                } sm:block
+                transition={{ type: "spring", stiffness: 200, damping: 25 }} // 动画过渡
+                className={`menu menu-xs rounded-lg bg-base-200 w-full max-w-xs fixed left-1 transition-transform duration-300 ease-in-out shadow-2xl ${isMenuOpen ? "block" : "hidden"
+                    } sm:block
     h-[calc(100vh-10rem)]
     overflow-y-auto
     scrollbar-thin
@@ -165,9 +164,9 @@ const Menu: React.FC<Type> = ({doc, onClick, selectedFile}) => {
 };
 
 const DocPage: React.FC = () => {
-    const {title} = useParams();
+    const { title } = useParams();
     const [searchParams] = useSearchParams();
-    const [{loading, data}] = useAxios<ApiResponse<DocDirectory>>({
+    const [{ loading, data }] = useAxios<ApiResponse<DocDirectory>>({
         url: docGet + `${title}`,
     });
     let doc = data?.data;
@@ -199,12 +198,12 @@ const DocPage: React.FC = () => {
             const foundFile = findMarkdownFileById(doc.children, fileId);
             if (foundFile) {
                 setSelectedFile(foundFile)
-            }else{
-                setSelectedFile(doc.files.find(value => value.id===fileId))
+            } else {
+                setSelectedFile(doc.files.find(value => value.id === fileId))
             }
         }
-        if(doc && !fileId){
-            if(doc.files.length>0){
+        if (doc && !fileId) {
+            if (doc.files.length > 0) {
                 setSelectedFile(doc.files[0])
             }
         }
@@ -213,7 +212,7 @@ const DocPage: React.FC = () => {
 
     return (
         <div className={""}>
-            {loading && <Loading/>}
+            {loading && <Loading />}
             {!loading && !doc && <span>笔记不存在</span>}
             {doc && (
                 <div>
@@ -224,7 +223,7 @@ const DocPage: React.FC = () => {
                             selectedFile={selectedFile}
                         />
                         <div className={"fixed right-0 bottom-0 mt-5 w-80"}>
-                            <Documents md={selectedFile?.content ?? ""}/>
+                            <Documents md={selectedFile?.content ?? ""} />
                         </div>
                         <div>
                             {selectedFile ? (
@@ -235,7 +234,7 @@ const DocPage: React.FC = () => {
                                     <div className={"text-neutral-500 mb-2 flex justify-between"}>
                                         <span>发布时间:{fromNow(selectedFile.createDate)}</span>
                                         <Paragraph
-                                            copyable={{text: `https://itbug.shop/idea/${title}?id=${selectedFile?.id}`,tooltips: [`复制链接`]}}
+                                            copyable={{ text: `https://itbug.shop/idea/${title}?id=${selectedFile?.id}`, tooltips: [`复制链接`] }}
                                         >分享</Paragraph>
                                     </div>
 

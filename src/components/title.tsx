@@ -3,6 +3,10 @@ import React from "react";
 const CardTitle: React.FC<{
   title: string;
 }> = ({ title }) => {
-  return <h1 className={"font-bold mb-2 text-3xl text-foreground"}>{title}</h1>;
+  return (
+    <h2 className={"font-bold text-2xl text-foreground border-l-4 border-primary pl-3"}>
+      {title}
+    </h2>
+  );
 };
 export default CardTitle;
