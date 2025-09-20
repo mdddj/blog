@@ -76,13 +76,13 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
       "
     >
       {/* 顶部装饰条 */}
-      <div
+      {/* <div
         className="
         absolute top-0 left-0 w-full h-1
         bg-gradient-to-r from-primary via-secondary to-accent
         opacity-0 group-hover:opacity-100 transition-opacity duration-300
       "
-      />
+      /> */}
 
       {/* 左侧装饰线 */}
       <div

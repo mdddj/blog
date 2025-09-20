@@ -211,7 +211,9 @@ export default function Page() {
                       getBlogsByCategory={function ():
                         | Promise<Blog[]>
                         | Blog[] {
-                        return blogs.filter((blog) => blog.tags.includes(tag));
+                        return blogs.filter((blog) =>
+                          blog.tags.map((tag) => tag.id).includes(tag.id),
+                        );
                       }}
                       renderHerder={function (
                         blogs: Blog[],
