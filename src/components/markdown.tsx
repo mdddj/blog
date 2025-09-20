@@ -93,7 +93,7 @@ const MarkdownComponent: React.FC<{
     >
       <article
         id={id ?? "-1"}
-        className={`prose max-w-none rounded-4xl shadow-2xl  p-12`}
+        className={`prose max-w-none rounded-4xl`}
         dangerouslySetInnerHTML={{ __html: mdParser.render(text) }}
       />
     </motion.div>

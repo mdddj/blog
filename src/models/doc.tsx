@@ -22,6 +22,7 @@ export interface DocDirectory {
     parent?: DocDirectory;
     [property: string]: any;
     createDate: Date;
+    introduce?: string
 }
 
 
