@@ -18,6 +18,8 @@ export default function Page() {
   const nav = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [showTOC, setShowTOC] = useState(false);
+  const [showFloatingActions, setShowFloatingActions] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const blog = blogStore((state) => state.blogs).find(
     (value) => `${value.id}` === params.id,
@@ -33,7 +35,16 @@ export default function Page() {
   // 监听滚动状态
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      const scrolled = window.scrollY > 100;
+      const progress = Math.min(
+        window.scrollY /
+          (document.documentElement.scrollHeight - window.innerHeight),
+        1,
+      );
+
+      setIsScrolled(scrolled);
+      setScrollProgress(progress);
+      setShowFloatingActions(scrolled);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -60,7 +71,7 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-base-200/30 to-base-100">
+    <div className="min-h-screen  from-base-200/30 to-base-100">
       {/* 主要内容区域 */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 文章头部 */}
@@ -68,7 +79,7 @@ export default function Page() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-gradient-to-br from-base-100 to-base-50 rounded-3xl shadow-2xl border border-base-200/50 overflow-hidden"
+          className=" from-base-100 to-base-50 rounded-3xl shadow-2xl border border-base-200/50 overflow-hidden"
         >
           {/* 装饰性顶部条 */}
           <div className="h-1 bg-gradient-to-r from-primary via-secondary to-accent"></div>
@@ -253,7 +264,7 @@ export default function Page() {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="mt-8 mb-12"
         >
-          <div className="bg-gradient-to-br from-base-100 to-base-50 rounded-3xl shadow-xl border border-base-200/50 overflow-hidden">
+          <div className="from-base-100 to-base-50 rounded-3xl shadow-xl border border-base-200/50 overflow-hidden">
             <div className="p-8 lg:p-12">
               <div className="prose prose-lg max-w-none prose-primary">
                 <MarkdownComponent text={blog.content} id="md-body" />
@@ -263,66 +274,258 @@ export default function Page() {
         </motion.div>
       </div>
 
-      {/* 浮动操作按钮 */}
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.8 }}
-        className="fixed left-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:flex flex-col gap-4"
-      >
-        {/* 返回按钮 */}
-        <div className="tooltip tooltip-right" data-tip="返回">
-          <motion.button
-            whileHover={{ scale: 1.1, rotate: -5 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => nav(-1)}
-            className="w-12 h-12 rounded-xl bg-gradient-to-r from-primary to-primary-focus text-primary-content shadow-lg hover:shadow-xl border border-primary/20 flex items-center justify-center transition-all duration-300"
+      {/* 现代化浮动操作按钮组 */}
+      <AnimatePresence>
+        {showFloatingActions && (
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -60 }}
+            transition={{
+              type: "spring",
+              stiffness: 400,
+              damping: 25,
+              staggerChildren: 0.1,
+            }}
+            className="fixed left-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:block"
           >
-            <BackSvg />
-          </motion.button>
-        </div>
+            {/* 主操作容器 */}
+            <div className="relative">
+              {/* 背景装饰 */}
+              <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-secondary/5 rounded-3xl blur-xl transform scale-110" />
 
-        {/* API接口按钮 */}
-        <div className="tooltip tooltip-right" data-tip="API接口">
-          <motion.a
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            whileTap={{ scale: 0.9 }}
-            rel="noreferrer"
-            target="_blank"
-            href={`https://api.itbug.shop/api/blog/get/${params?.id}`}
-            className="w-12 h-12 rounded-xl bg-gradient-to-r from-secondary to-secondary-focus text-secondary-content shadow-lg hover:shadow-xl border border-secondary/20 flex items-center justify-center transition-all duration-300"
-          >
-            <ApiSvg />
-          </motion.a>
-        </div>
+              <div className="relative flex flex-col gap-3 p-3 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl">
+                {/* 返回按钮 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="tooltip tooltip-right"
+                  data-tip="返回"
+                >
+                  <motion.button
+                    whileHover={{
+                      scale: 1.15,
+                      rotate: -8,
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => nav(-1)}
+                    className="relative group w-14 h-14 rounded-2xl bg-gradient-to-br from-primary via-primary to-primary-focus text-white shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2.5}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                      />
+                    </svg>
+                  </motion.button>
+                </motion.div>
 
-        {/* 目录切换按钮 */}
-        <div
-          className="tooltip tooltip-right"
-          data-tip={showTOC ? "隐藏目录" : "显示目录"}
-        >
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => setShowTOC(!showTOC)}
-            className="w-12 h-12 rounded-xl bg-gradient-to-r from-accent to-accent-focus text-accent-content shadow-lg hover:shadow-xl border border-accent/20 flex items-center justify-center transition-all duration-300"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 10h16M4 14h16M4 18h16"
-              />
-            </svg>
-          </motion.button>
-        </div>
-      </motion.div>
+                {/* API接口按钮 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="tooltip tooltip-right"
+                  data-tip="API接口"
+                >
+                  <motion.a
+                    whileHover={{
+                      scale: 1.15,
+                      rotate: 8,
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    rel="noreferrer"
+                    target="_blank"
+                    href={`https://api.itbug.shop/api/blog/get/${params?.id}`}
+                    className="relative group w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary via-secondary to-secondary-focus text-white shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ApiSvg />
+                  </motion.a>
+                </motion.div>
+
+                {/* 目录切换按钮 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="tooltip tooltip-right"
+                  data-tip={showTOC ? "隐藏目录" : "显示目录"}
+                >
+                  <motion.button
+                    whileHover={{
+                      scale: 1.15,
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setShowTOC(!showTOC)}
+                    className={`relative group w-14 h-14 rounded-2xl bg-gradient-to-br shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden ${
+                      showTOC
+                        ? "from-error via-error to-error-focus text-white"
+                        : "from-accent via-accent to-accent-focus text-white"
+                    }`}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <motion.svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      animate={{ rotate: showTOC ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d={
+                          showTOC
+                            ? "M6 18L18 6M6 6l12 12"
+                            : "M4 6h16M4 10h16M4 14h16M4 18h16"
+                        }
+                      />
+                    </motion.svg>
+                  </motion.button>
+                </motion.div>
+
+                {/* 回到顶部按钮 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="tooltip tooltip-right"
+                  data-tip="回到顶部"
+                >
+                  <motion.button
+                    whileHover={{
+                      scale: 1.15,
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() =>
+                      window.scrollTo({ top: 0, behavior: "smooth" })
+                    }
+                    className="relative group w-14 h-14 rounded-2xl bg-gradient-to-br from-info via-info to-info-focus text-white shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 10l7-7m0 0l7 7m-7-7v18"
+                      />
+                    </svg>
+                  </motion.button>
+                </motion.div>
+
+                {/* 分享按钮 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="tooltip tooltip-right"
+                  data-tip="分享文章"
+                >
+                  <motion.button
+                    whileHover={{
+                      scale: 1.15,
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      if (navigator.share) {
+                        navigator.share({
+                          title: blog.title,
+                          url: window.location.href,
+                        });
+                      } else {
+                        navigator.clipboard.writeText(window.location.href);
+                      }
+                    }}
+                    className="relative group w-14 h-14 rounded-2xl bg-gradient-to-br from-success via-success to-success-focus text-white shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
+                      />
+                    </svg>
+                  </motion.button>
+                </motion.div>
+
+                {/* 进度指示器 */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="relative mx-auto mt-2"
+                >
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-base-200/50 to-base-300/50 flex items-center justify-center backdrop-blur-sm border border-white/10">
+                    <div className="relative w-8 h-8">
+                      <svg
+                        className="w-8 h-8 transform -rotate-90"
+                        viewBox="0 0 32 32"
+                      >
+                        <circle
+                          cx="16"
+                          cy="16"
+                          r="12"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          fill="transparent"
+                          className="text-base-content/20"
+                        />
+                        <circle
+                          cx="16"
+                          cy="16"
+                          r="12"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          fill="transparent"
+                          strokeDasharray={`${2 * Math.PI * 12}`}
+                          strokeDashoffset={`${2 * Math.PI * 12 * (1 - scrollProgress)}`}
+                          className="text-primary transition-all duration-300"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-xs font-medium text-base-content/70">
+                          {Math.round(scrollProgress * 100)}%
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* 目录侧边栏 */}
       <AnimatePresence>
@@ -334,7 +537,7 @@ export default function Page() {
             transition={{ duration: 0.3 }}
             className="fixed right-6 top-1/2 transform -translate-y-1/2 w-80 z-30 hidden xl:block"
           >
-            <div className="bg-gradient-to-br from-base-100 to-base-50 rounded-2xl shadow-2xl border border-base-200/50 backdrop-blur-sm overflow-hidden">
+            <div className="from-base-100 to-base-50 rounded-2xl shadow-2xl border border-base-200/50 backdrop-blur-sm overflow-hidden">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -370,38 +573,168 @@ export default function Page() {
         )}
       </AnimatePresence>
 
-      {/* 移动端浮动按钮 */}
-      <div className="lg:hidden fixed bottom-6 right-6 z-40 flex flex-col gap-3">
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => nav(-1)}
-          className="w-12 h-12 rounded-full bg-primary text-primary-content shadow-lg flex items-center justify-center"
-        >
-          <BackSvg />
-        </motion.button>
-      </div>
+      {/* 移动端现代化浮动按钮 */}
+      <AnimatePresence>
+        {showFloatingActions && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            className="lg:hidden fixed bottom-6 right-6 z-40"
+          >
+            <div className="flex flex-col gap-4 items-end">
+              {/* 次要操作按钮组 */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 }}
+                className="flex flex-col gap-3"
+              >
+                {/* 回到顶部 */}
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
+                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-2xl border border-white/20 text-base-content shadow-xl flex items-center justify-center"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 10l7-7m0 0l7 7m-7-7v18"
+                    />
+                  </svg>
+                </motion.button>
 
-      {/* 滚动进度条 */}
+                {/* 目录切换 */}
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setShowTOC(!showTOC)}
+                  className={`w-12 h-12 rounded-full backdrop-blur-2xl border border-white/20 shadow-xl flex items-center justify-center transition-colors ${
+                    showTOC
+                      ? "bg-error/80 text-white"
+                      : "bg-white/10 text-base-content"
+                  }`}
+                >
+                  <motion.svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    animate={{ rotate: showTOC ? 45 : 0 }}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d={
+                        showTOC
+                          ? "M6 18L18 6M6 6l12 12"
+                          : "M4 6h16M4 10h16M4 14h16M4 18h16"
+                      }
+                    />
+                  </motion.svg>
+                </motion.button>
+              </motion.div>
+
+              {/* 主返回按钮 */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 400 }}
+                className="relative"
+              >
+                {/* 装饰光环 */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary rounded-full blur-lg opacity-30 animate-pulse" />
+
+                <motion.button
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => nav(-1)}
+                  className="relative w-16 h-16 rounded-full bg-gradient-to-br from-primary via-primary to-primary-focus text-white shadow-2xl flex items-center justify-center border-2 border-white/20 backdrop-blur-sm"
+                >
+                  <svg
+                    className="w-7 h-7"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2.5}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                    />
+                  </svg>
+
+                  {/* 进度环 */}
+                  <svg
+                    className="absolute inset-0 w-16 h-16 transform -rotate-90"
+                    viewBox="0 0 64 64"
+                  >
+                    <circle
+                      cx="32"
+                      cy="32"
+                      r="28"
+                      stroke="white"
+                      strokeWidth="2"
+                      fill="transparent"
+                      strokeOpacity="0.2"
+                    />
+                    <circle
+                      cx="32"
+                      cy="32"
+                      r="28"
+                      stroke="white"
+                      strokeWidth="2"
+                      fill="transparent"
+                      strokeDasharray={`${2 * Math.PI * 28}`}
+                      strokeDashoffset={`${2 * Math.PI * 28 * (1 - scrollProgress)}`}
+                      strokeOpacity="0.8"
+                      strokeLinecap="round"
+                      className="transition-all duration-300"
+                    />
+                  </svg>
+                </motion.button>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* 增强滚动进度条 */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary origin-left z-50"
-        style={{
-          scaleX: isScrolled ? 1 : 0,
-        }}
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent origin-left z-50 shadow-lg"
         initial={{ scaleX: 0 }}
-        animate={{
-          scaleX:
-            typeof window !== "undefined"
-              ? Math.min(
-                  window.scrollY /
-                    (document.documentElement.scrollHeight -
-                      window.innerHeight),
-                  1,
-                )
-              : 0,
-        }}
+        animate={{ scaleX: scrollProgress }}
         transition={{ duration: 0.1 }}
+        style={{
+          boxShadow:
+            scrollProgress > 0.1 ? "0 0 20px rgba(var(--p), 0.5)" : "none",
+        }}
       />
+
+      {/* 顶部装饰光效 */}
+      {scrollProgress > 0.1 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent z-49"
+        />
+      )}
     </div>
   );
 }
