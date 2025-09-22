@@ -1,6 +1,5 @@
 import React from "react";
 import { FriendLink } from "@/models/friend";
-import CardTitle from "@/components/title";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { linkStore } from "@/providers/links";
 import { useShallow } from "zustand/react/shallow";

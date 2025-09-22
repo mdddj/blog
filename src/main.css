@@ -6,7 +6,7 @@
         d --prefersdark;
 }
 pre {
-    @apply bg-base-200 text-base-content;
+    @apply bg-transparent text-base-content !p-0 !m-0;
 }
 
 @plugin "daisyui/theme" {
@@ -106,4 +106,43 @@ pre {
     box-shadow: none;
     padding: 0;
     margin: 0 2rem;
+}
+
+/* 代码块容器，用于相对定位 */
+.code-block-container {
+    /*position: relative;*/
+}
+
+/* highlight.js 的 pre 标签默认有 margin，我们将其重置，由容器来控制 */
+.code-block-container pre.hljs {
+    margin: 0;
+}
+
+/* 工具条样式 */
+.code-block-toolbar {
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+}
+
+/* 语言名称 */
+.language-name {
+    text-transform: lowercase;
+}
+
+/* 复制按钮 */
+.copy-button {
+}
+
+.copy-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 复制按钮中的 SVG 图标 */
+.copy-button svg {
+    vertical-align: middle;
 }

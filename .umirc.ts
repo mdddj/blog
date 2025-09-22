@@ -49,10 +49,23 @@ export default defineConfig({
       title: "项目",
     },
     {
+      path: "/dynamic/:id",
+      component: "dynamic/$id",
+      title: "动态详情",
+    },
+    {
       path: "/g",
       component: "group/index",
       title: "群组",
       routes: [
+        {
+          path: "/g",
+          redirect: "/g/all",
+        },
+        {
+          path: "/g/all",
+          component: "group/all",
+        },
         {
           path: "/g/:id",
           component: "group/list",
