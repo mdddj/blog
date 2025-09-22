@@ -27,7 +27,7 @@ const Hit = ({ hit }) => {
       exit={{ opacity: 0, y: -10 }}
       whileHover={{ x: 4, scale: 1.01 }}
       transition={{ duration: 0.2 }}
-      className="group w-full max-w-full min-w-0"
+      className="group max-w-full min-w-0"
     >
       <Link
         to={`/detail/${hit.id}`}
@@ -191,8 +191,8 @@ const SearchComponent = () => {
         <Hits
           hitComponent={Hit}
           classNames={{
-            root: "!block !w-full !max-w-full space-y-3",
-            list: "!flex !flex-col !w-full !max-w-full space-y-3 !grid-cols-none !gap-3 !overflow-hidden",
+            root: "!block !w-full !max-w-full",
+            list: "!flex !flex-col !w-full !max-w-full !gap-3 !grid-cols-none !gap-3 !overflow-hidden !pr-12",
             item: "!w-full !max-w-full !min-w-0",
           }}
         />
