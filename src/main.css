@@ -6,7 +6,7 @@
         d --prefersdark;
 }
 pre {
-    @apply bg-transparent text-base-content !p-0 !m-0;
+    @apply bg-base-200 mt-9 text-base-content ;
 }
 
 @plugin "daisyui/theme" {

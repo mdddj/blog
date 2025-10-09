@@ -60,7 +60,7 @@ const copyIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="
 const checkIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16"><path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022z"/></svg>`;
 
 const mdParser = new MarkdownIt({
-  highlight: (str, lang) => {
+  highlight: (str, lang): string => {
     // 1. 获取高亮后的 HTML 代码
     let highlightedCode = mdParser.utils.escapeHtml(str);
     if (lang && hljs.getLanguage(lang)) {
@@ -73,25 +73,25 @@ const mdParser = new MarkdownIt({
     }
 
     // 2. 生成语言名称和复制按钮的工具条 HTML
-    const toolbarHtml = `
-          <div class="code-block-toolbar flex flex-row justify-between py-2 px-3 bg-base-200">
-            <span class="language-name">${lang || "text"}</span>
-            <button class="copy-button btn btn-xs" title="复制代码">
-              ${copyIconSvg}
-            </button>
-          </div>
-        `;
 
+    return `<div class="relative card">
+                <pre lang='${lang}'>${highlightedCode}</pre>
+                <div class="absolute top-0 left-0 right-0 card-title flex flex-row h-9 px-3">
+                <span>${lang}</span>
+</div>
+            </div>`;
     // 3. 将工具条和代码包裹在一个容器中
     //    使用 <pre><code> 结构是更标准的做法
-    return `
-          <div class="code-block-container flex flex-col">
-            ${toolbarHtml}
-            <pre class="hljs">${highlightedCode}</pre>
-          </div>
-        `;
+    // return `
+    //       <div class="code-block-container flex flex-col">
+    //         ${toolbarHtml}
+    //         <pre class="hljs">${highlightedCode}</pre>
+    //       </div>
+    //     `;
   },
   html: true,
+  linkify: true,
+  typographer: true,
 });
 
 function customImagePlugin(md: MarkdownIt) {
@@ -110,56 +110,7 @@ const MarkdownComponent: React.FC<{
   id?: string;
   key?: string;
 }> = ({ text, id, key }) => {
-  useEffect(() => {
-    // 监听整个文档的点击事件（事件委托）
-    document.addEventListener("click", function (event) {
-      // event.target 是用户实际点击的元素
-      // .closest('.copy-button') 会从 event.target 开始向上查找，直到找到 .copy-button 或 null
-      let target = event.target;
-      if (!target) return;
-      const copyButton = target.closest(".copy-button");
 
-      // 如果点击的不是复制按钮，则什么也不做
-      if (!copyButton) {
-        return;
-      }
-
-      // 找到按钮所在的容器
-      const container = copyButton.closest(".code-block-container");
-      if (!container) {
-        return;
-      }
-
-      // 从容器中找到代码元素
-      const codeElement = container.querySelector("pre.hljs > code");
-      if (!codeElement) {
-        return;
-      }
-
-      // 获取代码的纯文本内容
-      const codeToCopy = codeElement.textContent;
-
-      // 使用现代的 Clipboard API 复制文本
-      navigator.clipboard
-        .writeText(codeToCopy)
-        .then(() => {
-          // 复制成功后的反馈
-          copyButton.innerHTML = checkIconSvg; // 切换到对勾图标
-          copyButton.title = "已复制!";
-
-          // 2秒后恢复原样
-          setTimeout(() => {
-            copyButton.innerHTML = copyIconSvg; // 换回复制图标
-            copyButton.title = "复制代码";
-          }, 2000);
-        })
-        .catch((err) => {
-          // 复制失败
-          console.error("无法复制到剪贴板:", err);
-          copyButton.title = "复制失败!";
-        });
-    });
-  }, []);
   return (
     <motion.div
       key={key !== null ? key : id}
@@ -170,7 +121,7 @@ const MarkdownComponent: React.FC<{
     >
       <article
         id={id ?? "-1"}
-        className={`prose max-w-none rounded-4xl`}
+        className={`max-w-none rounded-4xl prose`}
         dangerouslySetInnerHTML={{ __html: mdParser.render(text) }}
       />
     </motion.div>

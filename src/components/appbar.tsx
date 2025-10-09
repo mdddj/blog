@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { SearchButton } from "@/components/search";
 import MenuSvgIcon from "./menu_svg_icon";
 import { categoryStore } from "@/providers/category";
+import CompactSystemMonitor from "./system_monitor_compact";
 
 const AppbarTitle: React.FC = () => {
   const GetShowTitle = () => {
@@ -87,8 +88,10 @@ export default function AppBar() {
               在小程序打开
             </span>
             <MiniAppWidget />
+
           </div>
           {/* <MobileAppNavbar closeMenu={function (): void {}} /> */}
+          <div className="hidden lg:block"><CompactSystemMonitor /></div>
         </div>
       </div>
       <div className="navbar-center">

@@ -266,7 +266,8 @@ export default function Page() {
         >
           <div className="from-base-100 to-base-50 rounded-3xl shadow-xl border border-base-200/50 overflow-hidden">
             <div className="p-8 lg:p-12">
-              <div className="prose prose-lg max-w-none prose-primary">
+              {/*prose prose-lg max-w-none prose-primary*/}
+              <div className="prose max-w-none prose-primary">
                 <MarkdownComponent text={blog.content} id="md-body" />
               </div>
             </div>
