@@ -80,14 +80,6 @@ const mdParser = new MarkdownIt({
                 <span>${lang}</span>
 </div>
             </div>`;
-    // 3. 将工具条和代码包裹在一个容器中
-    //    使用 <pre><code> 结构是更标准的做法
-    // return `
-    //       <div class="code-block-container flex flex-col">
-    //         ${toolbarHtml}
-    //         <pre class="hljs">${highlightedCode}</pre>
-    //       </div>
-    //     `;
   },
   html: true,
   linkify: true,
@@ -110,7 +102,6 @@ const MarkdownComponent: React.FC<{
   id?: string;
   key?: string;
 }> = ({ text, id, key }) => {
-
   return (
     <motion.div
       key={key !== null ? key : id}

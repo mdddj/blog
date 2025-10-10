@@ -72,16 +72,6 @@ export default defineConfig({
         },
       ],
     },
-    {
-      path: "/monitor",
-      component: "monitor",
-      title: "系统监控",
-    },
-    {
-      path: "/compact-monitor",
-      component: "compact_monitor",
-      title: "紧凑模式监控",
-    },
   ],
   title: "典典的博客",
   npmClient: "pnpm",

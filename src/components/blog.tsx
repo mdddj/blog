@@ -10,15 +10,15 @@ const CategoryWidget: React.FC<{ category: Category }> = ({ category }) => {
     <motion.div
       whileHover={{ scale: 1.05 }}
       className="
-        inline-flex items-center gap-2 px-3 py-1.5
-        bg-gradient-to-r from-primary/10 to-secondary/10
-        rounded-full border border-primary/20
-        transition-all duration-300 hover:shadow-md hover:border-primary/40
+        inline-flex items-center gap-2 px-2 py-1
+        bg-base-100
+        rounded-md border border-base-300/50
+        transition-all duration-300 hover:shadow-sm hover:border-primary/30
         backdrop-blur-sm
       "
     >
       <div className="avatar">
-        <div className="w-5 h-5 rounded-full overflow-hidden ring-1 ring-primary/30">
+        <div className="w-5 h-5 rounded-full overflow-hidden ring-1 ring-base-300">
           <img
             src={category.logo}
             alt={category.name}
@@ -26,7 +26,9 @@ const CategoryWidget: React.FC<{ category: Category }> = ({ category }) => {
           />
         </div>
       </div>
-      <span className="text-sm font-medium text-primary">{category.name}</span>
+      <span className="text-sm font-medium text-base-content/80">
+        {category.name}
+      </span>
     </motion.div>
   );
 };
@@ -39,10 +41,10 @@ const TagWidget: React.FC<{ tag: { id: number; name: string } }> = ({
     <motion.span
       whileHover={{ scale: 1.1, y: -2 }}
       className="
-        inline-flex items-center px-2.5 py-1
-        text-xs font-medium text-base-content/70
-        bg-base-200/50 rounded-lg border border-base-300/50
-        hover:bg-base-200 hover:text-base-content hover:border-primary/30
+        inline-flex items-center px-2 py-0.5
+        text-xs font-medium text-base-content/60
+        bg-base-200/30 rounded-md
+        hover:bg-base-200 hover:text-base-content
         transition-all duration-200 cursor-pointer
       "
     >
@@ -68,41 +70,13 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
       onClick={() => nav(`/detail/${blog.id}`)}
       className="
         group relative cursor-pointer
-        bg-gradient-to-br from-base-100 to-base-50
-        rounded-3xl shadow-lg border border-base-200/50
-        hover:shadow-2xl hover:border-primary/30
+        bg-base-100
+        rounded-xl shadow-md border border-base-300/50
+        hover:shadow-lg hover:border-primary/20
         transition-all duration-300 overflow-hidden
         backdrop-blur-sm
       "
     >
-      {/* 顶部装饰条 */}
-      {/* <div
-        className="
-        absolute top-0 left-0 w-full h-1
-        bg-gradient-to-r from-primary via-secondary to-accent
-        opacity-0 group-hover:opacity-100 transition-opacity duration-300
-      "
-      /> */}
-
-      {/* 左侧装饰线 */}
-      <div
-        className="
-        absolute left-0 top-0 w-1 h-0
-        bg-gradient-to-b from-primary to-secondary
-        group-hover:h-full transition-all duration-500 ease-out
-      "
-      />
-
-      {/* 背景装饰 */}
-      <div
-        className="
-        absolute top-4 right-4 w-20 h-20
-        bg-gradient-to-br from-primary/5 to-secondary/5
-        rounded-full blur-xl opacity-0 group-hover:opacity-100
-        transition-opacity duration-300
-      "
-      />
-
       <div className="relative p-6">
         {/* 标题部分 */}
         <div className="mb-4">
@@ -157,26 +131,7 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
             ))}
           </div>
         </div>
-
-        {/* 底部装饰 */}
-        <div
-          className="
-          absolute bottom-0 right-0 w-12 h-12
-          bg-gradient-to-tl from-primary/10 to-transparent
-          rounded-tl-full opacity-0 group-hover:opacity-100
-          transition-opacity duration-300
-        "
-        />
       </div>
-
-      {/* 悬浮时的光效 */}
-      <div
-        className="
-        absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100
-        bg-gradient-to-br from-primary/5 via-transparent to-secondary/5
-        transition-opacity duration-300 pointer-events-none
-      "
-      />
     </motion.div>
   );
 };

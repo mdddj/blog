@@ -41,10 +41,10 @@ const useScrollShadow = (threshold = 10) => {
       setShowShadow(window.scrollY > threshold);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // 初始检查
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [threshold]);
 
   return showShadow;
@@ -54,16 +54,17 @@ export default function AppBar() {
   const docs = categoryStore((state) => state.data?.ideaDocs) ?? [];
   const showShadow = useScrollShadow(10);
   useEffect(() => {
-    const unListen = history.listen(() => { });
+    const unListen = history.listen(() => {});
 
     return () => {
       unListen();
     };
   }, []);
 
-
   return (
-    <header className={`navbar fixed bg-base-100 z-10 ${showShadow ? 'shadow-2xl' : 'shadow-none'}`}>
+    <header
+      className={`navbar fixed bg-base-100 z-10 ${showShadow ? "shadow-2xl" : "shadow-none"}`}
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <div
@@ -74,9 +75,35 @@ export default function AppBar() {
             {" "}
             <MenuSvgIcon />{" "}
           </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            {menus.map((item, index) => {
+              if (item.isDoc && docs.length === 0) {
+                return null;
+              }
+              return (
+                <li key={`item:${item.title}-${index}`}>
+                  {item.href && !item.isDoc && (
+                    <NavLink
+                      onClick={(_) => {
+                        // @ts-ignore
+                        document.activeElement?.blur();
+                      }}
+                      to={item.href}
+                    >
+                      {item.title}
+                    </NavLink>
+                  )}
+                  {item.isDoc && docs.length > 0 && <MyDocMenuElement />}
+                </li>
+              );
+            })}
+          </ul>
         </div>
+        <AppbarTitle />
         <div className={"flex flex-row gap-2 text-center items-center"}>
-          <AppbarTitle />
           <div className={"dropdown dropdown-bottom hidden lg:inline"}>
             <span
               tabIndex={0}
@@ -88,32 +115,35 @@ export default function AppBar() {
               在小程序打开
             </span>
             <MiniAppWidget />
-
           </div>
           {/* <MobileAppNavbar closeMenu={function (): void {}} /> */}
-          <div className="hidden lg:block"><CompactSystemMonitor /></div>
+          <div className="hidden lg:block">
+            <CompactSystemMonitor />
+          </div>
         </div>
       </div>
-      <div className="navbar-center">
+      <div className="navbar-center hidden lg:flex">
         <ul tabIndex={0} className="menu menu-horizontal px-1">
           {menus.map((item, index) => {
             if (item.isDoc && docs.length === 0) {
               return null;
             }
-            return <li key={`item:${item.title}-${index}`}>
-              {item.href && !item.isDoc && (
-                <NavLink
-                  onClick={(_) => {
-                    // @ts-ignore
-                    document.activeElement?.blur();
-                  }}
-                  to={item.href}
-                >
-                  {item.title}
-                </NavLink>
-              )}
-              {item.isDoc && docs.length > 0 && <MyDocMenuElement />}
-            </li>
+            return (
+              <li key={`item:${item.title}-${index}`}>
+                {item.href && !item.isDoc && (
+                  <NavLink
+                    onClick={(_) => {
+                      // @ts-ignore
+                      document.activeElement?.blur();
+                    }}
+                    to={item.href}
+                  >
+                    {item.title}
+                  </NavLink>
+                )}
+                {item.isDoc && docs.length > 0 && <MyDocMenuElement />}
+              </li>
+            );
           })}
         </ul>
       </div>
