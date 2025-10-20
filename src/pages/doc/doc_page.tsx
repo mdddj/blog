@@ -10,7 +10,7 @@ import FolderSvg from "@/components/folder_svg";
 import MdSvg from "@/components/md_svg";
 import { fromNow } from "@/tools/date";
 import Documents from "@/components/md_header";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useSearchParams } from "@@/exports";
 import { Typography } from "antd";
 
@@ -245,6 +245,87 @@ const Menu: React.FC<Type> = ({ doc, onClick, selectedFile }) => {
   );
 };
 
+const DefaultView = ({
+  doc,
+  onFileClick,
+}: {
+  doc: DocDirectory;
+  onFileClick: (file: MarkdownFile) => void;
+}) => {
+  const DirectoryView: React.FC<{ directory: DocDirectory }> = ({
+    directory,
+  }) => {
+    return (
+      <div className="text-left mt-4">
+        <div className="flex items-center gap-2 p-2 rounded-lg bg-base-200/50">
+          <FolderSvg />
+          <h3 className="text-md font-semibold">{directory.name}</h3>
+        </div>
+        <ul className="pl-6 mt-2 space-y-2">
+          {directory.files.map((file) => (
+            <li
+              key={file.id}
+              onClick={() => onFileClick(file)}
+              className="cursor-pointer hover:text-primary transition-colors flex items-center gap-2 text-sm"
+            >
+              <MdSvg />
+              <span>{file.name}</span>
+            </li>
+          ))}
+        </ul>
+        {directory.children && (
+          <div className="pl-6 mt-2 space-y-2">
+            {directory.children.map((childDir) => (
+              <DirectoryView key={childDir.name} directory={childDir} />
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <div className="p-8">
+      <div className="bg-base-50 rounded-2xl p-8">
+        <div className="text-center border-b border-base-200 pb-6">
+          <div className="text-5xl mb-4">📚</div>
+          <h1 className="text-2xl font-bold">{doc.name}</h1>
+          {doc.introduce && (
+            <div className="text-md text-base-content/80 mt-2 max-w-2xl mx-auto">
+              {doc.introduce}
+            </div>
+          )}
+          <div className="text-sm text-base-content/60 mt-4">
+            创建于 {fromNow(doc.createDate)}
+          </div>
+        </div>
+        <div className="mt-8">
+          <h2 className="text-xl font-bold text-center mb-6">文件总览</h2>
+          <div className="text-left max-w-3xl mx-auto">
+            <ul className="space-y-2">
+              {doc.files.map((file) => (
+                <li
+                  key={file.id}
+                  onClick={() => onFileClick(file)}
+                  className="cursor-pointer hover:text-primary transition-colors flex items-center gap-2 text-sm p-2 rounded-lg hover:bg-base-200/50"
+                >
+                  <MdSvg />
+                  <span>{file.name}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-4 space-y-4">
+              {doc.children.map((child) => (
+                <DirectoryView key={child.name} directory={child} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const DocPage: React.FC = () => {
   const { title } = useParams();
   const [searchParams] = useSearchParams();
@@ -352,19 +433,7 @@ const DocPage: React.FC = () => {
                   </div>
                 </motion.div>
               ) : (
-                <div className="p-8 text-center">
-                  <div className="bg-base-50 rounded-2xl p-8">
-                    <div className="text-4xl mb-4">📚</div>
-                    {doc.introduce && (
-                      <div className="text-lg text-base-content/80 mb-4">
-                        {doc.introduce}
-                      </div>
-                    )}
-                    <div className="text-base text-base-content/60">
-                      创建于 {fromNow(doc.createDate)}
-                    </div>
-                  </div>
-                </div>
+                <DefaultView doc={doc} onFileClick={handleFileClick} />
               )}
             </div>
           </div>
