@@ -109,7 +109,7 @@ export default function AppBar() {
               tabIndex={0}
               role="button"
               className={
-                "badge badge-accent badge-outline hover:bg-accent hover:text-secondary-content cursor-pointer"
+                "px-3 py-1 bg-base-100 rounded-md border border-base-200 text-sm cursor-pointer"
               }
             >
               在小程序打开

@@ -80,7 +80,7 @@ const CompactSystemMonitor: React.FC = () => {
       onMouseEnter={() => setShowDetail(true)}
       onMouseLeave={() => setShowDetail(false)}
     >
-      <div className="flex items-center gap-2 px-3 py-1 bg-base-100 rounded-full border border-base-200 text-sm">
+      <div className="flex items-center gap-2 px-3 py-1 bg-base-100 rounded-md border border-base-200 text-sm cursor-pointer">
         <span
           className={`inline-block w-2 h-2 rounded-full mr-1 ${isConnected ? "bg-success" : "bg-error"}`}
         ></span>

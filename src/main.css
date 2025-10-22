@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 @plugin "daisyui" {
     themes:
         lig --default,
@@ -15,30 +14,24 @@ pre {
     prefersdark: false;
     color-scheme: "light";
     --color-base-100: oklch(100% 0 0); /* Pure white */
-    --color-base-200: oklch(97% 0 0); /* Very light gray */
-    --color-base-300: oklch(90% 0 0); /* Light gray */
+    --color-base-200: oklch(96% 0 0); /* Light gray */
+    --color-base-300: oklch(90% 0 0); /* Medium light gray */
     --color-base-content: oklch(20% 0 0); /* Dark gray for text */
-    --color-primary: oklch(50% 0.05 260); /* Desaturated blue-purple */
-    --color-primary-content: oklch(
-        100% 0 0
-    ); /* Pure white for primary content */
-    --color-secondary: oklch(60% 0.05 180); /* Desaturated teal */
-    --color-secondary-content: oklch(
-        20% 0 0
-    ); /* Dark gray for secondary content */
-    --color-accent: oklch(70% 0.03 300); /* Desaturated pink-purple */
+    --color-primary: oklch(55% 0.15 260); /* A subtle, modern blue */
+    --color-primary-content: oklch(100% 0 0); /* White for primary content */
+    --color-secondary: oklch(65% 0.05 180); /* A muted teal */
+    --color-secondary-content: oklch(20% 0 0); /* Dark gray for secondary content */
+    --color-accent: oklch(70% 0.1 300); /* A soft purple */
     --color-accent-content: oklch(20% 0 0); /* Dark gray for accent content */
-    --color-neutral: oklch(40% 0 0); /* Darker gray for neutral elements */
-    --color-neutral-content: oklch(
-        100% 0 0
-    ); /* Pure white for neutral content */
-    --color-info: oklch(70% 0.05 230); /* Desaturated info blue */
+    --color-neutral: oklch(80% 0 0); /* Neutral gray */
+    --color-neutral-content: oklch(20% 0 0); /* Dark gray for neutral content */
+    --color-info: oklch(70% 0.1 230); /* A clear, soft blue */
     --color-info-content: oklch(20% 0 0);
-    --color-success: oklch(70% 0.05 150); /* Desaturated success green */
-    --color-success-content: oklch(20% 0 0);
-    --color-warning: oklch(75% 0.08 70); /* Desaturated warning orange */
+    --color-success: oklch(60% 0.15 150); /* A fresh green */
+    --color-success-content: oklch(100% 0 0);
+    --color-warning: oklch(75% 0.15 70); /* A warm yellow */
     --color-warning-content: oklch(20% 0 0);
-    --color-error: oklch(65% 0.1 10); /* Desaturated error red */
+    --color-error: oklch(65% 0.15 10); /* A soft red */
     --color-error-content: oklch(100% 0 0);
     --radius-selector: 0.25rem;
     --radius-field: 0.25rem;

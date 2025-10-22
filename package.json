@@ -10,8 +10,8 @@
   "dependencies": {
     "@ant-design/icons": "^6.1.0",
     "@meilisearch/instant-meilisearch": "^0.28.0",
-    "@tailwindcss/postcss": "^4.1.14",
-    "antd": "^5.27.5",
+    "@tailwindcss/postcss": "^4.1.15",
+    "antd": "^5.27.6",
     "axios": "^1.12.2",
     "axios-hooks": "^5.1.1",
     "dayjs": "^1.11.18",
@@ -35,7 +35,7 @@
     "daisyui": "^5.3.7",
     "oxlint": "^1.23.0",
     "stylelint": "^16",
-    "tailwindcss": "^4.1.14",
+    "tailwindcss": "^4.1.15",
     "typescript": "^5.9.3"
   }
 }

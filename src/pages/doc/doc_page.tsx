@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import { useParams } from "umi";
 import useAxios from "axios-hooks";
 import { ApiResponse } from "@/models/base";
@@ -20,18 +20,31 @@ type FilesProp = {
   files: MarkdownFile[];
   onSelectFile: (file: MarkdownFile) => void;
   currentFile: MarkdownFile | undefined;
+  scrollContainerRef: React.RefObject<HTMLDivElement>;
 };
 
 const FilesWidget: React.FC<FilesProp> = ({
   files,
   onSelectFile,
   currentFile,
+  scrollContainerRef,
 }) => {
+  const selectedRef = useRef<HTMLLIElement>(null);
+  useEffect(() => {
+    if (selectedRef.current) {
+      selectedRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [currentFile]);
+
   return (
     <ul className="space-y-1">
       {files.map((file, index) => (
         <motion.li
           key={file.id}
+          ref={currentFile?.id === file.id ? selectedRef : undefined}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: index * 0.05 }}
@@ -67,16 +80,18 @@ type Props = {
   children: DocDirectory[];
   onSelectFile: (file: MarkdownFile) => void;
   currentFile: MarkdownFile | undefined;
+  scrollContainerRef: React.RefObject<HTMLDivElement>;
 };
 
 const RenderMenu: React.FC<Props> = ({
-  children,
+  children: directories,
   onSelectFile,
   currentFile,
+  scrollContainerRef,
 }) => {
   return (
     <div className="space-y-2">
-      {children.map((child, index) => (
+      {directories.map((child, index) => (
         <motion.div
           key={child.name}
           initial={{ opacity: 0, y: 10 }}
@@ -108,14 +123,16 @@ const RenderMenu: React.FC<Props> = ({
                   currentFile={currentFile}
                   files={child.files}
                   onSelectFile={onSelectFile}
+                  scrollContainerRef={scrollContainerRef}
                 />
               )}
               {child.children && (
                 <div className="mt-3">
                   <RenderMenu
-                    children={child.children}
                     onSelectFile={onSelectFile}
                     currentFile={currentFile}
+                    children={child.children}
+                    scrollContainerRef={scrollContainerRef}
                   />
                 </div>
               )}
@@ -135,6 +152,7 @@ type Type = {
 
 const Menu: React.FC<Type> = ({ doc, onClick, selectedFile }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -225,17 +243,22 @@ const Menu: React.FC<Type> = ({ doc, onClick, selectedFile }) => {
             </div>
           </div>
 
-          <div className="h-[calc(100%-5rem)] overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent">
+          <div
+            ref={scrollContainerRef}
+            className="h-[calc(100%-5rem)] overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent"
+          >
             <div className="space-y-4">
               <FilesWidget
                 files={doc.files}
                 onSelectFile={onSelectFile}
                 currentFile={selectedFile}
+                scrollContainerRef={scrollContainerRef}
               />
               <RenderMenu
                 children={doc.children}
                 onSelectFile={onSelectFile}
                 currentFile={selectedFile}
+                scrollContainerRef={scrollContainerRef}
               />
             </div>
           </div>
@@ -370,7 +393,7 @@ const DocPage: React.FC = () => {
   }, [fileId, doc]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-base-200/30 to-base-100">
+    <div className="min-h-screen bg-linear-to-br from-base-200/30 to-base-100">
       {loading && <Loading />}
 
       {!loading && !doc && (
@@ -395,7 +418,7 @@ const DocPage: React.FC = () => {
           />
 
           {/* Main Content */}
-          <div className="ml-4 sm:ml-[2rem] mr-4 lg:mr-[2rem] p-6">
+          <div className="ml-4 sm:ml-8 mr-4 lg:mr-8 p-6">
             <div className="bg-base-100 rounded-2xl shadow-lg border border-base-200">
               {selectedFile ? (
                 <motion.div

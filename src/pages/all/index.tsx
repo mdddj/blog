@@ -51,12 +51,12 @@ export default function Page() {
                       transition={{ type: "spring", stiffness: 400 }}
                       className="flex items-center p-4 rounded-lg hover:bg-base-200 transition-colors duration-200 cursor-pointer"
                     >
-                      <div className="flex-shrink-0 w-20 text-left mr-4">
+                      <div className="shrink-0 whitespace-nowrap text-left mr-4">
                         <div className="text-sm font-mono text-base-content/60">
                           {dayjs(blog.createTime).format("YYYY-MM-DD")}
                         </div>
                       </div>
-                      <div className="flex-grow">
+                      <div className="grow">
                         <h3 className="font-medium text-base-content hover:text-primary transition-colors duration-200">
                           {blog.title}
                         </h3>
