@@ -4,7 +4,7 @@ import BlogCard from "@/components/blog";
 import LoadingWidget from "@/loading";
 
 export default function HomePage() {
-  document.title = "itbug笔记";
+  document.title = "梁典典的博客";
   const [blogs, isLoading] = blogStore(
     useShallow((state) => [state.blogs, state.isLoading]),
   );

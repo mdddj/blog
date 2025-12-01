@@ -13,7 +13,7 @@ import CompactSystemMonitor from "./system_monitor_compact";
 
 const AppbarTitle: React.FC = () => {
   const GetShowTitle = () => {
-    return "itbug笔记";
+    return "梁典典的博客";
   };
 
   const title = GetShowTitle();

@@ -73,7 +73,7 @@ export default defineConfig({
       ],
     },
   ],
-  title: "itbug笔记",
+  title: "梁典典的博客",
   npmClient: "pnpm",
   esbuildMinifyIIFE: true,
   publicPath: "/",
