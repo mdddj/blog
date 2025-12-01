@@ -13,6 +13,7 @@ import Documents from "@/components/md_header";
 import { motion } from "framer-motion";
 import { useSearchParams } from "@@/exports";
 import { Typography } from "antd";
+import { removeMdExtension } from "@/tools/string";
 
 const { Paragraph } = Typography;
 
@@ -65,7 +66,9 @@ const FilesWidget: React.FC<FilesProp> = ({
             >
               <MdSvg />
             </div>
-            <span className="truncate text-sm">{file.name}</span>
+            <span className="truncate text-sm">
+              {removeMdExtension(file.name)}
+            </span>
             {currentFile?.id === file.id && (
               <div className="ml-auto w-2 h-2 bg-primary rounded-full"></div>
             )}
@@ -238,7 +241,7 @@ const Menu: React.FC<Type> = ({ doc, onClick, selectedFile }) => {
               className="cursor-pointer group"
             >
               <h2 className="text-lg font-bold text-primary group-hover:text-primary-focus transition-colors">
-                {doc.name}
+                {removeMdExtension(doc.name)}
               </h2>
             </div>
           </div>
@@ -292,14 +295,17 @@ const DefaultView = ({
               className="cursor-pointer hover:text-primary transition-colors flex items-center gap-2 text-sm"
             >
               <MdSvg />
-              <span>{file.name}</span>
+              <span>{removeMdExtension(file.name)}</span>
             </li>
           ))}
         </ul>
         {directory.children && (
           <div className="pl-6 mt-2 space-y-2">
             {directory.children.map((childDir) => (
-              <DirectoryView key={childDir.name} directory={childDir} />
+              <DirectoryView
+                key={removeMdExtension(childDir.name)}
+                directory={childDir}
+              />
             ))}
           </div>
         )}
@@ -333,7 +339,7 @@ const DefaultView = ({
                   className="cursor-pointer hover:text-primary transition-colors flex items-center gap-2 text-sm p-2 rounded-lg hover:bg-base-200/50"
                 >
                   <MdSvg />
-                  <span>{file.name}</span>
+                  <span>{removeMdExtension(file.name)}</span>
                 </li>
               ))}
             </ul>
@@ -393,7 +399,7 @@ const DocPage: React.FC = () => {
   }, [fileId, doc]);
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-base-200/30 to-base-100">
+    <div className="min-h-screen">
       {loading && <Loading />}
 
       {!loading && !doc && (
@@ -430,7 +436,7 @@ const DocPage: React.FC = () => {
                 >
                   <div className="mb-8 pb-6 border-b border-base-200">
                     <h1 className="text-3xl font-bold mb-4 text-primary">
-                      {selectedFile.name}
+                      {removeMdExtension(selectedFile.name)}
                     </h1>
 
                     <div className="flex justify-between items-center text-sm text-base-content/70 bg-base-50 rounded-lg p-4">

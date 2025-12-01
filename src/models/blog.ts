@@ -1,26 +1,27 @@
 export interface Blog {
-  id: number;
-  title: string;
-  content: string;
-  createTime: Date;
-  category: Category;
-  author: string;
-  thumbnail: string;
-  dateString: string;
-  tags: Tag[];
-  aliasString: string;
-  html: string;
+    id: number;
+    title: string;
+    content: string;
+    createTime: Date;
+    category: Category;
+    author: string;
+    thumbnail: string;
+    dateString: string;
+    tags: Tag[];
+    aliasString: string;
+    html: string;
+    description: string | undefined
 }
 
 export interface Category {
-  id: number;
-  name: string;
-  logo: string;
-  intro: string;
-  createTime: Date;
+    id: number;
+    name: string;
+    logo: string;
+    intro: string;
+    createTime: Date;
 }
 
 export interface Tag {
-  id: number;
-  name: string;
+    id: number;
+    name: string;
 }

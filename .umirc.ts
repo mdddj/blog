@@ -73,7 +73,7 @@ export default defineConfig({
       ],
     },
   ],
-  title: "典典的博客",
+  title: "itbug笔记",
   npmClient: "pnpm",
   esbuildMinifyIIFE: true,
   publicPath: "/",
@@ -90,5 +90,12 @@ export default defineConfig({
         "欢迎来到典典博客,这里是梁典典的个人博客,专注于Flutter开发教程和心得分享。如果你对Flutter开发感兴趣,请关注梁典典的博客,获取最新的Flutter资讯和技术分享。",
     },
   ],
+  links: [
+    {
+      href: "https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.2.8/400.min.css",
+      rel: "stylesheet",
+    },
+  ],
+
   // mako: {}
 });

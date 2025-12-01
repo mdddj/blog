@@ -15,6 +15,7 @@ export const MyRewardDialog: React.FC = () => {
                 <form method="dialog">
                     <button type={'submit'} className="btn">取消</button>
                 </form>
+
             </div>
         </div>
 

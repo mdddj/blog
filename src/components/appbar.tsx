@@ -13,7 +13,7 @@ import CompactSystemMonitor from "./system_monitor_compact";
 
 const AppbarTitle: React.FC = () => {
   const GetShowTitle = () => {
-    return "典典博客";
+    return "itbug笔记";
   };
 
   const title = GetShowTitle();
@@ -54,7 +54,7 @@ export default function AppBar() {
   const docs = categoryStore((state) => state.data?.ideaDocs) ?? [];
   const showShadow = useScrollShadow(10);
   useEffect(() => {
-    const unListen = history.listen(() => {});
+    const unListen = history.listen(() => { });
 
     return () => {
       unListen();

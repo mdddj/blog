@@ -6,7 +6,7 @@ const Foot: React.FC = () => {
     return <>
         <footer className="footer footer-center p-4 xl:text-base text-base-content flex-none text-sm">
             <div>
-                <p>Copyright © 2024 - All right reserved by 典典博客 Ltd</p>
+                <p>Copyright © 2025 - All right reserved by itbug笔记 Ltd</p>
                 <p className={'flex flex-wrap items-center justify-center xl:gap-3 gap-1 mb-5'}>
                     <a href={"https://github.com/mdddj"} rel={'noreferrer'} target={"_blank"}
                         className={'hidden xl:inline'}

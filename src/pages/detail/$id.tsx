@@ -4,7 +4,6 @@ import { blogStore } from "@/providers/blog";
 import CardTitle from "@/components/title";
 import MarkdownComponent from "@/components/markdown";
 import { fromNow } from "@/tools/date";
-import BackSvg from "@/components/back_svg";
 import ApiSvg from "@/components/api_svg";
 import Documents from "@/components/md_header";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,6 +11,7 @@ import CategoryHover from "@/components/category_hover";
 import { Blog } from "@/models/blog";
 import HoverCategoryHeader from "@/components/hover_category_herder";
 import HoverTagHeader from "@/components/hover_tag_header";
+import { EditableMarkdownComponent } from "@/components";
 
 export default function Page() {
   const params = useParams<{ id: string }>();
@@ -38,7 +38,7 @@ export default function Page() {
       const scrolled = window.scrollY > 100;
       const progress = Math.min(
         window.scrollY /
-          (document.documentElement.scrollHeight - window.innerHeight),
+        (document.documentElement.scrollHeight - window.innerHeight),
         1,
       );
 
@@ -82,7 +82,7 @@ export default function Page() {
           className=" from-base-100 to-base-50 rounded-3xl shadow-2xl border border-base-200/50 overflow-hidden"
         >
           {/* 装饰性顶部条 */}
-          <div className="h-1 bg-gradient-to-r from-primary via-secondary to-accent"></div>
+          <div className="h-1 bg-linear-to-r from-primary via-secondary to-accent"></div>
 
           <div className="p-8 lg:p-12">
             {/* 标题部分 */}
@@ -97,7 +97,7 @@ export default function Page() {
               {/* 作者和发布时间 */}
               <div className="mt-6 flex flex-wrap items-center gap-4 text-base-content/70">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center shadow-lg">
+                  <div className="w-10 h-10 rounded-full bg-linear-to-r from-primary to-secondary flex items-center justify-center shadow-lg">
                     <span className="text-sm font-bold text-primary-content">
                       {blog.author.charAt(0)}
                     </span>
@@ -157,7 +157,7 @@ export default function Page() {
                 >
                   <motion.div
                     whileHover={{ scale: 1.05 }}
-                    className="flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full border border-primary/20 shadow-md hover:shadow-lg transition-all duration-300"
+                    className="flex items-center gap-3 px-4 py-2 bg-linear-to-r from-primary/10 to-secondary/10 rounded-full border border-primary/20 shadow-md hover:shadow-lg transition-all duration-300"
                   >
                     <div className="w-6 h-6 rounded-full overflow-hidden ring-2 ring-primary/30">
                       <img
@@ -179,7 +179,7 @@ export default function Page() {
                   rel="noreferrer"
                   target="_blank"
                   href={`https://manager.itbug.shop/blog/add?update=${blog.id}`}
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-accent/10 to-accent/5 text-accent hover:from-accent/20 hover:to-accent/10 rounded-xl border border-accent/20 transition-all duration-300 hover:shadow-lg"
+                  className="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-accent/10 to-accent/5 text-accent hover:from-accent/20 hover:to-accent/10 rounded-xl border border-accent/20 transition-all duration-300 hover:shadow-lg"
                 >
                   <svg
                     className="w-4 h-4"
@@ -219,6 +219,7 @@ export default function Page() {
                   </span>
                   {blog.tags.map((tag, index) => (
                     <CategoryHover
+                      key={tag.id}
                       getBlogsByCategory={function ():
                         | Promise<Blog[]>
                         | Blog[] {
@@ -293,7 +294,7 @@ export default function Page() {
             {/* 主操作容器 */}
             <div className="relative">
               {/* 背景装饰 */}
-              <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-secondary/5 rounded-3xl blur-xl transform scale-110" />
+              <div className="absolute inset-0 bg-linear-to-b from-primary/5 to-secondary/5 rounded-3xl blur-xl transform scale-110" />
 
               <div className="relative flex flex-col gap-3 p-3 bg-white/10 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl">
                 {/* 返回按钮 */}
@@ -312,9 +313,9 @@ export default function Page() {
                     }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => nav(-1)}
-                    className="relative group w-14 h-14 rounded-2xl bg-gradient-to-br from-primary via-primary to-primary-focus text-white shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden"
+                    className="relative group w-14 h-14 rounded-2xl bg-linear-to-br from-primary via-primary to-primary-focus text-white shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-linear-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <svg
                       className="w-6 h-6"
                       fill="none"
@@ -349,9 +350,9 @@ export default function Page() {
                     rel="noreferrer"
                     target="_blank"
                     href={`https://api.itbug.shop/api/blog/get/${params?.id}`}
-                    className="relative group w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary via-secondary to-secondary-focus text-white shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden"
+                    className="relative group w-14 h-14 rounded-2xl bg-linear-to-br from-secondary via-secondary to-secondary-focus text-white shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-linear-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <ApiSvg />
                   </motion.a>
                 </motion.div>
@@ -371,13 +372,12 @@ export default function Page() {
                     }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setShowTOC(!showTOC)}
-                    className={`relative group w-14 h-14 rounded-2xl bg-gradient-to-br shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden ${
-                      showTOC
-                        ? "from-error via-error to-error-focus text-white"
-                        : "from-accent via-accent to-accent-focus text-white"
-                    }`}
+                    className={`relative group w-14 h-14 rounded-2xl bg-linear-to-br shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden ${showTOC
+                      ? "from-error via-error to-error-focus text-white"
+                      : "from-accent via-accent to-accent-focus text-white"
+                      }`}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-linear-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <motion.svg
                       className="w-6 h-6"
                       fill="none"
@@ -417,9 +417,9 @@ export default function Page() {
                     onClick={() =>
                       window.scrollTo({ top: 0, behavior: "smooth" })
                     }
-                    className="relative group w-14 h-14 rounded-2xl bg-gradient-to-br from-info via-info to-info-focus text-white shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden"
+                    className="relative group w-14 h-14 rounded-2xl bg-linear-to-br from-info via-info to-info-focus text-white shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-linear-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <svg
                       className="w-6 h-6"
                       fill="none"
@@ -460,9 +460,9 @@ export default function Page() {
                         navigator.clipboard.writeText(window.location.href);
                       }
                     }}
-                    className="relative group w-14 h-14 rounded-2xl bg-gradient-to-br from-success via-success to-success-focus text-white shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden"
+                    className="relative group w-14 h-14 rounded-2xl bg-linear-to-br from-success via-success to-success-focus text-white shadow-lg flex items-center justify-center transition-all duration-300 overflow-hidden"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-linear-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <svg
                       className="w-6 h-6"
                       fill="none"
@@ -486,7 +486,7 @@ export default function Page() {
                   transition={{ delay: 0.6 }}
                   className="relative mx-auto mt-2"
                 >
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-base-200/50 to-base-300/50 flex items-center justify-center backdrop-blur-sm border border-white/10">
+                  <div className="w-12 h-12 rounded-full bg-linear-to-br from-base-200/50 to-base-300/50 flex items-center justify-center backdrop-blur-sm border border-white/10">
                     <div className="relative w-8 h-8">
                       <svg
                         className="w-8 h-8 transform -rotate-90"
@@ -541,7 +541,7 @@ export default function Page() {
             <div className="from-base-100 to-base-50 rounded-2xl shadow-2xl border border-base-200/50 backdrop-blur-sm overflow-hidden">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  <h3 className="text-lg font-semibold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
                     目录导航
                   </h3>
                   <motion.button
@@ -621,11 +621,10 @@ export default function Page() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setShowTOC(!showTOC)}
-                  className={`w-12 h-12 rounded-full backdrop-blur-2xl border border-white/20 shadow-xl flex items-center justify-center transition-colors ${
-                    showTOC
-                      ? "bg-error/80 text-white"
-                      : "bg-white/10 text-base-content"
-                  }`}
+                  className={`w-12 h-12 rounded-full backdrop-blur-2xl border border-white/20 shadow-xl flex items-center justify-center transition-colors ${showTOC
+                    ? "bg-error/80 text-white"
+                    : "bg-white/10 text-base-content"
+                    }`}
                 >
                   <motion.svg
                     className="w-5 h-5"
@@ -656,7 +655,7 @@ export default function Page() {
                 className="relative"
               >
                 {/* 装饰光环 */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary rounded-full blur-lg opacity-30 animate-pulse" />
+                <div className="absolute inset-0 bg-linear-to-r from-primary via-secondary to-primary rounded-full blur-lg opacity-30 animate-pulse" />
 
                 <motion.button
                   whileHover={{
@@ -665,7 +664,7 @@ export default function Page() {
                   }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => nav(-1)}
-                  className="relative w-16 h-16 rounded-full bg-gradient-to-br from-primary via-primary to-primary-focus text-white shadow-2xl flex items-center justify-center border-2 border-white/20 backdrop-blur-sm"
+                  className="relative w-16 h-16 rounded-full bg-linear-to-br from-primary via-primary to-primary-focus text-white shadow-2xl flex items-center justify-center border-2 border-white/20 backdrop-blur-sm"
                 >
                   <svg
                     className="w-7 h-7"
@@ -718,7 +717,7 @@ export default function Page() {
 
       {/* 增强滚动进度条 */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent origin-left z-50 shadow-lg"
+        className="fixed top-0 left-0 right-0 h-1 bg-linear-to-r from-primary via-secondary to-accent origin-left z-50 shadow-lg"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: scrollProgress }}
         transition={{ duration: 0.1 }}
@@ -733,7 +732,7 @@ export default function Page() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="fixed top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent z-49"
+          className="fixed top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-primary/50 to-transparent z-49"
         />
       )}
     </div>

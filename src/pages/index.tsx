@@ -3,17 +3,16 @@ import { useShallow } from "zustand/react/shallow";
 import BlogCard from "@/components/blog";
 import LoadingWidget from "@/loading";
 
-
 export default function HomePage() {
-  document.title = "典典博客";
+  document.title = "itbug笔记";
   const [blogs, isLoading] = blogStore(
-    useShallow((state) => [state.blogs, state.isLoading])
+    useShallow((state) => [state.blogs, state.isLoading]),
   );
   return (
     <>
       {isLoading && (
         <div className="text-center">
-          <LoadingWidget/>
+          <LoadingWidget />
         </div>
       )}
       {blogs.length > 0 && (
@@ -23,7 +22,7 @@ export default function HomePage() {
           })}
         </div>
       )}
-            {/*<BeianInfo />*/}
+      {/*<BeianInfo />*/}
     </>
   );
 }

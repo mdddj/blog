@@ -91,8 +91,16 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
             {blog.title}
           </h4>
 
+          <p className="
+            mt-2 text-base-content/70 text-sm
+            line-clamp-2
+            group-hover:text-base-content/90 transition-colors duration-300
+            ">
+            {blog.description}
+          </p>
+
           {/* 发布信息 */}
-          <div className="flex items-center gap-2 text-sm text-base-content/60">
+          <div className="flex items-center gap-2 text-sm text-base-content/60 mt-4">
             <div className="flex items-center gap-1.5">
               <div className="w-6 h-6 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
                 <span className="text-xs font-bold text-primary-content">
