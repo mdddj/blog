@@ -85,7 +85,7 @@ const ResourceCard: React.FC<Prop> = ({ item }) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         whileHover={{ y: -2 }}
-        className="bg-base-100 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-base-300/20 overflow-hidden cursor-pointer"
+        className="bg-base-100 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-[var(--transition-slow)] border border-base-300/20 overflow-hidden cursor-pointer"
         onClick={handleCardClick}
       >
         {/* 用户信息头部 */}
@@ -158,7 +158,7 @@ const ResourceCard: React.FC<Prop> = ({ item }) => {
                   }}
                 >
                   <img
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-[var(--transition-slow)] group-hover:scale-105"
                     src={image.url}
                     alt={`图片 ${index + 1}`}
                     loading="lazy"
@@ -179,7 +179,7 @@ const ResourceCard: React.FC<Prop> = ({ item }) => {
                   )}
 
                   {/* 悬停遮罩 */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-[var(--transition-normal)]" />
                 </motion.div>
               ))}
             </div>

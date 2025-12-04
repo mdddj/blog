@@ -27,7 +27,7 @@ const LinkItemLayout: React.FC<{ link: FriendLink }> = ({ link }) => {
                             href={link.url}
                             target={'_blank'}
                             rel={'noreferrer'}
-                            className={'link link-hover hover:text-primary transition-colors duration-300'}
+                            className={'link link-hover hover:text-primary transition-colors duration-[var(--transition-slow)]'}
                         >
                             {link.name}
                         </a>

@@ -131,7 +131,7 @@ function popupImagePlugin(md: MarkdownIt) {
 // Alert 块级规则：::: type 内容 :::
 // 支持类型：info, warning, error, success, tip, note, danger
 function alertPlugin(md: MarkdownIt) {
-  // daisyUI 5 alert 配置：使用 alert-soft 样式 + SVG 图标
+  // Glass-based alert 配置：使用 alert-soft 样式 + SVG 图标
   const alertTypes: Record<string, { icon: string; className: string }> = {
     info: {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current w-6 h-6 shrink-0"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
@@ -249,7 +249,7 @@ const ImagePreviewModal: React.FC<{
           className="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain"
         />
         <button
-          className="absolute -top-3 -right-3 btn btn-circle btn-sm btn-error"
+          className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-[var(--color-destructive)] text-[var(--color-destructive-foreground)] flex items-center justify-center text-sm font-bold hover:opacity-90 transition-opacity"
           onClick={onClose}
         >
           ✕

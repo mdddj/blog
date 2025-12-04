@@ -1,0 +1,204 @@
+# Implementation Plan
+
+- [x] 1. 项目基础设施搭建
+  - [x] 1.1 安装和配置 shadcn/ui
+    - 安装 shadcn/ui CLI 和依赖
+    - 配置 components.json
+    - 设置 tailwind.config.ts 兼容 shadcn
+    - 创建 lib/utils.ts 工具函数
+    - _Requirements: 10.1_
+  - [x] 1.2 创建液态玻璃主题系统
+    - 创建 styles/glass.css 定义玻璃效果 CSS 变量
+    - 更新 src/main.css 移除 DaisyUI 配置
+    - 定义 oklch 色彩系统变量
+    - 配置明暗主题切换变量
+    - _Requirements: 1.1, 1.2, 1.3, 8.1, 8.2, 8.3_
+  - [ ]* 1.3 编写属性测试：玻璃效果样式验证
+    - **Property 1: Glass elements have valid blur values**
+    - **Property 2: Glass backgrounds have valid transparency**
+    - **Property 3: Glass borders are correctly styled**
+    - **Validates: Requirements 1.1, 1.2, 1.3**
+
+- [x] 2. 玻璃基础组件开发
+  - [x] 2.1 安装 shadcn/ui 基础组件
+    - 安装 Button, Input, DropdownMenu, Dialog 组件
+    - _Requirements: 10.2, 10.3, 10.4_
+  - [x] 2.2 创建 GlassPanel 组件
+    - 实现可配置的 blur、opacity、border 属性
+    - 支持 sm/md/lg/xl 四种模糊级别
+    - _Requirements: 1.1, 1.2, 1.3_
+  - [x] 2.3 创建 GlassCard 组件
+    - 基于 GlassPanel 封装卡片样式
+    - 实现悬停动画效果
+    - _Requirements: 3.1, 3.2_
+  - [x] 2.4 创建 GlassButton 组件
+    - 扩展 shadcn Button 添加玻璃变体
+    - 实现悬停和点击效果
+    - _Requirements: 10.2_
+  - [ ]* 2.5 编写属性测试：shadcn 组件玻璃样式
+    - **Property 23: shadcn component glass styling**
+    - **Validates: Requirements 10.2, 10.3, 10.4**
+
+- [x] 3. Checkpoint - 确保所有测试通过
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [x] 4. 导航栏重构
+  - [x] 4.1 创建 useScroll hook
+    - 实现滚动位置监听
+    - 提供滚动状态（是否超过阈值）
+    - _Requirements: 2.1, 2.2_
+  - [x] 4.2 重构 Navbar 组件
+    - 实现透明到毛玻璃的过渡效果
+    - 限制高度为 56px
+    - 精简导航项布局
+    - _Requirements: 2.1, 2.2, 2.3, 2.4_
+  - [x] 4.3 实现移动端导航菜单
+    - 创建汉堡菜单按钮
+    - 实现全屏玻璃覆盖层菜单
+    - _Requirements: 2.5_
+  - [ ]* 4.4 编写属性测试：导航栏行为
+    - **Property 4: Navbar scroll state transition**
+    - **Property 5: Navbar height constraint**
+    - **Property 6: Navigation hover effects**
+    - **Validates: Requirements 2.1, 2.2, 2.3, 2.4**
+
+- [x] 5. 博客卡片重构
+  - [x] 5.1 重构 BlogCard 组件
+    - 使用 GlassCard 作为基础
+    - 实现精简布局（标题2行、描述1行）
+    - 限制内容高度为 120px
+    - _Requirements: 3.1, 3.3_
+  - [x] 5.2 实现标签截断逻辑
+    - 最多显示 3 个标签
+    - 超出时显示 +N 指示器
+    - _Requirements: 3.4_
+  - [x] 5.3 实现卡片悬停动画
+    - translateY(-4px) 上浮效果
+    - 玻璃光泽度增强
+    - _Requirements: 3.2_
+  - [ ]* 5.4 编写属性测试：博客卡片
+    - **Property 7: Blog card dimensions**
+    - **Property 8: Blog card hover transform**
+    - **Property 9: Blog card content structure**
+    - **Validates: Requirements 3.1, 3.2, 3.3, 3.4**
+
+- [x] 6. Checkpoint - 确保所有测试通过
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [x] 7. 首页重构
+  - [x] 7.1 更新首页布局
+    - 使用新的 BlogCard 组件
+    - 实现列表项渐入动画
+    - _Requirements: 7.2_
+  - [x] 7.2 实现加载状态
+    - 创建玻璃风格的加载骨架屏
+    - _Requirements: 7.1_
+  - [ ]* 7.3 编写属性测试：列表动画
+    - **Property 19: List item staggered animation**
+    - **Validates: Requirements 7.2**
+
+- [x] 8. 文章详情页重构
+  - [x] 8.1 重构文章头部
+    - 实现玻璃风格的元信息区域
+    - 显示作者、日期、分类、标签
+    - _Requirements: 4.2_
+  - [x] 8.2 重构文章内容区域
+    - 设置 max-width: 720px
+    - 设置 line-height: 1.75
+    - 优化排版样式
+    - _Requirements: 4.1_
+  - [x] 8.3 实现阅读进度条
+    - 顶部固定细线进度指示器
+    - 根据滚动位置动态更新
+    - _Requirements: 4.3_
+  - [x] 8.4 重构浮动操作按钮
+    - 使用玻璃风格按钮
+    - 滚动后显示在左侧
+    - _Requirements: 4.5_
+  - [x] 8.5 重构目录侧边栏
+    - 玻璃面板样式
+    - 仅在 >1280px 屏幕显示
+    - _Requirements: 4.4_
+  - [ ]* 8.6 编写属性测试：文章视图
+    - **Property 10: Article container width**
+    - **Property 11: Article metadata completeness**
+    - **Property 12: Reading progress indicator**
+    - **Property 13: Floating actions visibility**
+    - **Validates: Requirements 4.1, 4.2, 4.3, 4.5**
+
+- [x] 9. Checkpoint - 确保所有测试通过
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [x] 10. 页脚重构
+  - [x] 10.1 重构 Footer 组件
+    - 使用玻璃面板样式
+    - 限制高度为 80px
+    - 单行紧凑布局
+    - _Requirements: 5.1, 5.2_
+  - [x] 10.2 实现链接悬停效果
+    - 玻璃光晕效果
+    - 150ms 过渡动画
+    - _Requirements: 5.3_
+  - [ ]* 10.3 编写属性测试：页脚
+    - **Property 14: Footer structure and dimensions**
+    - **Property 15: Footer link hover effects**
+    - **Validates: Requirements 5.1, 5.2, 5.3**
+
+- [x] 11. 搜索功能重构
+  - [x] 11.1 创建 SearchModal 组件
+    - 使用 shadcn Dialog 组件
+    - 全屏玻璃遮罩效果
+    - 居中搜索输入框
+    - _Requirements: 9.1_
+  - [x] 11.2 重构搜索结果展示
+    - 玻璃卡片样式的结果项
+    - 显示标题和摘要
+    - _Requirements: 9.2, 9.3_
+  - [ ]* 11.3 编写属性测试：搜索功能
+    - **Property 22: Search results rendering**
+    - **Validates: Requirements 9.2, 9.3**
+
+- [x] 12. 响应式优化
+  - [x] 12.1 实现移动端玻璃效果优化
+    - 减少 <768px 屏幕的模糊值
+    - 优化性能
+    - _Requirements: 6.1_
+  - [x] 12.2 确保触摸目标尺寸
+    - 所有交互元素最小 44px
+    - _Requirements: 6.2_
+  - [x] 12.3 优化移动端博客卡片
+    - 单列布局
+    - 减少内边距
+    - _Requirements: 6.3_
+  - [ ]* 12.4 编写属性测试：响应式行为
+    - **Property 16: Mobile blur optimization**
+    - **Property 17: Touch target minimum size**
+    - **Validates: Requirements 6.1, 6.2**
+
+- [x] 13. 动画与过渡优化
+  - [x] 13.1 统一过渡时间
+    - 确保所有过渡在 150ms-300ms 范围内
+    - _Requirements: 7.1_
+  - [x] 13.2 实现主题切换过渡
+    - 颜色属性 300ms 平滑过渡
+    - _Requirements: 8.4_
+  - [ ]* 13.3 编写属性测试：动画与过渡
+    - **Property 18: Transition duration bounds**
+    - **Property 21: Theme transition smoothness**
+    - **Validates: Requirements 7.1, 8.4**
+
+- [x] 14. 清理与优化
+  - [x] 14.1 移除 DaisyUI 依赖
+    - 从 package.json 移除 daisyui
+    - 清理相关配置
+    - _Requirements: 10.1_
+  - [x] 14.2 清理未使用的组件和样式
+    - 删除旧组件文件
+    - 清理未使用的 CSS
+    - _Requirements: 10.1_
+  - [ ]* 14.3 编写属性测试：色彩系统
+    - **Property 20: Color space consistency**
+    - **Validates: Requirements 8.1**
+
+- [x] 15. Final Checkpoint - 确保所有测试通过
+  - Ensure all tests pass, ask the user if questions arise.

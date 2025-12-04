@@ -1,0 +1,800 @@
+/* Liquid Glass Design System
+ * Based on macOS 26 "Liquid Glass" design language
+ * Implements glassmorphism with dynamic blur, transparency, and depth
+ */
+
+/* ============================================
+   Glass Effect Variables
+   ============================================ */
+
+:root {
+  /* Blur levels (8px - 24px as per Requirements 1.1) */
+  --glass-blur-sm: 8px;
+  --glass-blur-md: 12px;
+  --glass-blur-lg: 16px;
+  --glass-blur-xl: 24px;
+
+  /* Transparency levels (0.1 - 0.8 as per Requirements 1.2) */
+  --glass-opacity-light: 0.1;
+  --glass-opacity-medium: 0.3;
+  --glass-opacity-heavy: 0.5;
+  --glass-opacity-solid: 0.8;
+
+  /* Border styles (1px borders as per Requirements 1.3) */
+  --glass-border-width: 1px;
+  --glass-border-light: oklch(100% 0 0 / 0.2);
+  --glass-border-dark: oklch(0% 0 0 / 0.1);
+
+  /* Shadow for depth perception */
+  --glass-shadow-sm: 0 2px 8px oklch(0% 0 0 / 0.05);
+  --glass-shadow-md: 0 4px 16px oklch(0% 0 0 / 0.08);
+  --glass-shadow-lg: 0 8px 32px oklch(0% 0 0 / 0.12);
+
+  /* Transition durations (150ms - 300ms as per Requirements 7.1) */
+  --glass-transition-fast: 150ms;
+  --glass-transition-normal: 200ms;
+  --glass-transition-slow: 300ms;
+
+  /* Layout constraints */
+  --navbar-height: 56px;
+  --footer-height: 80px;
+  --article-max-width: 720px;
+  --card-content-height: 120px;
+}
+
+/* ============================================
+   Light Theme (Requirements 8.2)
+   Warm neutral tones with subtle blue-purple accents
+   ============================================ */
+
+:root,
+[data-theme="light"] {
+  /* Base colors using oklch color space (Requirements 8.1) */
+  --color-background: oklch(98% 0.005 270);
+  --color-foreground: oklch(15% 0.01 270);
+  
+  /* Surface colors for glass panels */
+  --color-surface: oklch(100% 0 0);
+  --color-surface-elevated: oklch(99% 0.003 270);
+  
+  /* Muted colors */
+  --color-muted: oklch(95% 0.01 270);
+  --color-muted-foreground: oklch(45% 0.02 270);
+  
+  /* Accent colors - subtle blue-purple */
+  --color-primary: oklch(55% 0.15 260);
+  --color-primary-foreground: oklch(100% 0 0);
+  
+  --color-secondary: oklch(65% 0.08 280);
+  --color-secondary-foreground: oklch(20% 0.02 270);
+  
+  --color-accent: oklch(70% 0.12 300);
+  --color-accent-foreground: oklch(20% 0.02 270);
+
+  /* Border colors */
+  --color-border: oklch(90% 0.01 270);
+  --color-border-hover: oklch(85% 0.02 270);
+
+  /* Glass-specific colors */
+  --glass-bg: oklch(100% 0 0 / var(--glass-opacity-medium));
+  --glass-bg-hover: oklch(100% 0 0 / var(--glass-opacity-heavy));
+  --glass-border: var(--glass-border-light);
+  --glass-highlight: oklch(100% 0 0 / 0.5);
+
+  /* Card colors */
+  --color-card: oklch(100% 0 0);
+  --color-card-foreground: oklch(15% 0.01 270);
+
+  /* Input colors */
+  --color-input: oklch(95% 0.01 270);
+  --color-ring: oklch(55% 0.15 260);
+
+  /* Destructive colors */
+  --color-destructive: oklch(55% 0.2 25);
+  --color-destructive-foreground: oklch(100% 0 0);
+}
+
+/* ============================================
+   Dark Theme (Requirements 8.3)
+   Deep neutral backgrounds with luminous glass effects
+   ============================================ */
+
+[data-theme="dark"] {
+  /* Base colors using oklch color space */
+  --color-background: oklch(12% 0.01 270);
+  --color-foreground: oklch(95% 0.005 270);
+  
+  /* Surface colors for glass panels */
+  --color-surface: oklch(18% 0.01 270);
+  --color-surface-elevated: oklch(22% 0.015 270);
+  
+  /* Muted colors */
+  --color-muted: oklch(25% 0.01 270);
+  --color-muted-foreground: oklch(65% 0.02 270);
+  
+  /* Accent colors - preserved from light theme */
+  --color-primary: oklch(65% 0.15 260);
+  --color-primary-foreground: oklch(10% 0.01 270);
+  
+  --color-secondary: oklch(55% 0.08 280);
+  --color-secondary-foreground: oklch(95% 0.005 270);
+  
+  --color-accent: oklch(70% 0.12 300);
+  --color-accent-foreground: oklch(10% 0.01 270);
+
+  /* Border colors */
+  --color-border: oklch(30% 0.01 270);
+  --color-border-hover: oklch(40% 0.02 270);
+
+  /* Glass-specific colors - luminous effect */
+  --glass-bg: oklch(20% 0.01 270 / var(--glass-opacity-medium));
+  --glass-bg-hover: oklch(25% 0.015 270 / var(--glass-opacity-heavy));
+  --glass-border: var(--glass-border-dark);
+  --glass-highlight: oklch(100% 0 0 / 0.1);
+
+  /* Card colors */
+  --color-card: oklch(18% 0.01 270);
+  --color-card-foreground: oklch(95% 0.005 270);
+
+  /* Input colors */
+  --color-input: oklch(25% 0.01 270);
+  --color-ring: oklch(65% 0.15 260);
+
+  /* Destructive colors */
+  --color-destructive: oklch(60% 0.2 25);
+  --color-destructive-foreground: oklch(100% 0 0);
+}
+
+/* ============================================
+   Theme Transition (Requirements 8.4)
+   Smooth 300ms transition for theme switching
+   ============================================ */
+
+:root {
+  color-scheme: light dark;
+  
+  /* Unified transition duration variables (Requirements 7.1)
+   * All transitions MUST be between 150ms and 300ms */
+  --transition-fast: 150ms;
+  --transition-normal: 200ms;
+  --transition-slow: 300ms;
+  
+  /* Theme transition duration - 300ms for color properties (Requirements 8.4) */
+  --transition-theme: 300ms;
+}
+
+/* Global theme transition for color-related properties (Requirements 8.4)
+ * Ensures smooth 300ms transition when switching themes */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: var(--transition-theme);
+  transition-timing-function: ease-out;
+}
+
+/* Disable transitions for elements that shouldn't animate */
+*:where([data-no-transition]),
+*:where([data-no-transition]) * {
+  transition: none !important;
+}
+
+/* Disable theme transitions during initial page load to prevent flash */
+html:not([data-theme-ready]) * {
+  transition: none !important;
+}
+
+/* ============================================
+   Glass Utility Classes
+   ============================================ */
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-md));
+  -webkit-backdrop-filter: blur(var(--glass-blur-md));
+  border: var(--glass-border-width) solid var(--glass-border);
+  box-shadow: var(--glass-shadow-md);
+}
+
+.glass-sm {
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+}
+
+.glass-md {
+  backdrop-filter: blur(var(--glass-blur-md));
+  -webkit-backdrop-filter: blur(var(--glass-blur-md));
+}
+
+.glass-lg {
+  backdrop-filter: blur(var(--glass-blur-lg));
+  -webkit-backdrop-filter: blur(var(--glass-blur-lg));
+}
+
+.glass-xl {
+  backdrop-filter: blur(var(--glass-blur-xl));
+  -webkit-backdrop-filter: blur(var(--glass-blur-xl));
+}
+
+/* Glass hover effect */
+.glass-hover:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--color-border-hover);
+}
+
+/* Glass highlight effect for navigation items (Requirements 2.3)
+ * Uses 150ms transition as per Requirements 7.1 */
+.glass-highlight {
+  position: relative;
+}
+
+.glass-highlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--glass-highlight);
+  opacity: 0;
+  transition: opacity var(--transition-fast) ease-out;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.glass-highlight:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   Mobile Optimizations (Requirements 6.1, 6.2, 6.3)
+   Reduced blur values for performance
+   Touch target minimum size: 44px
+   ============================================ */
+
+@media (max-width: 767px) {
+  :root {
+    /* Reduced blur values for mobile performance (Requirements 6.1) */
+    --glass-blur-sm: 4px;
+    --glass-blur-md: 8px;
+    --glass-blur-lg: 12px;
+    --glass-blur-xl: 16px;
+
+    /* Reduced shadow intensity for mobile */
+    --glass-shadow-sm: 0 1px 4px oklch(0% 0 0 / 0.03);
+    --glass-shadow-md: 0 2px 8px oklch(0% 0 0 / 0.05);
+    --glass-shadow-lg: 0 4px 16px oklch(0% 0 0 / 0.08);
+
+    /* Minimum touch target size (Requirements 6.2) */
+    --touch-target-min: 44px;
+
+    /* Reduced card padding for mobile (Requirements 6.3) */
+    --card-padding-mobile: 12px;
+  }
+
+  /* Ensure all interactive elements meet minimum touch target size */
+  button,
+  [role="button"],
+  a,
+  input,
+  select,
+  textarea,
+  [tabindex]:not([tabindex="-1"]) {
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+  }
+
+  /* Exception for inline links within text */
+  p a,
+  span a,
+  li a:not(.nav-link) {
+    min-height: auto;
+    min-width: auto;
+  }
+
+  /* Optimize glass rendering on mobile */
+  .glass,
+  [data-slot="glass-panel"],
+  [data-slot="glass-card"] {
+    /* Use will-change sparingly for performance */
+    will-change: auto;
+    /* Reduce paint complexity */
+    transform: translateZ(0);
+  }
+
+  /* Disable heavy hover effects on touch devices */
+  @media (hover: none) {
+    .glass-hover:hover,
+    .glass-highlight:hover::before {
+      background: inherit;
+      opacity: inherit;
+    }
+  }
+}
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   Unified Transition Utilities (Requirements 7.1)
+   All transitions between 150ms and 300ms
+   ============================================ */
+
+/* Fast transitions (150ms) - for hover effects, highlights */
+.transition-fast {
+  transition-duration: var(--transition-fast) !important;
+}
+
+/* Normal transitions (200ms) - for most UI interactions */
+.transition-normal {
+  transition-duration: var(--transition-normal) !important;
+}
+
+/* Slow transitions (300ms) - for theme changes, major state changes */
+.transition-slow {
+  transition-duration: var(--transition-slow) !important;
+}
+
+/* Combined transition utilities with timing function */
+.transition-glass {
+  transition-property: background-color, border-color, color, opacity, transform, box-shadow;
+  transition-duration: var(--transition-normal);
+  transition-timing-function: ease-out;
+}
+
+.transition-glass-fast {
+  transition-property: background-color, border-color, color, opacity, transform, box-shadow;
+  transition-duration: var(--transition-fast);
+  transition-timing-function: ease-out;
+}
+
+.transition-glass-slow {
+  transition-property: background-color, border-color, color, opacity, transform, box-shadow;
+  transition-duration: var(--transition-slow);
+  transition-timing-function: ease-out;
+}
+
+
+/* ============================================
+   DaisyUI Replacement Utility Classes
+   These classes replace DaisyUI components with
+   glass-based styling for consistency
+   ============================================ */
+
+/* Base Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition-property: background-color, border-color, color, opacity, transform, box-shadow;
+  transition-duration: var(--transition-normal);
+  transition-timing-function: ease-out;
+  border: 1px solid transparent;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  color: var(--color-foreground);
+}
+
+.btn:hover {
+  background: var(--glass-bg-hover);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Button Variants */
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background: oklch(from var(--color-primary) calc(l - 0.05) c h);
+}
+
+.btn-secondary {
+  background: var(--color-secondary);
+  color: var(--color-secondary-foreground);
+  border-color: var(--color-secondary);
+}
+
+.btn-secondary:hover {
+  background: oklch(from var(--color-secondary) calc(l - 0.05) c h);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  backdrop-filter: none;
+}
+
+.btn-ghost:hover {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-sm));
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--color-border);
+  backdrop-filter: none;
+}
+
+.btn-outline:hover {
+  background: var(--glass-bg);
+  border-color: var(--color-border-hover);
+  backdrop-filter: blur(var(--glass-blur-sm));
+}
+
+.btn-error {
+  background: var(--color-destructive);
+  color: var(--color-destructive-foreground);
+  border-color: var(--color-destructive);
+}
+
+/* Button Sizes */
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  min-height: 2rem;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  min-height: 3rem;
+}
+
+.btn-circle {
+  border-radius: 9999px;
+  padding: 0.5rem;
+  aspect-ratio: 1;
+}
+
+/* Badge Styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  border-radius: 9999px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  border: 1px solid var(--glass-border);
+  color: var(--color-foreground);
+}
+
+.badge-primary {
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border-color: var(--color-primary);
+}
+
+.badge-secondary {
+  background: var(--color-secondary);
+  color: var(--color-secondary-foreground);
+  border-color: var(--color-secondary);
+}
+
+.badge-outline {
+  background: transparent;
+  border-color: var(--color-border);
+}
+
+.badge-sm {
+  padding: 0.0625rem 0.375rem;
+  font-size: 0.625rem;
+}
+
+.badge-lg {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: oklch(0% 0 0 / 0.5);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+}
+
+.modal[open] {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--color-surface);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  max-width: 32rem;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--glass-shadow-lg);
+  border: 1px solid var(--glass-border);
+}
+
+.modal-action {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: transparent;
+}
+
+/* Card Styles */
+.card {
+  background: var(--color-card);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: var(--glass-shadow-md);
+  border: 1px solid var(--glass-border);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+  color: var(--color-card-foreground);
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Menu Styles */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem;
+}
+
+.menu-horizontal {
+  flex-direction: row;
+}
+
+.menu-sm {
+  font-size: 0.875rem;
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  min-height: var(--navbar-height);
+}
+
+.navbar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Alert Styles (Glass-based replacement for DaisyUI alerts) */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur-md));
+  -webkit-backdrop-filter: blur(var(--glass-blur-md));
+  border: 1px solid var(--glass-border);
+}
+
+.alert-soft {
+  background: var(--glass-bg);
+}
+
+.alert-info {
+  border-color: oklch(65% 0.15 230 / 0.3);
+  background: oklch(65% 0.15 230 / 0.1);
+}
+
+.alert-info svg {
+  color: oklch(65% 0.15 230);
+}
+
+.alert-warning {
+  border-color: oklch(75% 0.15 85 / 0.3);
+  background: oklch(75% 0.15 85 / 0.1);
+}
+
+.alert-warning svg {
+  color: oklch(75% 0.15 85);
+}
+
+.alert-error {
+  border-color: oklch(60% 0.2 25 / 0.3);
+  background: oklch(60% 0.2 25 / 0.1);
+}
+
+.alert-error svg {
+  color: oklch(60% 0.2 25);
+}
+
+.alert-success {
+  border-color: oklch(65% 0.2 145 / 0.3);
+  background: oklch(65% 0.2 145 / 0.1);
+}
+
+.alert-success svg {
+  color: oklch(65% 0.2 145);
+}
+
+/* Loading Spinner */
+.loading {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-spinner {
+  border-style: solid;
+}
+
+.loading-md {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Base Color Utilities */
+.bg-base-100 {
+  background-color: var(--color-surface);
+}
+
+.bg-base-200 {
+  background-color: var(--color-muted);
+}
+
+.bg-base-200\/50 {
+  background-color: oklch(from var(--color-muted) l c h / 0.5);
+}
+
+.bg-base-200\/70 {
+  background-color: oklch(from var(--color-muted) l c h / 0.7);
+}
+
+.bg-base-50 {
+  background-color: var(--color-surface-elevated);
+}
+
+.bg-base-50\/30 {
+  background-color: oklch(from var(--color-surface-elevated) l c h / 0.3);
+}
+
+.bg-base-50\/50 {
+  background-color: oklch(from var(--color-surface-elevated) l c h / 0.5);
+}
+
+.text-base-content {
+  color: var(--color-foreground);
+}
+
+.text-base-content\/40 {
+  color: oklch(from var(--color-foreground) l c h / 0.4);
+}
+
+.text-base-content\/50 {
+  color: oklch(from var(--color-foreground) l c h / 0.5);
+}
+
+.text-base-content\/60 {
+  color: oklch(from var(--color-foreground) l c h / 0.6);
+}
+
+.text-base-content\/70 {
+  color: oklch(from var(--color-foreground) l c h / 0.7);
+}
+
+.text-base-content\/80 {
+  color: oklch(from var(--color-foreground) l c h / 0.8);
+}
+
+.border-base-200 {
+  border-color: var(--color-border);
+}
+
+.border-base-300 {
+  border-color: var(--color-border-hover);
+}
+
+/* Primary Color Utilities */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-primary-content {
+  color: var(--color-primary-foreground);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-primary\/10 {
+  background-color: oklch(from var(--color-primary) l c h / 0.1);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+/* Hover utilities for base colors */
+.hover\:bg-base-200:hover {
+  background-color: var(--color-muted);
+}
+
+.hover\:bg-base-200\/50:hover {
+  background-color: oklch(from var(--color-muted) l c h / 0.5);
+}
+
+.hover\:text-primary:hover {
+  color: var(--color-primary);
+}
+
+.hover\:text-primary-focus:hover {
+  color: oklch(from var(--color-primary) calc(l - 0.1) c h);
+}
+
+/* Prose overrides for glass theme */
+.prose-pre\:bg-base-200 :where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  background-color: var(--color-muted);
+}

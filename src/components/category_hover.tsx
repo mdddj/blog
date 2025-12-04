@@ -35,12 +35,12 @@ const BlogItem: React.FC<{ blog: Blog; onNavigate: () => void }> = ({
         group cursor-pointer p-3 rounded-xl
         hover:bg-gradient-to-r hover:from-primary/5 hover:to-secondary/5
         border border-transparent hover:border-primary/20
-        transition-all duration-300
+        transition-all duration-[var(--transition-slow)]
       "
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0">
-          <h4 className="text-sm font-semibold text-base-content group-hover:text-primary transition-colors duration-200 line-clamp-2 leading-relaxed mb-1">
+          <h4 className="text-sm font-semibold text-base-content group-hover:text-primary transition-colors duration-[var(--transition-normal)] line-clamp-2 leading-relaxed mb-1">
             {blog.title}
           </h4>
           <div className="flex items-center gap-2 text-xs text-base-content/60">
@@ -70,7 +70,7 @@ const BlogItem: React.FC<{ blog: Blog; onNavigate: () => void }> = ({
             </div>
           )}
         </div>
-        <div className="flex-shrink-0 text-base-content/30 group-hover:text-primary group-hover:translate-x-1 transition-all duration-200">
+        <div className="shrink-0 text-base-content/30 group-hover:text-primary group-hover:translate-x-1 transition-all duration-[var(--transition-normal)]">
           <svg
             className="w-4 h-4"
             fill="none"

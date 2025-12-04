@@ -49,7 +49,7 @@ export default function Page() {
                     <motion.div
                       whileHover={{ x: 5 }}
                       transition={{ type: "spring", stiffness: 400 }}
-                      className="flex items-center p-4 rounded-lg hover:bg-base-200 transition-colors duration-200 cursor-pointer"
+                      className="flex items-center p-4 rounded-lg hover:bg-base-200 transition-colors duration-[var(--transition-normal)] cursor-pointer"
                     >
                       <div className="shrink-0 whitespace-nowrap text-left mr-4">
                         <div className="text-sm font-mono text-base-content/60">
@@ -57,7 +57,7 @@ export default function Page() {
                         </div>
                       </div>
                       <div className="grow">
-                        <h3 className="font-medium text-base-content hover:text-primary transition-colors duration-200">
+                        <h3 className="font-medium text-base-content hover:text-primary transition-colors duration-[var(--transition-normal)]">
                           {blog.title}
                         </h3>
                       </div>

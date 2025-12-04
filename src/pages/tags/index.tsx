@@ -52,11 +52,10 @@ export default function Page() {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <button
-                  className={`btn btn-lg transition-all duration-300 ${
-                    label === value.name
+                  className={`btn btn-lg transition-all duration-[var(--transition-slow)] ${label === value.name
                       ? "btn-primary"
                       : "btn-ghost hover:bg-base-200"
-                  }
+                    }
                     `}
                   onClick={() => {
                     filter.call(undefined, (b) =>

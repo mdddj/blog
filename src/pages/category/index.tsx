@@ -5,7 +5,7 @@ import filterBlogsProvider from "@/providers/filter_blog";
 import { useShallow } from "zustand/react/shallow";
 import { motion } from "framer-motion";
 import React from "react";
-import {blogStore} from "@/providers/blog";
+import { blogStore } from "@/providers/blog";
 
 export default function Page() {
   const categorys = categoryStore((state) => state.data?.categoryList) ?? [];
@@ -38,9 +38,9 @@ export default function Page() {
                 transition={{ type: "spring", stiffness: 400 }}
               >
                 <div
-                  className={`card bg-base-100 shadow-lg rounded-2xl p-6 text-center cursor-pointer transition-all duration-300 ${label === value.name
-                      ? "ring-2 ring-primary bg-primary/10"
-                      : "hover:shadow-xl"
+                  className={`card bg-base-100 shadow-lg rounded-2xl p-6 text-center cursor-pointer transition-all duration-[var(--transition-slow)] ${label === value.name
+                    ? "ring-2 ring-primary bg-primary/10"
+                    : "hover:shadow-xl"
                     }`}
                   onClick={() => {
                     filter.call(undefined, (b) =>

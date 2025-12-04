@@ -99,7 +99,7 @@ const CompactSystemMonitor: React.FC = () => {
       </div>
 
       {showDetail && (
-        <div className="absolute z-10 top-full mt-2 left-1/2 -translate-x-1/2 p-4 bg-base-100 rounded-lg shadow-lg border border-base-200 transition-all duration-300 ease-in-out opacity-100 scale-100 origin-top w-48">
+        <div className="absolute z-10 top-full mt-2 left-1/2 -translate-x-1/2 p-4 bg-base-100 rounded-lg shadow-lg border border-base-200 transition-all duration-[var(--transition-slow)] ease-in-out opacity-100 scale-100 origin-top w-48">
           <h3 className="font-bold text-base-content mb-2">系统状态</h3>
           <div className="text-sm space-y-1">
             <p>

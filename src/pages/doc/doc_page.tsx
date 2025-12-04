@@ -51,12 +51,11 @@ const FilesWidget: React.FC<FilesProp> = ({
           transition={{ delay: index * 0.05 }}
           onClick={() => onSelectFile(file)}
           className={`
-            py-3 px-4 rounded-lg cursor-pointer transition-all duration-200
+            py-3 px-4 rounded-lg cursor-pointer transition-all duration-[var(--transition-normal)]
             hover:bg-base-200/70 hover:shadow-sm hover:translate-x-1
-            ${
-              currentFile?.id === file.id
-                ? "bg-primary/10 border-l-4 border-primary text-primary font-semibold"
-                : "hover:border-l-4 hover:border-primary/30"
+            ${currentFile?.id === file.id
+              ? "bg-primary/10 border-l-4 border-primary text-primary font-semibold"
+              : "hover:border-l-4 hover:border-primary/30"
             }
           `}
         >
@@ -185,7 +184,7 @@ const Menu: React.FC<Type> = ({ doc, onClick, selectedFile }) => {
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="sm:hidden fixed top-2 left-4 p-3 mt-12 z-50 bg-primary text-primary-content rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+        className="sm:hidden fixed top-2 left-4 p-3 mt-12 z-50 bg-primary text-primary-content rounded-xl shadow-lg hover:shadow-xl transition-all duration-[var(--transition-slow)]"
         onClick={toggleMenu}
       >
         <motion.div
