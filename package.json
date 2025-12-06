@@ -23,7 +23,7 @@
     "pnpm": "^10.24.0",
     "react-hook-form": "^7.68.0",
     "react-instantsearch": "^7.20.1",
-    "umi": "^4.6.4",
+    "umi": "^4.6.5",
     "zustand": "^5.0.9"
   },
   "devDependencies": {
@@ -31,8 +31,8 @@
     "@types/markdown-it": "^14.1.2",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@umijs/lint": "^4.6.4",
-    "@umijs/plugins": "^4.6.4",
+    "@umijs/lint": "^4.6.5",
+    "@umijs/plugins": "^4.6.5",
     "daisyui": "^5.5.8",
     "oxlint": "^1.31.0",
     "stylelint": "^16",
