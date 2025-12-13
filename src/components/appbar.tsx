@@ -5,21 +5,17 @@ import { NavLink } from "@@/exports";
 import MiniAppWidget from "@/components/mini_app_widget";
 import MyDocMenuElement from "@/components/doc_menu";
 import { history } from "umi";
-import { motion } from "framer-motion";
 import { SearchButton } from "@/components/search";
 import MenuSvgIcon from "./menu_svg_icon";
 import { categoryStore } from "@/providers/category";
 import CompactSystemMonitor from "./system_monitor_compact";
+import BlogName from "./blog_name";
 
 const AppbarTitle: React.FC = () => {
-  const GetShowTitle = () => {
-    return "梁典典的博客";
-  };
 
-  const title = GetShowTitle();
   return (
     <>
-      <NavLink to={"/"} className="text-xl font-bold">
+      {/* <NavLink to={"/"} className="text-xl font-bold">
         <motion.p
           key={title} // 使用 key 来触发动画
           initial={{ opacity: 0, y: 10 }} // 初始状态：透明且稍微向下
@@ -29,7 +25,8 @@ const AppbarTitle: React.FC = () => {
         >
           {title}
         </motion.p>
-      </NavLink>
+      </NavLink> */}
+      <BlogName />
     </>
   );
 };
@@ -63,7 +60,7 @@ export default function AppBar() {
 
   return (
     <header
-      className={`navbar fixed bg-base-100 z-10 ${showShadow ? "shadow-2xl" : "shadow-none"}`}
+      className={`navbar fixed bg-nexus-900/70 border-b border-white/10 backdrop-blur-md z-10 ${showShadow ? "shadow-2xl" : "shadow-none"}`}
     >
       <div className="navbar-start">
         <div className="dropdown">
@@ -77,7 +74,7 @@ export default function AppBar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-1 p-2 shadow bg-base-100 rounded-box w-52"
           >
             {menus.map((item, index) => {
               if (item.isDoc && docs.length === 0) {

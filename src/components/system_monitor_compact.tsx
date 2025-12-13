@@ -21,6 +21,19 @@ const CompactSystemMonitor: React.FC = () => {
   });
 
   const [showDetail, setShowDetail] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const toggleDetail = () => {
+    if (showDetail) {
+      setIsAnimating(true);
+      setTimeout(() => {
+        setShowDetail(false);
+        setIsAnimating(false);
+      }, 300);
+    } else {
+      setShowDetail(true);
+    }
+  };
 
   useEffect(() => {
     let socket: WebSocket | null = null;

@@ -1,7 +1,7 @@
 import { defineConfig } from "umi";
 
 export default defineConfig({
-  // mfsu: false,
+  mfsu: false,
   routes: [
     { path: "/", component: "index" },
     {
@@ -97,5 +97,4 @@ export default defineConfig({
     },
   ],
 
-  // mako: {}
 });
